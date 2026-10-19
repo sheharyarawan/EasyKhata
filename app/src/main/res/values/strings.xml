@@ -25,4 +25,10 @@
     <string name="sort_customers">Sort customers</string>
     <string name="favourites">FAVOURITES</string>
     <string name="customers">CUSTOMERS</string>
+    <string name="maine_diye">Maine Diye</string>
+    <string name="hisaab_clear_hai">Hisaab clear hai</string>
+    <string name="diye">DIYE</string>
+    <string name="liye">LIYE</string>
+    <string name="tareekh_rakhein">Tareekh Rakhein</string>
+    <string name="maine_liye">Maine Liye</string>
 </resources>
