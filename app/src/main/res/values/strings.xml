@@ -5,4 +5,6 @@
     <string name="countryCode">+92</string>
     <string name="hint_phone_number">Phone Number</string>
     <string name="sms_par_otp_bhejain">SMS par OTP bhejain</string>
+    <string name="code_nhi_aya_00_00_ke_baad_code_phir_se_bheja_ja_sakta_hai">Code nhi aya? 00:00 ke baad code phir se bheja ja sakta hai</string>
+    <string name="sms_per_bhejain">SMS per bhejain</string>
 </resources>
