@@ -7,4 +7,22 @@
     <string name="sms_par_otp_bhejain">SMS par OTP bhejain</string>
     <string name="code_nhi_aya_00_00_ke_baad_code_phir_se_bheja_ja_sakta_hai">Code nhi aya? 00:00 ke baad code phir se bheja ja sakta hai</string>
     <string name="sms_per_bhejain">SMS per bhejain</string>
+    <string name="add_customer">+ Add customer</string>
+    <string name="business_icon">Business icon</string>
+    <string name="tap_here_to_change_business">TAP HERE TO CHANGE BUSINESS</string>
+    <string name="total_balance">TOTAL BALANCE</string>
+    <string name="lene">lene</string>
+    <string name="rs_0">Rs 0</string>
+    <string name="maine_lene_hain">Maine lene hain</string>
+    <string name="dene">dene</string>
+    <string name="rs_0_dene">Rs 0</string>
+    <string name="maine_dene_hain">Maine dene hain</string>
+    <string name="customer_add_karein_aur_unka_hisaab_rakhna_shuru_karein">Customer add karein aur unka hisaab rakhna shuru karein</string>
+    <string name="reminders_0_overdue">Reminders (0 overdue)</string>
+    <string name="search_customer">Search customer</string>
+    <string name="search_customer_et">Search Customer</string>
+    <string name="export_pdf">Export PDF</string>
+    <string name="sort_customers">Sort customers</string>
+    <string name="favourites">FAVOURITES</string>
+    <string name="customers">CUSTOMERS</string>
 </resources>
