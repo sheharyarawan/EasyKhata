@@ -54,4 +54,13 @@
     <string name="koi_tareekh_nahi">Koi tareekh nahi</string>
     <string name="tareekh_darj_karein">Tareekh darj karein</string>
     <string name="agla_mahina">Agla mahina</string>
+    <string name="search">Search</string>
+    <string name="sort_by">Sort by</string>
+    <string name="default">Default</string>
+    <string name="default_chip">default</string>
+    <string name="newest_first">Newest first</string>
+    <string name="oldest_first">Oldest first</string>
+    <string name="amount_high_to_low">Amount (high to low)</string>
+    <string name="amount_low_to_high">Amount (low to high)</string>
+    <string name="filter_karein">Filter karein</string>
 </resources>

@@ -249,7 +249,7 @@
                         app:drawableStartCompat="@drawable/ic_reminder" />
                 </com.google.android.material.card.MaterialCardView>
                 <com.google.android.material.card.MaterialCardView
-                    android:id="@+id/materialCardView3"
+                    android:id="@+id/searchCardView"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
@@ -263,7 +263,7 @@
                     app:layout_constraintEnd_toStartOf="@id/cardSort"
                     app:layout_constraintTop_toBottomOf="@id/reminderCard">
                     <EditText
-                        android:id="@+id/etSearchCustomer"
+                        android:id="@+id/etSearchCustomerExpand"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@null"
@@ -284,10 +284,10 @@
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
                     app:strokeWidth="0dp"
-                    app:layout_constraintStart_toEndOf="@id/materialCardView3"
+                    app:layout_constraintStart_toEndOf="@id/searchCardView"
                     app:layout_constraintEnd_toStartOf="@id/cardPdf"
-                    app:layout_constraintTop_toTopOf="@id/materialCardView3"
-                    app:layout_constraintBottom_toBottomOf="@id/materialCardView3">
+                    app:layout_constraintTop_toTopOf="@id/searchCardView"
+                    app:layout_constraintBottom_toBottomOf="@id/searchCardView">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -307,8 +307,8 @@
                     app:strokeWidth="0dp"
                     app:layout_constraintStart_toEndOf="@id/cardSort"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/materialCardView3"
-                    app:layout_constraintBottom_toBottomOf="@id/materialCardView3">
+                    app:layout_constraintTop_toTopOf="@id/searchCardView"
+                    app:layout_constraintBottom_toBottomOf="@id/searchCardView">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -326,7 +326,7 @@
                     android:orientation="vertical"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
+                    app:layout_constraintTop_toBottomOf="@+id/searchCardView"
                     android:visibility="gone">
                     <TextView
                         android:layout_width="wrap_content"
