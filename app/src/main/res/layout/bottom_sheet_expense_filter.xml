@@ -31,6 +31,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/cardTopView">
         </TextView>
+        <ImageView
+            android:id="@+id/closeSheet"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:src="@drawable/ic_close"
+            app:layout_constraintBottom_toBottomOf="@+id/textView10"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/textView10"
+            tools:ignore="ContentDescription">
+        </ImageView>
         <View
             android:id="@+id/view4"
             android:layout_width="0dp"
