@@ -49,4 +49,9 @@
     <string name="customer">Customer</string>
     <string name="supplier">Supplier</string>
     <string name="save_2">SAVE</string>
+    <string name="wasooli_ki_tareekh_badlein">Wasooli ki tareekh badlein</string>
+    <string name="agla_hafta">Agla hafta</string>
+    <string name="koi_tareekh_nahi">Koi tareekh nahi</string>
+    <string name="tareekh_darj_karein">Tareekh darj karein</string>
+    <string name="agla_mahina">Agla mahina</string>
 </resources>
