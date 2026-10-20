@@ -46,4 +46,7 @@
     <string name="naam">Naam</string>
     <string name="edit_2">EDIT</string>
     <string name="delete">DELETE</string>
+    <string name="customer">Customer</string>
+    <string name="supplier">Supplier</string>
+    <string name="save_2">SAVE</string>
 </resources>

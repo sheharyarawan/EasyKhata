@@ -25,7 +25,7 @@
         app:layout_constraintTop_toBottomOf="@+id/editCustomerToolbar">
     </TextView>
     <EditText
-        android:id="@+id/editTextName"
+        android:id="@+id/editTextNameUpdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -44,10 +44,10 @@
         android:text="@string/phone_number"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextName">
+        app:layout_constraintTop_toBottomOf="@+id/editTextNameUpdate">
     </TextView>
     <EditText
-        android:id="@+id/editTextNumber"
+        android:id="@+id/editTextNumberUpdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
@@ -69,7 +69,7 @@
         app:cardCornerRadius="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumber"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberUpdate"
         app:strokeWidth="0dp">
         <TextView
             android:id="@+id/detailExpenseTv"
