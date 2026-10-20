@@ -13,8 +13,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Dastgeer Furniture"
-        app:subtitle="Customer since Oct 12, 2021"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"

@@ -36,4 +36,9 @@
     <string name="amount">Amount</string>
     <string name="rs">Rs</string>
     <string name="save">SAVE</string>
+    <string name="hisaab_ka_parcha">HISAAB KA PARCHA</string>
+    <string name="hisaab_ka_parcha_2">Hisaab ka parcha</string>
+    <string name="tafseel">Tafseel</string>
+    <string name="edit">EDIT</string>
+    <string name="share">SHARE</string>
 </resources>
