@@ -32,4 +32,8 @@
     <string name="tareekh_rakhein">Tareekh Rakhein</string>
     <string name="maine_liye">Maine Liye</string>
     <string name="rs_0_2">+ Rs 0</string>
+    <string name="tafseel_optional">Tafseel (optional)</string>
+    <string name="amount">Amount</string>
+    <string name="rs">Rs</string>
+    <string name="save">SAVE</string>
 </resources>
