@@ -66,4 +66,13 @@
     <string name="naya_customer_add_karein">NAYA CUSTOMER ADD KAREIN</string>
     <string name="add">+ ADD</string>
     <string name="add_2">ADD</string>
+    <string name="all">All</string>
+    <string name="hisaab_clear_hai_2">Hisaab clear hai</string>
+    <string name="maine_dene_hain_2">Maine dene hain</string>
+    <string name="maine_lene_hain_2">Maine lene hain</string>
+    <string name="filter_by">Filter by</string>
+    <string name="hisaab">Hisaab</string>
+    <string name="customers_2">customers</string>
+    <string name="suppliers">Suppliers</string>
+    <string name="type">Type</string>
 </resources>
