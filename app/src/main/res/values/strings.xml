@@ -75,4 +75,10 @@
     <string name="customers_2">customers</string>
     <string name="suppliers">Suppliers</string>
     <string name="type">Type</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="naam_2">Naam</string>
+    <string name="maine_diye_3">Maine diye</string>
+    <string name="maine_liye_3">Maine Liye</string>
+    <string name="download">DOWNLOAD</string>
 </resources>
