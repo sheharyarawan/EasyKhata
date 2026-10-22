@@ -2,10 +2,12 @@ package com.example.easykhata.ui.fragments.account
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import com.example.easykhata.R
-class AccountFragment : Fragment() {
-
+import com.example.easykhata.databinding.FragmentAccountBinding
+class AccountFragment : Fragment(R.layout.fragment_account) {
+    lateinit var binding: FragmentAccountBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding= FragmentAccountBinding.bind(view)
+    }
 }
