@@ -100,4 +100,10 @@
     <string name="phone_number_2">Phone number</string>
     <string name="karobar_ka_address">Karobar ka address</string>
     <string name="karobar_type_2">Karobar type</string>
+    <string name="search_3">Search</string>
+    <string name="search_for_a_place">Search for a place</string>
+    <string name="selected_map_location">Selected map location</string>
+    <string name="zoom_in">Zoom in</string>
+    <string name="zoom_out">Zoom out</string>
+    <string name="location_confirm_karein">LOCATION CONFIRM KAREIN</string>
 </resources>
