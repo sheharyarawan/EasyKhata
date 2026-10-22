@@ -95,4 +95,9 @@
     <string name="rate_easy_khata">Rate Easy Khata</string>
     <string name="kaobar_type">Kaobar type</string>
     <string name="karobar_type">Karobar type</string>
+    <string name="karobar_ka_naam">Karobar ka naam</string>
+    <string name="apka_naam">Apka naam</string>
+    <string name="phone_number_2">Phone number</string>
+    <string name="karobar_ka_address">Karobar ka address</string>
+    <string name="karobar_type_2">Karobar type</string>
 </resources>

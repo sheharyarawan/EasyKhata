@@ -258,7 +258,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:drawablePadding="14dp"
+        android:drawablePadding="8dp"
         android:gravity="center_vertical"
         android:text="@string/rate_easy_khata"
         android:textSize="20sp"
