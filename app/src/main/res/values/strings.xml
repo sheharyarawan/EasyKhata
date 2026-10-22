@@ -93,4 +93,6 @@
     <string name="app_settings">App settings</string>
     <string name="deleted_items">Deleted items</string>
     <string name="rate_easy_khata">Rate Easy Khata</string>
+    <string name="kaobar_type">Kaobar type</string>
+    <string name="karobar_type">Karobar type</string>
 </resources>
