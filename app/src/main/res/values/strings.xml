@@ -86,4 +86,11 @@
     <string name="pichla_mahina">Pichla mahina</string>
     <string name="date">Date</string>
     <string name="maine_lene_hain_3">Maine lene hain</string>
+    <string name="wasooli">Wasooli</string>
+    <string name="visiting_cards">Visiting cards</string>
+    <string name="cashbook">Cashbook</string>
+    <string name="karobar_ki_maloomat">Karobar ki maloomat</string>
+    <string name="app_settings">App settings</string>
+    <string name="deleted_items">Deleted items</string>
+    <string name="rate_easy_khata">Rate Easy Khata</string>
 </resources>

@@ -1,0 +1,38 @@
+<escape><?xml version="1.0" encoding="utf-8"?>
+    <vector xmlns:android="http://schemas.android.com/apk/res/android"
+        android:width="310dp"
+        android:height="350dp"
+        android:viewportWidth="310"
+        android:viewportHeight="350">
+
+        <!-- Head -->
+        <path
+            android:fillColor="#D3D3D3"
+            android:pathData="M155,0 C112,0 79,33 79,75 L79,94 C67,89 67,104 74,123 C77,133 82,140 89,145 C102,177 126,198 155,198 C184,198 208,177 221,145 C228,140 233,133 236,123 C243,104 243,89 231,94 L231,75 C231,33 198,0 155,0 Z" />
+
+        <!-- Neck -->
+        <path
+            android:fillColor="#D3D3D3"
+            android:pathData="M120,190 L190,190 L190,224 L120,224 Z" />
+
+        <!-- Shoulders and suit -->
+        <path
+            android:fillColor="#D3D3D3"
+            android:pathData="M102,199 L137,286 L147,242 L163,242 L173,286 L208,199 L262,220 C292,232 304,251 307,282 L310,326 C310,341 301,350 286,350 L24,350 C9,350 0,341 0,326 L3,282 C6,251 18,232 48,220 Z" />
+
+        <!-- Shirt collar -->
+        <path
+            android:fillColor="#FFFFFF"
+            android:pathData="M103,199 L137,286 L147,242 L163,242 L173,286 L207,199 L180,215 L155,238 L130,215 Z" />
+
+        <!-- Tie knot -->
+        <path
+            android:fillColor="#D3D3D3"
+            android:pathData="M137,210 L173,210 L165,228 L145,228 Z" />
+
+        <!-- Tie -->
+        <path
+            android:fillColor="#D3D3D3"
+            android:pathData="M147,239 L163,239 L174,284 L155,316 L136,284 Z" />
+
+    </vector></escape>
