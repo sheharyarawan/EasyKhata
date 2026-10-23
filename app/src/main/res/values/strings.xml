@@ -117,4 +117,7 @@
     <string name="_5_stars">5 stars</string>
     <string name="review_bhejain">REVIEW BHEJAIN</string>
     <string name="search_karobar_type">Search Karobar type</string>
+    <string name="udhaar_text">Customer ke liye wasooli ki tareekh rakhein aur automatic SMS ke zariye udhaar yaad dila kar bar-waqt wasool karein</string>
+    <string name="anay_wale">ANAY WALE</string>
+    <string name="late_wale">LATE WALE</string>
 </resources>
