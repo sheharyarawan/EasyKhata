@@ -108,4 +108,12 @@
     <string name="location_confirm_karein">LOCATION CONFIRM KAREIN</string>
     <string name="aap_ka_naam">Aap ka naam</string>
     <string name="save_3">SAVE</string>
+    <string name="rate_easy_khata_2">Rate Easy Khata</string>
+    <string name="feedback_dain_optional">Feedback dain (Optional)</string>
+    <string name="_1_star">1 star</string>
+    <string name="_2_stars">2 stars</string>
+    <string name="_3_stars">3 stars</string>
+    <string name="_4_stars">4 stars</string>
+    <string name="_5_stars">5 stars</string>
+    <string name="review_bhejain">REVIEW BHEJAIN</string>
 </resources>
