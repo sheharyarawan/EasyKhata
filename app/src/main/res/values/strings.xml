@@ -120,4 +120,8 @@
     <string name="udhaar_text">Customer ke liye wasooli ki tareekh rakhein aur automatic SMS ke zariye udhaar yaad dila kar bar-waqt wasool karein</string>
     <string name="anay_wale">ANAY WALE</string>
     <string name="late_wale">LATE WALE</string>
+    <string name="customer_2">Customer</string>
+    <string name="amount_2">Amount</string>
+    <string name="tareekh">Tareekh</string>
+    <string name="tareekh_rakhein_2">TAREEKH RAKHEIN</string>
 </resources>
