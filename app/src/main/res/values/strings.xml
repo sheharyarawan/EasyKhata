@@ -124,4 +124,11 @@
     <string name="amount_2">Amount</string>
     <string name="tareekh">Tareekh</string>
     <string name="tareekh_rakhein_2">TAREEKH RAKHEIN</string>
+    <string name="cash_in_hand">Cash in hand</string>
+    <string name="aaj_ka_balance">Aaj ka balance</string>
+    <string name="purana_record">Purana record</string>
+    <string name="cash_in">+ CASH IN</string>
+    <string name="cash_out">- CASH OUT</string>
+    <string name="cash_out_2">Cash Out</string>
+    <string name="cash_in_2">Cash In</string>
 </resources>
