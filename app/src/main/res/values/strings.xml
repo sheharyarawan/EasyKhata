@@ -131,4 +131,10 @@
     <string name="cash_out">- CASH OUT</string>
     <string name="cash_out_2">Cash Out</string>
     <string name="cash_in_2">Cash In</string>
+    <string name="total_in">Total In</string>
+    <string name="total_out">Total Out</string>
+    <string name="date_2">Date</string>
+    <string name="cash_in_hand_2">Cash in hand</string>
+    <string name="balance">Balance</string>
+    <string name="net_balance">Net Balance</string>
 </resources>
