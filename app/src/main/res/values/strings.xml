@@ -137,4 +137,20 @@
     <string name="cash_in_hand_2">Cash in hand</string>
     <string name="balance">Balance</string>
     <string name="net_balance">Net Balance</string>
+    <string name="kull_sales">KULL SALES</string>
+    <string name="rs_0_3">Rs 0</string>
+    <string name="is_hafte">---- is hafte</string>
+    <string name="kull_orders">KULL ORDERS</string>
+    <string name="_0">0</string>
+    <string name="kull_naqad">KULL NAQAD</string>
+    <string name="jo_cheezein_bechte_hain_unhe_add_update_ya_remove_karein">Jo cheezein bechte hain unhe add, update ya remove karein</string>
+    <string name="items_manage_karein">Items manage karein</string>
+    <string name="sales">Sales</string>
+    <string name="hafta">Hafta</string>
+    <string name="maheena">Maheena</string>
+    <string name="apni_marzi">Apni marzi</string>
+    <string name="kull_udhaar">KULL UDHAAR</string>
+    <string name="naam_ya_raqam_se_talash_karein">Naam ya raqam se talash karein</string>
+    <string name="haali_sales">HAALI SALES</string>
+    <string name="sale_darj_karein">Sale darj karein</string>
 </resources>
