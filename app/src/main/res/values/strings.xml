@@ -156,4 +156,8 @@
     <string name="customer_3">Customer</string>
     <string name="walk_in_customer">Walk-in customer</string>
     <string name="more_options">More options</string>
+    <string name="items_talash_karein">Items talash karein ...</string>
+    <string name="abhi_koi_item_nahi">Abhi koi item nahi</string>
+    <string name="pehla_item_add_karein">Pehla item add karein</string>
+    <string name="naya_item">Naya item</string>
 </resources>
