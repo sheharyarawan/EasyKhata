@@ -153,4 +153,7 @@
     <string name="naam_ya_raqam_se_talash_karein">Naam ya raqam se talash karein</string>
     <string name="haali_sales">HAALI SALES</string>
     <string name="sale_darj_karein">Sale darj karein</string>
+    <string name="customer_3">Customer</string>
+    <string name="walk_in_customer">Walk-in customer</string>
+    <string name="more_options">More options</string>
 </resources>
