@@ -166,4 +166,16 @@
     <string name="unit">Unit</string>
     <string name="unit_chunein">Unit chunein</string>
     <string name="selected">Selected</string>
+    <string name="line">-----------------------------------------------------------------------------------------</string>
+    <string name="raqam">RAQAM</string>
+    <string name="done">Done</string>
+    <string name="pdf_download">PDF download</string>
+    <string name="whatsapp_par_share_karein">WhatsApp par share karein</string>
+    <string name="recipt">Recipt</string>
+    <string name="customer_4">Customer</string>
+    <string name="item">ITEM</string>
+    <string name="jama_raqam">Jama raqam</string>
+    <string name="discount">Discount</string>
+    <string name="total">TOTAL</string>
+    <string name="note">NOTE</string>
 </resources>
