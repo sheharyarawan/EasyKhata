@@ -124,6 +124,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 app:strokeWidth="1dp"
+                app:cardCornerRadius="0dp"
                 app:strokeColor="@color/mid_gray"
                 app:cardBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -132,6 +133,8 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/catalogRv"
                     android:layout_width="match_parent"
+                    tools:listitem="@layout/item_catalog"
+                    tools:itemCount="2"
                     android:layout_height="wrap_content">
                 </androidx.recyclerview.widget.RecyclerView>
             </com.google.android.material.card.MaterialCardView>
