@@ -178,4 +178,11 @@
     <string name="discount">Discount</string>
     <string name="total">TOTAL</string>
     <string name="note">NOTE</string>
+    <string name="naya_item_add_karein">Naya item add karein</string>
+    <string name="items_talash_karein_2">Items talash karein ...</string>
+    <string name="_0_items">0 ITEMS</string>
+    <string name="aapka_catalog">AAPKA CATALOG</string>
+    <string name="_0_2">(0)</string>
+    <string name="total_2">TOTAL</string>
+    <string name="next">Next</string>
 </resources>
