@@ -133,8 +133,6 @@
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/catalogRv"
                     android:layout_width="match_parent"
-                    tools:listitem="@layout/item_catalog"
-                    tools:itemCount="2"
                     android:layout_height="wrap_content">
                 </androidx.recyclerview.widget.RecyclerView>
             </com.google.android.material.card.MaterialCardView>

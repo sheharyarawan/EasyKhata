@@ -185,4 +185,19 @@
     <string name="_0_2">(0)</string>
     <string name="total_2">TOTAL</string>
     <string name="next">Next</string>
+    <string name="cashbook_mein_add_ho_ga">Cashbook mein add ho ga</string>
+    <string name="discount_ki_raqam">Discount ki raqam</string>
+    <string name="khate_mein_add_ho_ga">Khate mein add ho ga</string>
+    <string name="zaruri_nahi">Zaruri nahi</string>
+    <string name="udhaar">Udhaar</string>
+    <string name="note_2">NOTE</string>
+    <string name="discount_2">DISCOUNT</string>
+    <string name="naqad_2">Naqad</string>
+    <string name="payment_ka_tareeqa">PAYMENT KA TAREEQA</string>
+    <string name="kull_raqam">KULL RAQAM</string>
+    <string name="customer_ka_naam_ya_phone">Customer ka naam ya phone</string>
+    <string name="note_likhein">Note likhein</string>
+    <string name="sale_confirm_karein">Sale confirm karein</string>
+    <string name="subtotal">Subtotal</string>
+    <string name="customer_5">CUSTOMER</string>
 </resources>
