@@ -9,4 +9,14 @@
         android:name="com.example.easykhata.ui.fragments.customers.HomeFragment"
         android:label="fragment_home"
         tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/salesFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.SalesFragment"
+        android:label="fragment_sales"
+        tools:layout="@layout/fragment_sales" />
+    <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.easykhata.ui.fragments.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
 </navigation>
