@@ -31,7 +31,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
-        android:background="null"
+        android:background="@android:color/transparent"
         android:hint="@string/search_customer_2"
         android:inputType="textPersonName"
         android:minHeight="48dp"
