@@ -27,6 +27,7 @@ junit = "4.13.2"
 junitVersion = "1.3.0"
 espressoCore = "3.7.0"
 androidx-core-splashscreen = "1.2.0"
+playServicesMaps = "20.1.0"
 
 
 [libraries]
@@ -80,6 +81,7 @@ androidx-core-splashscreen = { module = "androidx.core:core-splashscreen", versi
 junit = { group = "junit", name = "junit", version.ref = "junit" }
 androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+play-services-maps = { group = "com.google.android.gms", name = "play-services-maps", version.ref = "playServicesMaps" }
 
 
 [plugins]
