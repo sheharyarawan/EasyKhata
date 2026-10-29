@@ -67,7 +67,11 @@
         android:id="@+id/itemsManageFragment"
         android:name="com.example.easykhata.ui.fragments.sales.ItemsManageFragment"
         android:label="fragment_items_manage"
-        tools:layout="@layout/fragment_items_manage" />
+        tools:layout="@layout/fragment_items_manage" >
+        <action
+            android:id="@+id/action_itemsManageFragment_to_itemEditKareinFragment"
+            app:destination="@id/itemEditKareinFragment" />
+    </fragment>
     <fragment
         android:id="@+id/saleDarjkareinFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SaleDarjkareinFragment"
