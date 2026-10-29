@@ -8,7 +8,17 @@
         android:id="@+id/homeFragment"
         android:name="com.example.easykhata.ui.fragments.customers.HomeFragment"
         android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_searchCustomerFragment"
+            app:destination="@id/searchCustomerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_addCustomerFragment"
+            app:destination="@id/addCustomerFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_khataReportFragment"
+            app:destination="@id/khataReportFragment" />
+    </fragment>
     <fragment
         android:id="@+id/salesFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SalesFragment"
@@ -19,4 +29,19 @@
         android:name="com.example.easykhata.ui.fragments.account.AccountFragment"
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
+    <fragment
+        android:id="@+id/searchCustomerFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.SearchCustomerFragment"
+        android:label="fragment_search_customer"
+        tools:layout="@layout/fragment_search_customer" />
+    <fragment
+        android:id="@+id/addCustomerFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.AddCustomerFragment"
+        android:label="fragment_add_customer"
+        tools:layout="@layout/fragment_add_customer" />
+    <fragment
+        android:id="@+id/khataReportFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.KhataReportFragment"
+        android:label="fragment_khata_report"
+        tools:layout="@layout/fragment_khata_report" />
 </navigation>

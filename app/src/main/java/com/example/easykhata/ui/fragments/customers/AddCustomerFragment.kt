@@ -6,6 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.easykhata.R
-class AddCustomerFragment : Fragment() {
+class AddCustomerFragment : Fragment(R.layout.fragment_add_customer) {
 
 }
