@@ -201,4 +201,7 @@
     <string name="subtotal">Subtotal</string>
     <string name="customer_5">CUSTOMER</string>
     <string name="x">×</string>
+    <string name="khata">Khata</string>
+    <string name="sales_2">Sales</string>
+    <string name="account">Account</string>
 </resources>
