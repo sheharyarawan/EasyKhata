@@ -26,7 +26,14 @@
         android:id="@+id/salesFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SalesFragment"
         android:label="fragment_sales"
-        tools:layout="@layout/fragment_sales" />
+        tools:layout="@layout/fragment_sales" >
+        <action
+            android:id="@+id/action_salesFragment_to_itemsManageFragment"
+            app:destination="@id/itemsManageFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_saleDarjkareinFragment"
+            app:destination="@id/saleDarjkareinFragment" />
+    </fragment>
     <fragment
         android:id="@+id/accountFragment"
         android:name="com.example.easykhata.ui.fragments.account.AccountFragment"
@@ -56,4 +63,14 @@
         android:name="com.example.easykhata.ui.fragments.customers.AddCustomerDetailFragment"
         android:label="fragment_add_customer_detail"
         tools:layout="@layout/fragment_add_customer_detail" />
+    <fragment
+        android:id="@+id/itemsManageFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.ItemsManageFragment"
+        android:label="fragment_items_manage"
+        tools:layout="@layout/fragment_items_manage" />
+    <fragment
+        android:id="@+id/saleDarjkareinFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.SaleDarjkareinFragment"
+        android:label="fragment_sale_darjkarein"
+        tools:layout="@layout/fragment_sale_darjkarein" />
 </navigation>
