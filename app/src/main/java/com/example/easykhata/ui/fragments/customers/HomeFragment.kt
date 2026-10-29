@@ -6,6 +6,8 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentHomeBinding
+import com.example.easykhata.ui.fragments.customers.bottomSheets.CustomerFilterBottomSheet
+
 class HomeFragment : Fragment(R.layout.fragment_home) {
 lateinit var binding: FragmentHomeBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +27,12 @@ lateinit var binding: FragmentHomeBinding
             }
             cardPdf.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_khataReportFragment)
+            }
+            cardSort.setOnClickListener {
+                CustomerFilterBottomSheet().show(
+                    parentFragmentManager,
+                    "CustomerFilterBottomSheet"
+                )
             }
         }
     }
