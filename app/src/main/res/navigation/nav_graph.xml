@@ -72,5 +72,22 @@
         android:id="@+id/saleDarjkareinFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SaleDarjkareinFragment"
         android:label="fragment_sale_darjkarein"
-        tools:layout="@layout/fragment_sale_darjkarein" />
+        tools:layout="@layout/fragment_sale_darjkarein" >
+        <action
+            android:id="@+id/action_saleDarjkareinFragment_to_itemEditKareinFragment"
+            app:destination="@id/itemEditKareinFragment" />
+        <action
+            android:id="@+id/action_saleDarjkareinFragment_to_saleConfirmKareinFragment"
+            app:destination="@id/saleConfirmKareinFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/itemEditKareinFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.ItemEditKareinFragment"
+        android:label="fragment_item_edit_karein"
+        tools:layout="@layout/fragment_item_edit_karein" />
+    <fragment
+        android:id="@+id/saleConfirmKareinFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.SaleConfirmKareinFragment"
+        android:label="fragment_sale_confirm_karein"
+        tools:layout="@layout/fragment_sale_confirm_karein" />
 </navigation>
