@@ -5,6 +5,8 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentAccountBinding
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class AccountFragment : Fragment(R.layout.fragment_account) {
     lateinit var binding: FragmentAccountBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
