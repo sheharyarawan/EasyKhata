@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentCashDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CashDetailFragment : Fragment(R.layout.fragment_cash_detail) {
     lateinit var binding: FragmentCashDetailBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

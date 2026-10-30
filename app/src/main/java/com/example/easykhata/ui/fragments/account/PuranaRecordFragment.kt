@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentPuranaRecordBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class PuranaRecordFragment : Fragment(R.layout.fragment_purana_record) {
 lateinit var binding: FragmentPuranaRecordBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

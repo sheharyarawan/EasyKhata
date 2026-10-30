@@ -8,7 +8,8 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentAnayWaleBinding
-
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class AnayWaleFragment : Fragment(R.layout.fragment_anay_wale) {
     lateinit var binding: FragmentAnayWaleBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

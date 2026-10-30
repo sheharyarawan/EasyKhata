@@ -6,6 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.easykhata.R
-class ExpenseDetailFragment : Fragment(R.layout.fragment_expense_detail) {
+import com.example.easykhata.databinding.FragmentExpenseDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
+class ExpenseDetailFragment : Fragment(R.layout.fragment_expense_detail) {
+lateinit var binding: FragmentExpenseDetailBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding= FragmentExpenseDetailBinding.bind(view)
+    }
 }

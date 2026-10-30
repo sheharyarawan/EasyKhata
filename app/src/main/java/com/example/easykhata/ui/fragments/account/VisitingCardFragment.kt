@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentVisitingCardBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class VisitingCardFragment : Fragment(R.layout.fragment_visiting_card) {
     lateinit var binding: FragmentVisitingCardBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

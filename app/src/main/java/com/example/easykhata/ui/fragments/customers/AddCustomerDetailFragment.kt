@@ -6,6 +6,8 @@ import android.view.View
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentAddCustomerDetailBinding
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class AddCustomerDetailFragment : Fragment(R.layout.fragment_add_customer_detail) {
     lateinit var binding: FragmentAddCustomerDetailBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

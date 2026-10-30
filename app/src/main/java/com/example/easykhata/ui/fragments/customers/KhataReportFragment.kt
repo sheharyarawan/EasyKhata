@@ -8,7 +8,9 @@ import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentKhataReportBinding
 import com.example.easykhata.ui.fragments.customers.bottomSheets.KhataBottomSheet
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class KhataReportFragment : Fragment(R.layout.fragment_khata_report) {
 lateinit var binding: FragmentKhataReportBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

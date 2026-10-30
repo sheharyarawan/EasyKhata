@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentItemEditKareinBinding
+import dagger.hilt.android.AndroidEntryPoint
+
+@AndroidEntryPoint
 class ItemEditKareinFragment : Fragment(R.layout.fragment_item_edit_karein) {
     lateinit var binding: FragmentItemEditKareinBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
