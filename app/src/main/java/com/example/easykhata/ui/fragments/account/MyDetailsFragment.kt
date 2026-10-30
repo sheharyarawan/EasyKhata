@@ -13,6 +13,7 @@ class MyDetailsFragment : Fragment(R.layout.fragment_my_details) {
     lateinit var binding: FragmentMyDetailsBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding= FragmentMyDetailsBinding.bind(view)
+        setUpClicks()
     }
     private fun setUpClicks(){
         binding.apply {
