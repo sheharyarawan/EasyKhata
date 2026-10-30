@@ -23,6 +23,11 @@ class VisitingCardFragment : Fragment(R.layout.fragment_visiting_card) {
             visitingCardToolbar.setNavigationOnClickListener {
                 findNavController().navigateUp()
             }
+            val navigateToType= View.OnClickListener{
+                findNavController().navigate(R.id.action_visitingCardFragment_to_karobarTypeFragment)
+            }
+            tvBusinessTypeLabel.setOnClickListener(navigateToType)
+            visitingCardBusinessType.setOnClickListener(navigateToType)
         }
     }
 }

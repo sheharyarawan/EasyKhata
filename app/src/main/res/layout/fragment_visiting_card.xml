@@ -185,10 +185,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:src="@drawable/ic_location"
+                android:paddingEnd="16dp"
                 app:layout_constraintBottom_toBottomOf="@+id/visitingCardBusinessAddress"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@+id/visitingCardBusinessAddress"
-                tools:ignore="ContentDescription">
+                tools:ignore="ContentDescription,RtlSymmetry">
             </ImageView>
             <View
                 android:id="@+id/dividerBusinessAddress"
@@ -263,7 +264,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginEnd="16dp"
-        android:backgroundTint="#249F97"
+        android:backgroundTint="@color/green"
         android:paddingHorizontal="16dp"
         android:paddingVertical="10dp"
         android:text="@string/share"
