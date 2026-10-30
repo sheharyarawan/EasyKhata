@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="12dp">
+    <TextView
+        android:id="@+id/tvTransactionDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/tvDiye"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="VisualLintSystemUi" />
+    <TextView
+        android:id="@+id/tvTransactionDescription"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintStart_toStartOf="@id/tvTransactionDate"
+        app:layout_constraintEnd_toEndOf="@id/tvTransactionDate"
+        app:layout_constraintTop_toBottomOf="@id/tvTransactionDate" />
+    <TextView
+        android:id="@+id/tvBalanceLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
+        android:background="@drawable/bg_red"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="5dp"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="@id/tvTransactionDate"
+        app:layout_constraintTop_toBottomOf="@id/tvTransactionDescription">
+    </TextView>
+    <TextView
+        android:id="@+id/tvDiye"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/red"
+        android:textSize="19sp"
+        android:textStyle="bold"
+        android:gravity="end"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintWidth_percent="0.20"
+        app:layout_constraintEnd_toStartOf="@id/tvLiye"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <TextView
+        android:id="@+id/tvLiye"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textColor="@color/green"
+        android:textSize="19sp"
+        android:layout_marginEnd="16dp"
+        android:gravity="end"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintWidth_percent="0.20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+    <View
+        android:id="@+id/line"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/lt_gray"
+        app:layout_constraintTop_toBottomOf="@id/tvBalanceLabel"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>
