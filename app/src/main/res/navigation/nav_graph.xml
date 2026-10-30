@@ -144,4 +144,18 @@
         android:name="com.example.easykhata.ui.fragments.account.bottomSheets.KarobarTypeFragment"
         android:label="fragment_karobar_type"
         tools:layout="@layout/fragment_karobar_type" />
+    <fragment
+        android:id="@+id/anayWaleFragment"
+        android:name="com.example.easykhata.ui.fragments.account.AnayWaleFragment"
+        android:label="fragment_anay_wale"
+        tools:layout="@layout/fragment_anay_wale" >
+        <action
+            android:id="@+id/action_anayWaleFragment_to_wasooliCustomerFragment"
+            app:destination="@id/wasooliCustomerFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/wasooliCustomerFragment"
+        android:name="com.example.easykhata.ui.fragments.account.WasooliCustomerFragment"
+        android:label="fragment_wasooli_customer"
+        tools:layout="@layout/fragment_wasooli_customer" />
 </navigation>
