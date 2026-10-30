@@ -6,6 +6,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.easykhata.R
-class CustomerExpenseReportFragment : Fragment() {
-
+import com.example.easykhata.databinding.FragmentCustomerExpenseReportBinding
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
+class CustomerExpenseReportFragment : Fragment(R.layout.fragment_customer_expense_report) {
+    lateinit var binding: FragmentCustomerExpenseReportBinding
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        binding= FragmentCustomerExpenseReportBinding.bind(view)
+    }
 }
