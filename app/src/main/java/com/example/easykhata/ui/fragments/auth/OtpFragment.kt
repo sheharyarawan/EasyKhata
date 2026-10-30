@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.View
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentOtpBinding
+import dagger.hilt.android.AndroidEntryPoint
+@AndroidEntryPoint
 class OtpFragment : Fragment(R.layout.fragment_otp) {
 lateinit var binding: FragmentOtpBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
