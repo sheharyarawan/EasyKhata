@@ -21,10 +21,10 @@ class CashbookFragment : Fragment(R.layout.fragment_cashbook) {
                 findNavController().navigateUp()
             }
             cashInButton.setOnClickListener {
-                findNavController().navigate(R.id.action_cashbookFragment_to_cashDetailFragment)
+                findNavController().navigate(R.id.action_cashbookFragment_to_addExpenseFragment)
             }
             cashOutButton.setOnClickListener {
-                findNavController().navigate(R.id.action_cashbookFragment_to_cashDetailFragment)
+                findNavController().navigate(R.id.action_cashbookFragment_to_addExpenseFragment)
             }
             puranaRecordCard.setOnClickListener {
                 findNavController().navigate(R.id.action_cashbookFragment_to_puranaRecordFragment)

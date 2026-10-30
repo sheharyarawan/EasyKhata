@@ -135,6 +135,9 @@
         <action
             android:id="@+id/action_cashbookFragment_to_puranaRecordFragment"
             app:destination="@id/puranaRecordFragment" />
+        <action
+            android:id="@+id/action_cashbookFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
     </fragment>
     <fragment
         android:id="@+id/myDetailsFragment"
@@ -169,10 +172,19 @@
         android:id="@+id/cashDetailFragment"
         android:name="com.example.easykhata.ui.fragments.account.CashDetailFragment"
         android:label="fragment_cash_detail"
-        tools:layout="@layout/fragment_cash_detail" />
+        tools:layout="@layout/fragment_cash_detail" >
+        <action
+            android:id="@+id/action_cashDetailFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
+    </fragment>
     <fragment
         android:id="@+id/puranaRecordFragment"
         android:name="com.example.easykhata.ui.fragments.account.PuranaRecordFragment"
         android:label="fragment_purana_record"
         tools:layout="@layout/fragment_purana_record" />
+    <fragment
+        android:id="@+id/addExpenseFragment"
+        android:name="com.example.easykhata.ui.fragments.expense.AddExpenseFragment"
+        android:label="fragment_add_expense"
+        tools:layout="@layout/fragment_add_expense" />
 </navigation>
