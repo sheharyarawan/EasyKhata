@@ -96,31 +96,31 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
     <ImageView
-        android:id="@+id/wasooliIv"
+        android:id="@+id/visitingIv"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:layout_marginTop="30dp"
         android:background="@drawable/bg_initials"
         android:padding="5dp"
         android:src="@drawable/ic_calendar"
-        app:layout_constraintEnd_toStartOf="@+id/visitingCardIv"
+        app:layout_constraintEnd_toStartOf="@+id/wasooliIv"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editAccountCardView"
         app:tint="#FF5722"
         tools:ignore="ContentDescription,ImageContrastCheck">
     </ImageView>
     <ImageView
-        android:id="@+id/visitingCardIv"
+        android:id="@+id/wasooliIv"
         android:layout_width="45dp"
         android:layout_height="45dp"
         android:background="@drawable/bg_initials"
         android:padding="5dp"
         android:src="@drawable/ic_card"
-        app:layout_constraintBottom_toBottomOf="@+id/wasooliIv"
+        app:layout_constraintBottom_toBottomOf="@+id/visitingIv"
         app:layout_constraintEnd_toStartOf="@+id/cashBookIv"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/wasooliIv"
-        app:layout_constraintTop_toTopOf="@+id/wasooliIv"
+        app:layout_constraintStart_toEndOf="@+id/visitingIv"
+        app:layout_constraintTop_toTopOf="@+id/visitingIv"
         app:tint="#3F51B5"
         tools:ignore="ContentDescription">
     </ImageView>
@@ -131,11 +131,11 @@
         android:background="@drawable/bg_initials"
         android:padding="5dp"
         android:src="@drawable/ic_cashbook"
-        app:layout_constraintBottom_toBottomOf="@+id/visitingCardIv"
+        app:layout_constraintBottom_toBottomOf="@+id/wasooliIv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/visitingCardIv"
-        app:layout_constraintTop_toTopOf="@+id/visitingCardIv"
+        app:layout_constraintStart_toEndOf="@+id/wasooliIv"
+        app:layout_constraintTop_toTopOf="@+id/wasooliIv"
         app:tint="#D162AEEB"
         tools:ignore="ContentDescription,ImageContrastCheck">
     </ImageView>
@@ -147,8 +147,8 @@
         android:textSize="18sp"
         android:layout_marginTop="4dp"
         app:layout_constraintBottom_toBottomOf="@+id/visitingCardTv"
-        app:layout_constraintEnd_toEndOf="@+id/visitingCardIv"
-        app:layout_constraintStart_toStartOf="@+id/visitingCardIv"
+        app:layout_constraintEnd_toEndOf="@+id/wasooliIv"
+        app:layout_constraintStart_toStartOf="@+id/wasooliIv"
         app:layout_constraintTop_toTopOf="@+id/visitingCardTv">
     </TextView>
     <TextView
@@ -158,9 +158,9 @@
         android:layout_marginTop="4dp"
         android:text="@string/visiting_cards"
         android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="@+id/wasooliIv"
-        app:layout_constraintStart_toStartOf="@+id/wasooliIv"
-        app:layout_constraintTop_toBottomOf="@+id/wasooliIv">
+        app:layout_constraintEnd_toEndOf="@+id/visitingIv"
+        app:layout_constraintStart_toStartOf="@+id/visitingIv"
+        app:layout_constraintTop_toBottomOf="@+id/visitingIv">
     </TextView>
     <TextView
         android:id="@+id/CashbookTv"

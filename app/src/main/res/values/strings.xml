@@ -204,4 +204,9 @@
     <string name="khata">Khata</string>
     <string name="sales_2">Sales</string>
     <string name="account">Account</string>
+    <string name="enter_business_address">Enter business address</string>
+    <string name="select_business_type">Select business type</string>
+    <string name="enter_your_name">Enter your name</string>
+    <string name="enter_phone_number">Enter phone number</string>
+    <string name="karobar_ka_address_2">Karobar ka address</string>
 </resources>

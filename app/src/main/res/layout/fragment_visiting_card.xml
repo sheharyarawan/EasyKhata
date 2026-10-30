@@ -12,11 +12,10 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:navigationIcon="@drawable/ic_back"
-        app:title="Visting cards"
+        app:title="Visiting card"
         app:titleMarginStart="20dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </com.google.android.material.appbar.MaterialToolbar>
+        app:layout_constraintTop_toTopOf="parent" />
     <androidx.core.widget.NestedScrollView
         android:id="@+id/visitingCardScrollView"
         android:layout_width="0dp"
@@ -47,36 +46,37 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/karobar_ka_naam"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/visitingCardRv"
-                tools:ignore="TextContrastCheck">
-            </TextView>
-    <TextView
-        android:id="@+id/visitingCardName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView18">
-    </TextView>
-    <View
-        android:id="@+id/view13"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="#9D9D9D"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/visitingCardName">
-    </View>
+                app:layout_constraintTop_toBottomOf="@id/visitingCardRv"
+                tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/visitingCardName"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:hint="Enter business name"
+                android:inputType="textCapWords"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView18"
+                tools:ignore="Autofill,HardcodedText,TextContrastCheck,VisualLintTextFieldSize" />
+            <View
+                android:id="@+id/view13"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#9D9D9D"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visitingCardName" />
             <TextView
                 android:id="@+id/tvApkaNaamLabel"
                 android:layout_width="wrap_content"
@@ -84,33 +84,37 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/apka_naam"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/view13"
-                tools:ignore="TextContrastCheck">
-            </TextView>
-    <TextView
-        android:id="@+id/visitingCardOwnerName"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvApkaNaamLabel" />
-    <View
-        android:id="@+id/dividerOwnerName"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="#9D9D9D"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/visitingCardOwnerName" />
+                app:layout_constraintTop_toBottomOf="@id/view13"
+                tools:ignore="TextContrastCheck" />
+            <EditText
+                android:id="@+id/visitingCardOwnerName"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/enter_your_name"
+                android:inputType="textCapWords"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvApkaNaamLabel"
+                tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
+            <View
+                android:id="@+id/dividerOwnerName"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#9D9D9D"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visitingCardOwnerName" />
             <TextView
                 android:id="@+id/tvPhoneNumberLabel"
                 android:layout_width="wrap_content"
@@ -118,32 +122,37 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/phone_number_2"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dividerOwnerName"
                 tools:ignore="TextContrastCheck" />
-    <TextView
-        android:id="@+id/visitingCardPhoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberLabel" />
-    <View
-        android:id="@+id/dividerPhoneNumber"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="#9D9D9D"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/visitingCardPhoneNumber" />
+            <EditText
+                android:id="@+id/visitingCardPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:background="@android:color/transparent"
+                android:hint="@string/enter_phone_number"
+                android:inputType="phone"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvPhoneNumberLabel"
+                tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
+            <View
+                android:id="@+id/dividerPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#9D9D9D"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visitingCardPhoneNumber" />
             <TextView
                 android:id="@+id/tvBusinessAddressLabel"
                 android:layout_width="0dp"
@@ -151,36 +160,46 @@
                 android:layout_marginHorizontal="16dp"
                 android:layout_marginTop="16dp"
                 android:text="@string/karobar_ka_address"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                app:drawableEndCompat="@drawable/ic_location"
-                app:drawableTint="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/dividerPhoneNumber"
                 tools:ignore="TextContrastCheck" />
-    <TextView
-        android:id="@+id/visitingCardBusinessAddress"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:maxLines="2"
-        android:textSize="18sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvBusinessAddressLabel" />
-    <View
-        android:id="@+id/dividerBusinessAddress"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:background="#9D9D9D"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/visitingCardBusinessAddress" />
+            <TextView
+                android:id="@+id/visitingCardBusinessAddress"
+                android:layout_width="0dp"
+                android:layout_height="48dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:textSize="18sp"
+                android:text="@string/karobar_ka_address_2"
+                app:layout_constraintEnd_toStartOf="@+id/imageView7"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBusinessAddressLabel"
+                tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
+            <ImageView
+                android:id="@+id/imageView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/ic_location"
+                app:layout_constraintBottom_toBottomOf="@+id/visitingCardBusinessAddress"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/visitingCardBusinessAddress"
+                tools:ignore="ContentDescription">
+            </ImageView>
+            <View
+                android:id="@+id/dividerBusinessAddress"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#9D9D9D"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/visitingCardBusinessAddress" />
             <TextView
                 android:id="@+id/tvBusinessTypeLabel"
                 android:layout_width="0dp"
@@ -194,21 +213,30 @@
                 app:drawableEndCompat="@drawable/ic_arrow_down"
                 app:drawableTint="@color/gray"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/dividerBusinessAddress"
-                tools:ignore="TextContrastCheck" />
-    <TextView
-        android:id="@+id/visitingCardBusinessType"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="12dp"
-        android:textSize="18sp"
-        android:layout_marginBottom="16dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tvBusinessTypeLabel" />
+                app:layout_constraintTop_toBottomOf="@id/dividerBusinessAddress" />
+            <TextView
+                android:id="@+id/visitingCardBusinessType"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="16dp"
+                android:text="@string/select_business_type"
+                android:textSize="18sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tvBusinessTypeLabel" />
+            <View
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="12dp"
+                android:background="#9D9D9D"
+                app:layout_constraintTop_toBottomOf="@id/visitingCardBusinessType"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent">
+            </View>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
     <com.google.android.material.button.MaterialButton
@@ -227,11 +255,9 @@
         app:iconSize="30dp"
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/shareVisitingCardButton"
-        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintEnd_toStartOf="@id/shareVisitingCardButton"
         app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="VisualLintButtonSize">
-    </com.google.android.material.button.MaterialButton>
+        tools:ignore="VisualLintButtonSize" />
     <com.google.android.material.button.MaterialButton
         android:id="@+id/shareVisitingCardButton"
         android:layout_width="0dp"
@@ -249,8 +275,6 @@
         app:iconTint="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.5"
-        app:layout_constraintStart_toEndOf="@+id/downloadVisitingCardButton"
-        tools:ignore="VisualLintButtonSize">
-    </com.google.android.material.button.MaterialButton>
+        app:layout_constraintStart_toEndOf="@id/downloadVisitingCardButton"
+        tools:ignore="VisualLintButtonSize" />
 </androidx.constraintlayout.widget.ConstraintLayout>

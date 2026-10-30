@@ -111,7 +111,11 @@
         android:id="@+id/visitingCardFragment"
         android:name="com.example.easykhata.ui.fragments.account.VisitingCardFragment"
         android:label="fragment_visiting_card"
-        tools:layout="@layout/fragment_visiting_card" />
+        tools:layout="@layout/fragment_visiting_card" >
+        <action
+            android:id="@+id/action_visitingCardFragment_to_karobarAddressFragment"
+            app:destination="@id/karobarAddressFragment" />
+    </fragment>
     <fragment
         android:id="@+id/wasooliFragment"
         android:name="com.example.easykhata.ui.fragments.account.WasooliFragment"
@@ -127,4 +131,9 @@
         android:name="com.example.easykhata.ui.fragments.account.MyDetailsFragment"
         android:label="fragment_my_details"
         tools:layout="@layout/fragment_my_details" />
+    <fragment
+        android:id="@+id/karobarAddressFragment"
+        android:name="com.example.easykhata.ui.fragments.account.KarobarAddressFragment"
+        android:label="fragment_karobar_address"
+        tools:layout="@layout/fragment_karobar_address" />
 </navigation>

@@ -13,7 +13,7 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
     }
     private fun setUpClicks(){
         binding.apply {
-            visitingCardIv.setOnClickListener {
+            visitingIv.setOnClickListener {
                 findNavController().navigate(R.id.action_accountFragment_to_visitingCardFragment)
             }
             wasooliIv.setOnClickListener {
