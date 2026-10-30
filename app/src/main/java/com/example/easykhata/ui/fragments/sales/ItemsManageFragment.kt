@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentItemsManageBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
 lateinit var binding: FragmentItemsManageBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

@@ -8,7 +8,9 @@ import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentSaleConfirmKareinBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SaleConfirmKareinFragment : Fragment(R.layout.fragment_sale_confirm_karein) {
 lateinit var binding: FragmentSaleConfirmKareinBinding
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
