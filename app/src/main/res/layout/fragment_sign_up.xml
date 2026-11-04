@@ -7,6 +7,17 @@
     android:layout_height="match_parent"
     android:padding="20dp"
     tools:context=".ui.fragments.auth.SignUpFragment">
+    <com.google.android.material.progressindicator.LinearProgressIndicator
+        android:id="@+id/otpProgressBar"
+        android:layout_width="0dp"
+        android:layout_height="4dp"
+        android:visibility="gone"
+        android:indeterminate="true"
+        app:indicatorColor="@color/green"
+        app:trackColor="@color/gray"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
     <TextView
         android:id="@+id/countryCodeTv"
         android:layout_width="wrap_content"

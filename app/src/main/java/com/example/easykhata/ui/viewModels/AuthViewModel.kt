@@ -40,7 +40,7 @@ class AuthViewModel @Inject constructor(
             },
             onError = { exception ->
                 _uiState.value = UiState.Error(
-                    exception.message ?: "Something went wrong"
+                    exception.message ?: "Request fail hogi, dubaara koshish karein"
                 )
             }
         )

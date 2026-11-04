@@ -8,11 +8,9 @@ import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
-
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
 ) : AuthRepository {
-
     override fun sendOtp(
         phoneNumber: String,
         activity: Activity,
@@ -20,21 +18,17 @@ class AuthRepositoryImpl @Inject constructor(
         onVerificationCompleted: (PhoneAuthCredential) -> Unit,
         onError: (Exception) -> Unit
     ) {
-
         val callbacks = object : PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
-
             override fun onVerificationCompleted(
                 credential: PhoneAuthCredential
             ) {
                 onVerificationCompleted(credential)
             }
-
             override fun onVerificationFailed(
                 exception: FirebaseException
             ) {
                 onError(exception)
             }
-
             override fun onCodeSent(
                 verificationId: String,
                 token: PhoneAuthProvider.ForceResendingToken
@@ -42,14 +36,12 @@ class AuthRepositoryImpl @Inject constructor(
                 onCodeSent(verificationId)
             }
         }
-
         val options = PhoneAuthOptions.newBuilder(firebaseAuth)
             .setPhoneNumber(phoneNumber)
             .setTimeout(60L, TimeUnit.SECONDS)
             .setActivity(activity)
             .setCallbacks(callbacks)
             .build()
-
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
     override fun isUserSignedIn(): Boolean {
