@@ -10,4 +10,5 @@ interface AuthRepository {
         onVerificationCompleted: (PhoneAuthCredential) -> Unit,
         onError: (Exception) -> Unit
     )
+    fun isUserSignedIn(): Boolean
 }

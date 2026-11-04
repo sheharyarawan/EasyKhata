@@ -52,4 +52,7 @@ class AuthRepositoryImpl @Inject constructor(
 
         PhoneAuthProvider.verifyPhoneNumber(options)
     }
+    override fun isUserSignedIn(): Boolean {
+        return firebaseAuth.currentUser != null
+    }
 }
