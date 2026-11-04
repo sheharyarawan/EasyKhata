@@ -209,4 +209,9 @@
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_phone_number">Enter phone number</string>
     <string name="karobar_ka_address_2">Karobar ka address</string>
+    <string name="karobar_ki_tafseelat">Karobar ki tafseelat</string>
+    <string name="apny_karobar_ka_naam_likhain">Apny karobar ka naam likhain</string>
+    <string name="karobar_ka_naam_2">Karobar ka naam</string>
+    <string name="karobar_type_3">Karobar type</string>
+    <string name="aagay_barhein">Aagay barhein</string>
 </resources>
