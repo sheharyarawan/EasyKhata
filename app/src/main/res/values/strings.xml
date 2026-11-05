@@ -216,4 +216,7 @@
     <string name="aagay_barhein">Aagay barhein</string>
     <string name="easy">Easy</string>
     <string name="khata_2">Khata</string>
+    <string name="sms_per_bhejain_2">SMS per bhejain</string>
+    <string name="login_code_validate_ho_raha_hai">Login code validate ho raha hai...</string>
+    <string name="otp_valid_nai_hai_dubaara_koshish_karein">Otp valid nai hai, dubaara koshish karein</string>
 </resources>
