@@ -11,7 +11,7 @@ import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
-    private val firebaseAuth: FirebaseAuth
+    private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore
 ) : AuthRepository {
     override fun sendOtp(
@@ -80,5 +80,8 @@ class AuthRepositoryImpl @Inject constructor(
             .get()
             .await()
         return !snapshot.isEmpty
+    }
+    override fun getCurrentUserUid(): String? {
+        return firebaseAuth.currentUser?.uid
     }
 }
