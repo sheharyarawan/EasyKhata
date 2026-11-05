@@ -22,11 +22,13 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlin.time.Duration.Companion.milliseconds
+import java.util.Locale
 @AndroidEntryPoint
 class OtpFragment : Fragment(R.layout.fragment_otp) {
     private lateinit var binding: FragmentOtpBinding
     private val args: OtpFragmentArgs by navArgs()
     private var errorCardJob: Job? = null
+    private var resendTimerJob: Job? = null
     private val authViewModel: AuthViewModel by viewModels()
     private var verificationId: String? = null
     private var isVerifying = false
@@ -40,11 +42,20 @@ class OtpFragment : Fragment(R.layout.fragment_otp) {
         setUpOtpFields()
         observeUiState()
         observeBusinessState()
+        observeResendOtpState()
+        startResendTimer()
     }
     private fun setUpClicks() {
         binding.apply {
             otpToolbar.setNavigationOnClickListener {
                 findNavController().navigateUp()
+            }
+            smsPerBhejainButton.setOnClickListener {
+                val activity = requireActivity()
+                authViewModel.resendOtp(
+                    phoneNumber = args.phoneNumber,
+                    activity = activity
+                )
             }
         }
     }
@@ -161,6 +172,35 @@ class OtpFragment : Fragment(R.layout.fragment_otp) {
             }
         }
     }
+    private fun observeResendOtpState() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                authViewModel.resendOtpState.collect { state ->
+                    when (state) {
+                        is UiState.Idle -> Unit
+                        is UiState.Loading -> {
+                            binding.smsPerBhejainButton.isEnabled = false
+                        }
+                        is UiState.Success -> {
+                            val newVerificationId = state.data.verificationId
+                            if (newVerificationId != null) {
+                                verificationId = newVerificationId
+                                startResendTimer()
+                            }
+                        }
+                        is UiState.Error -> {
+                            binding.smsPerBhejainButton.isEnabled = true
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                    }
+                }
+            }
+        }
+    }
     private fun showErrorCard() {
         errorCardJob?.cancel()
         errorCardJob = viewLifecycleOwner.lifecycleScope.launch {
@@ -168,6 +208,29 @@ class OtpFragment : Fragment(R.layout.fragment_otp) {
             binding.otpErrorCard.visibility = View.VISIBLE
             delay(2000.milliseconds)
             binding.otpErrorCard.visibility = View.GONE
+        }
+    }
+    private fun startResendTimer() {
+        resendTimerJob?.cancel()
+        binding.smsPerBhejainButton.isEnabled = false
+        resendTimerJob = viewLifecycleOwner.lifecycleScope.launch {
+            for (seconds in 60 downTo 0) {
+                val minutes = seconds / 60
+                val remainingSeconds = seconds % 60
+                val time = String.format(
+                    Locale.getDefault(),
+                    "%02d:%02d",
+                    minutes,
+                    remainingSeconds
+                )
+                binding.codeTv.text = getString(
+                    R.string.code_nhi_aya_00_00_ke_baad_code_phir_se_bheja_ja_sakta_hai
+                ).replace("00:00", time)
+                if (seconds > 0) {
+                    delay(1000.milliseconds)
+                }
+            }
+            binding.smsPerBhejainButton.isEnabled = true
         }
     }
     private fun showProgress() {

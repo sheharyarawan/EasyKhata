@@ -75,7 +75,7 @@
             tools:ignore="LabelFor,SpeakableTextPresentCheck" />
     </LinearLayout>
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/codeTv"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
@@ -95,10 +95,11 @@
         android:layout_marginTop="30dp"
         android:paddingVertical="12dp"
         android:textSize="18sp"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+        app:layout_constraintTop_toBottomOf="@+id/codeTv">
     </com.google.android.material.button.MaterialButton>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/otpCardView"
