@@ -6,10 +6,13 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.PhoneAuthCredential
 import com.google.firebase.auth.PhoneAuthOptions
 import com.google.firebase.auth.PhoneAuthProvider
+import com.google.firebase.firestore.FirebaseFirestore
+import kotlinx.coroutines.tasks.await
 import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 class AuthRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth
+    private val firestore: FirebaseFirestore
 ) : AuthRepository {
     override fun sendOtp(
         phoneNumber: String,
@@ -57,7 +60,6 @@ class AuthRepositoryImpl @Inject constructor(
             verificationId,
             otp
         )
-
         firebaseAuth.signInWithCredential(credential)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
@@ -68,5 +70,15 @@ class AuthRepositoryImpl @Inject constructor(
                     )
                 }
             }
+    }
+    override suspend fun hasBusiness(uid: String): Boolean {
+        val snapshot = firestore
+            .collection("users")
+            .document(uid)
+            .collection("business")
+            .limit(1)
+            .get()
+            .await()
+        return !snapshot.isEmpty
     }
 }

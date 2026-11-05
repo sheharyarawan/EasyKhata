@@ -17,4 +17,5 @@ interface AuthRepository {
         onSuccess: () -> Unit,
         onError: (Exception) -> Unit
     )
+    suspend fun hasBusiness(uid: String): Boolean
 }
