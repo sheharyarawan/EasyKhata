@@ -21,6 +21,9 @@ class AuthViewModel @Inject constructor(
     private val _businessState =
         MutableStateFlow<UiState<Boolean>>(UiState.Idle)
     val businessState = _businessState.asStateFlow()
+    private val _resendOtpState =
+        MutableStateFlow<UiState<PhoneAuthData>>(UiState.Idle)
+    val resendOtpState = _resendOtpState.asStateFlow()
     fun sendOtp(
         phoneNumber: String,
         activity: Activity
@@ -50,12 +53,41 @@ class AuthViewModel @Inject constructor(
             }
         )
     }
+    fun resendOtp(
+        phoneNumber: String,
+        activity: Activity
+    ) {
+        _resendOtpState.value = UiState.Loading
+        authRepository.sendOtp(
+            phoneNumber = phoneNumber,
+            activity = activity,
+
+            onCodeSent = { verificationId ->
+                _resendOtpState.value = UiState.Success(
+                    PhoneAuthData(
+                        verificationId = verificationId
+                    )
+                )
+            },
+            onVerificationCompleted = { credential ->
+                _resendOtpState.value = UiState.Success(
+                    PhoneAuthData(
+                        credential = credential
+                    )
+                )
+            },
+            onError = { exception ->
+                _resendOtpState.value = UiState.Error(
+                    exception.message ?: "OTP dobara send nahi ho saka"
+                )
+            }
+        )
+    }
     fun verifyOtp(
         verificationId: String,
         otp: String
     ) {
         _uiState.value = UiState.Loading
-
         authRepository.verifyOtp(
             verificationId = verificationId,
             otp = otp,
@@ -74,21 +106,16 @@ class AuthViewModel @Inject constructor(
     fun checkExistingBusiness() {
         viewModelScope.launch {
             _businessState.value = UiState.Loading
-
             try {
                 val uid = authRepository.getCurrentUserUid()
-
                 if (uid == null) {
                     _businessState.value =
                         UiState.Error("User not authenticated")
                     return@launch
                 }
-
                 val hasBusiness = authRepository.hasBusiness(uid)
-
                 _businessState.value =
                     UiState.Success(hasBusiness)
-
             } catch (e: Exception) {
                 _businessState.value = UiState.Error(
                     e.message ?: "Unable to check business details"
