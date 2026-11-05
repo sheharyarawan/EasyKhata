@@ -59,7 +59,12 @@ class SignUpFragment : Fragment(R.layout.fragment_sign_up) {
                             binding.sendOtpBtn.isEnabled = true
                             val data = state.data
                             if (data.verificationId != null) {
-                                findNavController().navigate(R.id.action_signUpFragment_to_otpFragment)
+                                val action = SignUpFragmentDirections
+                                    .actionSignUpFragmentToOtpFragment(
+                                        verificationId = data.verificationId,
+                                        phoneNumber = "+92${binding.signUpPhoneEt.text.toString().trim()}"
+                                    )
+                                findNavController().navigate(action)
                             }
                         }
                         is UiState.Error -> {
