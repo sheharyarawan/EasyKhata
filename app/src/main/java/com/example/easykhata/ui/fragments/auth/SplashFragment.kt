@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentSplashBinding
+import com.example.easykhata.ui.viewModels.AuthViewModel
 import com.example.easykhata.ui.viewModels.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
@@ -23,11 +24,13 @@ class SplashFragment : Fragment(R.layout.fragment_splash) {
         delayTime()
     }
     private fun navigateBasedOnAuthStatus() {
-        val navController = findNavController()
-        if (viewModel.isUserSignedIn()) {
-            navController.navigate(R.id.home_graph)
-        } else {
-            navController.navigate(R.id.auth_graph)
+        viewLifecycleOwner.lifecycleScope.launch {
+            val navController = findNavController()
+            if (viewModel.isUserSignedIn() && viewModel.hasBusiness()) {
+                navController.navigate(R.id.home_graph)
+            } else {
+                navController.navigate(R.id.auth_graph)
+            }
         }
     }
     private fun delayTime(){

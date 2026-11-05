@@ -11,4 +11,8 @@ class SplashViewModel @Inject constructor(
     fun isUserSignedIn(): Boolean {
         return authRepository.isUserSignedIn()
     }
+    suspend fun hasBusiness(): Boolean {
+        val uid = authRepository.getCurrentUserUid() ?: return false
+        return authRepository.hasBusiness(uid)
+    }
 }
