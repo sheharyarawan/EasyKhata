@@ -35,5 +35,17 @@
         android:id="@+id/karobarTafseelFragment"
         android:name="com.example.easykhata.ui.fragments.auth.KarobarTafseelFragment"
         android:label="fragment_karobar_tafseel"
-        tools:layout="@layout/fragment_karobar_tafseel" />
+        tools:layout="@layout/fragment_karobar_tafseel" >
+        <action
+            android:id="@+id/action_karobarTafseelFragment_to_karobarTypeFragment2"
+            app:destination="@id/karobarTypeFragment2" />
+        <argument
+            android:name="phoneNumber"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/karobarTypeFragment2"
+        android:name="com.example.easykhata.ui.fragments.account.bottomSheets.KarobarTypeFragment"
+        android:label="fragment_karobar_type"
+        tools:layout="@layout/fragment_karobar_type" />
 </navigation>
