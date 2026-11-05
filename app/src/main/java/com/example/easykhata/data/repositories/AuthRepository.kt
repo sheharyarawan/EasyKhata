@@ -11,4 +11,10 @@ interface AuthRepository {
         onError: (Exception) -> Unit
     )
     fun isUserSignedIn(): Boolean
+    fun verifyOtp(
+        verificationId: String,
+        otp: String,
+        onSuccess: () -> Unit,
+        onError: (Exception) -> Unit
+    )
 }
