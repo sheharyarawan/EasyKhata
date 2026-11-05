@@ -154,9 +154,10 @@ class OtpFragment : Fragment(R.layout.fragment_otp) {
                                     R.id.home_graph
                                 )
                             } else {
-                                findNavController().navigate(
-                                    R.id.action_otpFragment_to_karobarTafseelFragment
+                                val action= OtpFragmentDirections.actionOtpFragmentToKarobarTafseelFragment(
+                                    args.phoneNumber
                                 )
+                                findNavController().navigate(action)
                             }
                         }
                         is UiState.Error -> {
