@@ -4,6 +4,8 @@ import com.example.easykhata.data.repositories.AuthRepository
 import com.example.easykhata.data.repositories.AuthRepositoryImpl
 import com.example.easykhata.data.repositories.BusinessRepository
 import com.example.easykhata.data.repositories.BusinessRepositoryImpl
+import com.example.easykhata.data.repositories.PhoneContactsRepository
+import com.example.easykhata.data.repositories.PhoneContactsRepositoryImpl
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -22,4 +24,9 @@ abstract class RepositoryModule {
     abstract fun bindBusinessRepository(
         businessRepositoryImpl: BusinessRepositoryImpl
     ): BusinessRepository
+    @Binds
+    @Singleton
+    abstract fun bindPhoneContactsRepository(
+        phoneContactsRepositoryImpl: PhoneContactsRepositoryImpl
+    ): PhoneContactsRepository
 }
