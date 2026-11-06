@@ -5,7 +5,7 @@
     <string name="countryCode">+92</string>
     <string name="hint_phone_number">Phone Number</string>
     <string name="sms_par_otp_bhejain">SMS par OTP bhejain</string>
-    <string name="code_nhi_aya_00_00_ke_baad_code_phir_se_bheja_ja_sakta_hai">Code nhi aya? 00:00 ke baad code phir se bheja ja sakta hai</string>
+    <string name="code_nhi_aya_00_00_ke_baad_code_phir_se_bheja_ja_sakta_hai">Code nahi aya? 00:00 ke baad code phir se bheja ja sakta hai</string>
     <string name="sms_per_bhejain">SMS per bhejain</string>
     <string name="add_customer">+ Add customer</string>
     <string name="business_icon">Business icon</string>
@@ -209,4 +209,14 @@
     <string name="enter_your_name">Enter your name</string>
     <string name="enter_phone_number">Enter phone number</string>
     <string name="karobar_ka_address_2">Karobar ka address</string>
+    <string name="karobar_ki_tafseelat">Karobar ki tafseelat</string>
+    <string name="apny_karobar_ka_naam_likhain">Apny karobar ka naam likhain</string>
+    <string name="karobar_ka_naam_2">Karobar ka naam</string>
+    <string name="karobar_type_3">Karobar type</string>
+    <string name="aagay_barhein">Aagay barhein</string>
+    <string name="easy">Easy</string>
+    <string name="khata_2">Khata</string>
+    <string name="sms_per_bhejain_2">SMS per bhejain</string>
+    <string name="login_code_validate_ho_raha_hai">Login code validate ho raha hai...</string>
+    <string name="otp_valid_nai_hai_dubaara_koshish_karein">Otp valid nai hai, dubaara koshish karein</string>
 </resources>

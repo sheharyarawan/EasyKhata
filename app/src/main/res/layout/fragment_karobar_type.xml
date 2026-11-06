@@ -39,7 +39,7 @@
         android:id="@+id/view14"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginStart="45dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="10dp"
         android:background="#ADADAD"
         app:layout_constraintEnd_toEndOf="parent"
@@ -48,9 +48,11 @@
         app:layout_constraintTop_toBottomOf="@+id/etSearchCustomerExpand">
     </View>
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/karobarTypeRv"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="10dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/karobarSaveButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -65,6 +67,8 @@
         android:text="@string/save"
         android:textSize="18sp"
         android:layout_margin="16dp"
+        android:paddingVertical="10dp"
+        app:cornerRadius="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -1,14 +1,15 @@
 package com.example.easykhata
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.easykhata.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     lateinit var binding: ActivityMainBinding
@@ -19,15 +20,35 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
+            v.setPadding(
+                systemBars.left,
+                systemBars.top,
+                systemBars.right,
+                systemBars.bottom
+            )
             insets
         }
         setUpBottomNavWithNavController()
     }
     private fun setUpBottomNavWithNavController() {
-        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container)
-                as NavHostFragment
+        val navHost = supportFragmentManager.findFragmentById(R.id.nav_host_fragment_container) as NavHostFragment
         val navController = navHost.navController
         binding.bottomNavigationView.setupWithNavController(navController)
+        setUpBottomNavVisibility(navController)
+    }
+    private fun setUpBottomNavVisibility(navController: NavController) {
+        navController.addOnDestinationChangedListener { _, destination, _ ->
+            val fragmentsWithBottomNav = setOf(
+                R.id.homeFragment,
+                R.id.salesFragment,
+                R.id.accountFragment
+            )
+            binding.bottomNavigationView.visibility =
+                if (destination.id in fragmentsWithBottomNav) {
+                    View.VISIBLE
+                } else {
+                    View.GONE
+                }
+        }
     }
 }
