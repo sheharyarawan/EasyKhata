@@ -1,5 +1,4 @@
 package com.example.easykhata.ui.fragments.customers
-
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.View
@@ -24,7 +23,6 @@ import java.util.Locale
 class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
     lateinit var binding: FragmentCustomerDetailBinding
     private val viewModel: CustomerDetailViewModel by activityViewModels()
-
     private val businessViewModel: BusinessViewModel by activityViewModels()
     private val args: CustomerDetailFragmentArgs by navArgs()
     private lateinit var customerId: String
@@ -36,8 +34,23 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
         loadCustomer()
     }
     private fun setUpClicks() {
-        binding.customerDetailToolbar.setNavigationOnClickListener {
-            findNavController().navigateUp()
+        binding.apply {
+            customerDetailToolbar.setNavigationOnClickListener {
+                findNavController().navigateUp()
+            }
+            customerDetailToolbar.setOnMenuItemClickListener { menuItem ->
+                when (menuItem.itemId) {
+                    R.id.addToFav -> {
+                        // Add or remove customer from favourites
+                        true
+                    }
+                    R.id.editCustomerToolbar -> {
+                       findNavController().navigate(R.id.action_customerDetailFragment_to_editCustomerFragment)
+                        true
+                    }
+                    else -> false
+                }
+            }
         }
     }
     private fun loadCustomer() {
@@ -57,29 +70,43 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.customerState.collect { state ->
                     when (state) {
-                        is UiState.Loading -> Unit
+                        is UiState.Loading -> {
+                            showProgress()
+                        }
                         is UiState.Success -> {
+                            hideProgress()
                             setUpToolbar(state.data)
                         }
                         is UiState.Error -> {
+                            hideProgress()
                             Toast.makeText(
                                 requireContext(),
                                 state.message,
                                 Toast.LENGTH_SHORT
                             ).show()
                         }
-                        is UiState.Idle -> Unit
+                        is UiState.Idle -> {
+                            hideProgress()
+                        }
                     }
                 }
             }
         }
     }
     private fun setUpToolbar(customer: Customer) {
-        binding.customerDetailToolbar.title = customer.name
-        val formattedDate = customer.createdAt?.toDate()?.let {
-            SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
+        binding.apply {
+            customerDetailToolbar.title = customer.name
+            val formattedDate = customer.createdAt?.toDate()?.let {
+                SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
+            }
+            customerDetailToolbar.subtitle =
+                formattedDate?.let { "Customer since $it" } ?: "Date unavailable"
         }
-        binding.customerDetailToolbar.subtitle =
-            formattedDate?.let { "Customer since $it" } ?: "Date unavailable"
+    }
+    private fun showProgress() {
+        binding.customerDetailProgressOverlay.visibility = View.VISIBLE
+    }
+    private fun hideProgress() {
+        binding.customerDetailProgressOverlay.visibility = View.GONE
     }
 }

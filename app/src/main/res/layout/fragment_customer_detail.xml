@@ -278,4 +278,25 @@
         app:layout_constraintTop_toTopOf="@+id/liyeButton"
         tools:ignore="VisualLintButtonSize">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/customerDetailProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
