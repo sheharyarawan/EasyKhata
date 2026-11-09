@@ -27,7 +27,8 @@ class BusinessRepositoryImpl @Inject constructor(
             .document()
         val userData = user.copy(
             userId = uid,
-            phoneNumber = currentUser.phoneNumber ?: ""
+            phoneNumber = currentUser.phoneNumber ?: "",
+            activeBusinessId = businessRef.id
         )
         val businessData = business.copy(
             businessId = businessRef.id
@@ -66,5 +67,29 @@ class BusinessRepositoryImpl @Inject constructor(
             "Electronics",
             "Gold & Jewellery"
         )
+    }
+    override fun getActiveBusinessId(
+        onSuccess: (String) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        firestore.collection("users")
+            .document(currentUser.uid)
+            .get()
+            .addOnSuccessListener { document ->
+                val businessId = document.getString("activeBusinessId")
+                if (businessId.isNullOrBlank()) {
+                    onFailure(Exception("No active business found"))
+                } else {
+                    onSuccess(businessId)
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
     }
 }

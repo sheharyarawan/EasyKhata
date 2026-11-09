@@ -10,4 +10,8 @@ interface BusinessRepository {
         onException: (Exception) -> Unit
     )
     fun getKarobarTypes(): List<String>
+    fun getActiveBusinessId(
+        onSuccess: (String) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
