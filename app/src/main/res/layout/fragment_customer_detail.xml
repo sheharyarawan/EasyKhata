@@ -16,6 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge.Emphasized"
+        app:subtitleTextColor="@color/mid_gray"
         app:menu="@menu/customer_detail_menu">
     </com.google.android.material.appbar.MaterialToolbar>
     <androidx.cardview.widget.CardView
@@ -193,7 +195,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="30dp"
         android:text="TIME"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -207,7 +209,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="70dp"
         android:text="@string/diye"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/liyeTv"
@@ -221,7 +223,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="70dp"
         android:text="@string/liye"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
