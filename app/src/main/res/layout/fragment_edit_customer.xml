@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:navigationIcon="@drawable/ic_back"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge.Emphasized"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </com.google.android.material.appbar.MaterialToolbar>
@@ -20,67 +21,107 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/naam"
+        android:textColor="@color/mid_gray"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editCustomerToolbar">
+        app:layout_constraintTop_toBottomOf="@+id/editCustomerToolbar"
+        tools:ignore="TextContrastCheck">
     </TextView>
-    <EditText
+    <TextView
         android:id="@+id/editTextNameUpdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:minHeight="48dp"
+        android:layout_marginTop="10dp"
         android:textSize="18sp"
+        tools:text="Hassan Burhan"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize">
-    </EditText>
+    </TextView>
+    <View
+        android:id="@+id/view23"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/mid_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNameUpdate">
+    </View>
     <TextView
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/phone_number"
+        android:textColor="@color/mid_gray"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNameUpdate">
+        app:layout_constraintTop_toBottomOf="@+id/view23"
+        tools:ignore="TextContrastCheck">
     </TextView>
-    <EditText
+    <TextView
         android:id="@+id/editTextNumberUpdate"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="16dp"
-        android:minHeight="48dp"
+        android:layout_marginTop="10dp"
+        android:textColor="@color/black"
         android:textSize="18sp"
+        tools:text="03107367318"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView8"
         tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck,TextFields,VisualLintTextFieldSize">
-    </EditText>
+    </TextView>
+    <View
+        android:id="@+id/view24"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:background="@color/mid_gray"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextNumberUpdate">
+    </View>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/editCustomerSupplier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         app:cardBackgroundColor="#1A8D8D8D"
-        app:contentPaddingRight="50dp"
-        app:contentPaddingLeft="50dp"
         app:cardCornerRadius="15dp"
+        app:contentPaddingLeft="50dp"
+        app:contentPaddingRight="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextNumberUpdate"
+        app:layout_constraintTop_toBottomOf="@+id/view24"
         app:strokeWidth="0dp">
-        <TextView
-            android:id="@+id/detailExpenseTv"
-            android:layout_width="wrap_content"
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="14dp"
-            android:text="@string/supplier_mai_badlein"
-            android:textSize="19sp"
-            android:drawablePadding="8dp"
-            app:drawableStartCompat="@drawable/ic_person"
-            app:drawableTint="@color/black" />
+            android:orientation="horizontal"
+            tools:ignore="UseCompoundDrawables">
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_person"
+                tools:ignore="ContentDescription">
+            </ImageView>
+            <TextView
+                android:id="@+id/detailExpenseTv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:padding="14dp"
+                android:text="@string/supplier_mai_badlein"
+                android:textSize="19sp" />
+        </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.button.MaterialButton
         android:id="@+id/editCustomerDelete"
@@ -124,4 +165,25 @@
         app:layout_constraintTop_toTopOf="@+id/editCustomerDelete"
         tools:ignore="VisualLintButtonSize">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/editCustomerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
