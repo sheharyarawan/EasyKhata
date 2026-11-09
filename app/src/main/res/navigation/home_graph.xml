@@ -204,5 +204,22 @@
         <argument
             android:name="customerId"
             app:argType="string" />
+        <action
+            android:id="@+id/action_customerDetailFragment_to_editCustomerFragment"
+            app:destination="@id/editCustomerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/editCustomerFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.EditCustomerFragment"
+        android:label="fragment_edit_customer"
+        tools:layout="@layout/fragment_edit_customer" >
+        <action
+            android:id="@+id/action_editCustomerFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
 </navigation>
