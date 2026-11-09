@@ -19,4 +19,10 @@ interface CustomerRepository {
         onSuccess: (Customer) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun updateCustomer(
+        businessId: String,
+        customer: Customer,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }

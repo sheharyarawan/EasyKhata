@@ -112,4 +112,42 @@ class CustomerRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+    override fun updateCustomer(
+        businessId: String,
+        customer: Customer,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+
+        if (userId == null) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+
+        if (businessId.isBlank() || customer.id.isBlank()) {
+            onFailure(Exception("Business or customer not selected"))
+            return
+        }
+
+        firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("customers")
+            .document(customer.id)
+            .update(
+                mapOf(
+                    "name" to customer.name,
+                    "phone" to customer.phone
+                )
+            )
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
