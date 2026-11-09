@@ -72,4 +72,44 @@ class CustomerRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+    override fun getCustomerById(
+        businessId: String,
+        customerId: String,
+        onSuccess: (Customer) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+
+        if (userId == null) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+
+        if (businessId.isBlank() || customerId.isBlank()) {
+            onFailure(Exception("Business or customer not selected"))
+            return
+        }
+
+        firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("customers")
+            .document(customerId)
+            .get()
+            .addOnSuccessListener { document ->
+
+                val customer = document.toObject(Customer::class.java)
+
+                if (customer != null) {
+                    onSuccess(customer.copy(id = document.id))
+                } else {
+                    onFailure(Exception("Customer not found"))
+                }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }

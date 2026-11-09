@@ -13,4 +13,10 @@ interface CustomerRepository {
         onSuccess: (List<Customer>) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun getCustomerById(
+        businessId: String,
+        customerId: String,
+        onSuccess: (Customer) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
