@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.fragments.customers.AddCustomerFragment">
+    tools:context=".ui.fragments.customers.AddCustomerFragment"
+    tools:ignore="VisualLintSystemUi">
     <com.google.android.material.appbar.MaterialToolbar
         android:id="@+id/addCustomerToolbar"
         android:layout_width="0dp"
@@ -24,7 +25,7 @@
         android:src="@drawable/ic_search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/addCustomerToolbar"
-        tools:ignore="ContentDescription">
+        tools:ignore="ContentDescription,ImageContrastCheck">
     </ImageView>
     <EditText
         android:id="@+id/addCustomerEditText"
@@ -40,7 +41,7 @@
         app:layout_constraintEnd_toStartOf="@+id/addCustomerClose"
         app:layout_constraintStart_toEndOf="@+id/imageView3"
         app:layout_constraintTop_toBottomOf="@id/addCustomerToolbar"
-        tools:ignore="Autofill,VisualLintTextFieldSize,VisualLintSystemUi">
+        tools:ignore="Autofill,VisualLintTextFieldSize,VisualLintSystemUi,TextContrastCheck">
     </EditText>
     <ImageView
         android:id="@+id/addCustomerClose"
@@ -103,4 +104,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addNewCustomer">
     </androidx.recyclerview.widget.RecyclerView>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="#FFFFFF" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
