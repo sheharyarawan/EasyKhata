@@ -1,5 +1,4 @@
 package com.example.easykhata.ui.viewModels.customerViewModel
-
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.easykhata.data.models.UiState
@@ -7,6 +6,7 @@ import com.example.easykhata.data.models.customers.Contact
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.data.repositories.CustomerRepository
 import com.example.easykhata.data.repositories.PhoneContactsRepository
+import com.example.easykhata.utils.PhoneNumberUtils
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -31,7 +31,18 @@ class AddCustomerViewModel @Inject constructor(
             _contactsState.value = UiState.Loading
             try {
                 val contacts = phoneContactsRepository.getPhoneContacts()
-                _contactsState.value = UiState.Success(contacts)
+                val seenPhones = mutableSetOf<String>()
+                val uniqueContacts = contacts
+                    .map { contact ->
+                        contact.copy(
+                            phoneNumber = PhoneNumberUtils.normalize(contact.phoneNumber)
+                        )
+                    }
+                    .filter { contact ->
+                        contact.phoneNumber.isBlank() ||
+                                seenPhones.add(contact.phoneNumber)
+                    }
+                _contactsState.value = UiState.Success(uniqueContacts)
             } catch (e: Exception) {
                 _contactsState.value = UiState.Error(
                     e.message ?: "Unable to load contacts"
@@ -44,7 +55,10 @@ class AddCustomerViewModel @Inject constructor(
             businessId = businessId,
             onSuccess = { customers ->
                 _existingCustomerPhones.value = customers
-                    .map { it.phone.filter(Char::isDigit) }
+                    .map {
+                        PhoneNumberUtils.normalize(it.phone)
+                    }
+                    .filter { it.isNotBlank() }
                     .toSet()
             },
             onFailure = {
@@ -52,21 +66,42 @@ class AddCustomerViewModel @Inject constructor(
             }
         )
     }
-    fun addCustomer(businessId: String, customer: Customer) {
+    fun addCustomer(
+        businessId: String,
+        customer: Customer,
+        isFromContact: Boolean = false
+    ) {
         if (businessId.isBlank()) {
             _addCustomerState.value = UiState.Error(
                 "Please select a business first"
             )
             return
         }
+        val phone = if (isFromContact) {
+            PhoneNumberUtils.normalize(customer.phone)
+        } else {
+            customer.phone.trim()
+        }
+        if (phone.isNotEmpty() &&
+            !PhoneNumberUtils.isValidLocalNumber(phone)
+        ) {
+            _addCustomerState.value = UiState.Error(
+                "Durust phone number darj karein"
+            )
+            return
+        }
+        val customerToSave = customer.copy(
+            phone = phone
+        )
         _addCustomerState.value = UiState.Loading
         customerRepository.addCustomer(
             businessId = businessId,
-            customer = customer,
+            customer = customerToSave,
             onSuccess = { customerId ->
                 _addCustomerState.value = UiState.Success(customerId)
-                val normalizedPhone = customer.phone.filter(Char::isDigit)
-                _existingCustomerPhones.value += normalizedPhone
+                if (phone.isNotBlank()) {
+                    _existingCustomerPhones.value += phone
+                }
             },
             onFailure = { exception ->
                 _addCustomerState.value = UiState.Error(
