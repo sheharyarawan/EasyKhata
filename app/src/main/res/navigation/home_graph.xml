@@ -80,7 +80,11 @@
         android:id="@+id/addCustomerDetailFragment"
         android:name="com.example.easykhata.ui.fragments.customers.AddCustomerDetailFragment"
         android:label="fragment_add_customer_detail"
-        tools:layout="@layout/fragment_add_customer_detail" />
+        tools:layout="@layout/fragment_add_customer_detail" >
+        <action
+            android:id="@+id/action_addCustomerDetailFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/itemsManageFragment"
         android:name="com.example.easykhata.ui.fragments.sales.ItemsManageFragment"
