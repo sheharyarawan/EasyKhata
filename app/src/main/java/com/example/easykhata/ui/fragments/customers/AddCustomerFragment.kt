@@ -85,7 +85,11 @@ class AddCustomerFragment : Fragment(R.layout.fragment_add_customer) {
                 name = contact.name,
                 phone = contact.phoneNumber
             )
-            viewModel.addCustomer(businessId, customer)
+            viewModel.addCustomer(
+                businessId = businessId,
+                customer = customer,
+                isFromContact = true
+            )
         }
         binding.phoneCustomers.apply {
             layoutManager = LinearLayoutManager(requireContext())
