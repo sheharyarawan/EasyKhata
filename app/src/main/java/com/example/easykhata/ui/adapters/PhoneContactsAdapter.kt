@@ -24,8 +24,11 @@ class PhoneContactsAdapter(
             val contact = item.contact
             val isAdded = item.isAdded
             binding.apply {
-                itemSearchCustomerInitials.text =
-                    contact.name.firstOrNull()?.uppercase() ?: "?"
+                itemSearchCustomerInitials.text = contact.name
+                    .trim().split("\\s+".toRegex()).take(2)
+                    .mapNotNull { it.firstOrNull()?.uppercase() }
+                    .joinToString("")
+                    .ifEmpty { "?" }
                 itemAddCustomerName.text = contact.name
                 itemAddCustomerNumber.text = contact.phoneNumber
                 itemAddCustomerAdded.apply {
