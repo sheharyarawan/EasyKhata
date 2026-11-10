@@ -1,4 +1,4 @@
-package com.example.easykhata.ui.viewModels.customerViewModel
+package com.example.easykhata.ui.viewModels.customer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.easykhata.data.models.UiState

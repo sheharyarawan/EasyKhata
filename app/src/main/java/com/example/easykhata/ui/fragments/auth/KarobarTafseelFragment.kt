@@ -16,7 +16,7 @@ import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.auth.Business
 import com.example.easykhata.data.models.auth.User
 import com.example.easykhata.databinding.FragmentKarobarTafseelBinding
-import com.example.easykhata.ui.viewModels.BusinessViewModel
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import kotlin.getValue

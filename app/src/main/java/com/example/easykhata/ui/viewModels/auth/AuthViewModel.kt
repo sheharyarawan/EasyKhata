@@ -1,4 +1,4 @@
-package com.example.easykhata.ui.viewModels
+package com.example.easykhata.ui.viewModels.auth
 
 import android.app.Activity
 import androidx.lifecycle.ViewModel

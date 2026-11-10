@@ -9,9 +9,8 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentSplashBinding
-import com.example.easykhata.ui.viewModels.AuthViewModel
-import com.example.easykhata.ui.viewModels.BusinessViewModel
-import com.example.easykhata.ui.viewModels.SplashViewModel
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
+import com.example.easykhata.ui.viewModels.auth.SplashViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch

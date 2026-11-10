@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentKarobarTypeBinding
 import com.example.easykhata.ui.adapters.KarobarTypeAdapter
-import com.example.easykhata.ui.viewModels.BusinessViewModel
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class KarobarTypeFragment : Fragment(R.layout.fragment_karobar_type) {

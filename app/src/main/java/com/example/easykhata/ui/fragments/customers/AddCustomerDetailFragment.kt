@@ -14,8 +14,8 @@ import com.example.easykhata.R
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.databinding.FragmentAddCustomerDetailBinding
-import com.example.easykhata.ui.viewModels.BusinessViewModel
-import com.example.easykhata.ui.viewModels.customerViewModel.AddCustomerViewModel
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
+import com.example.easykhata.ui.viewModels.customer.AddCustomerViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint

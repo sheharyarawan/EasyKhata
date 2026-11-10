@@ -12,7 +12,7 @@ import com.example.easykhata.R
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.databinding.FragmentEditCustomerBinding
-import com.example.easykhata.ui.viewModels.customerViewModel.CustomerDetailViewModel
+import com.example.easykhata.ui.viewModels.customer.CustomerDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint

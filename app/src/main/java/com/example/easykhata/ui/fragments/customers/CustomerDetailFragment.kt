@@ -13,8 +13,8 @@ import com.example.easykhata.R
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.databinding.FragmentCustomerDetailBinding
-import com.example.easykhata.ui.viewModels.BusinessViewModel
-import com.example.easykhata.ui.viewModels.customerViewModel.CustomerDetailViewModel
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
+import com.example.easykhata.ui.viewModels.customer.CustomerDetailViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
