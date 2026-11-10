@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.easykhata.R
 import com.example.easykhata.data.models.ExpenseDirection
+import com.example.easykhata.data.models.expense.Expense
 import com.example.easykhata.data.models.expense.ExpenseWithBalance
 import com.example.easykhata.databinding.ItemExpenseBinding
 import java.text.DecimalFormat
@@ -16,7 +17,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 import kotlin.math.abs
-class ExpenseAdapter :
+class ExpenseAdapter(private val onItemClick: (Expense) -> Unit) :
     ListAdapter<ExpenseWithBalance, ExpenseAdapter.ExpenseViewHolder>(DiffCallback()) {
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -33,7 +34,11 @@ class ExpenseAdapter :
         holder: ExpenseViewHolder,
         position: Int
     ) {
+        val item = getItem(position)
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            onItemClick(item.expense)
+        }
     }
     inner class ExpenseViewHolder(
         private val binding: ItemExpenseBinding
