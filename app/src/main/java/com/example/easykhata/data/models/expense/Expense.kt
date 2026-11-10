@@ -8,5 +8,5 @@ data class Expense(
     val date: Timestamp? = null,
     val description: String = "",
     val amount: Double = 0.0,
-    val direction: ExpenseDirection
+    val direction: ExpenseDirection = ExpenseDirection.LIYE
 )
