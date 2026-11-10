@@ -8,4 +8,11 @@ interface ExpenseRepository {
         onSuccess: (String) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun getCustomerExpenses(
+        businessId: String,
+        customerId: String,
+        onSuccess: (List<Expense>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeCustomerExpensesListener()
 }
