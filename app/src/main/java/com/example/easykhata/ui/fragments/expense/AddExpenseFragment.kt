@@ -6,7 +6,6 @@ import android.content.res.ColorStateList
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -30,7 +29,7 @@ class AddExpenseFragment : Fragment(R.layout.fragment_add_expense) {
     private lateinit var expenseDirection: ExpenseDirection
     private var expenseTimestamp: Timestamp = Timestamp.now()
     private val args: AddExpenseFragmentArgs by navArgs()
-    private val expenseViewModel: ExpenseViewModel by viewModels()
+    private val expenseViewModel: ExpenseViewModel by activityViewModels()
     private val businessViewModel: BusinessViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -126,7 +125,6 @@ class AddExpenseFragment : Fragment(R.layout.fragment_add_expense) {
                     expenseToolbar.title = "Maine diye"
                     setExpenseSaveButtonColor(R.color.red)
                 }
-
                 ExpenseDirection.LIYE -> {
                     expenseToolbar.title = "Maine liye"
                     setExpenseSaveButtonColor(R.color.green)
