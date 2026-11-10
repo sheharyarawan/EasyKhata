@@ -15,4 +15,10 @@ interface ExpenseRepository {
         onFailure: (Exception) -> Unit
     )
     fun removeCustomerExpensesListener()
+    fun updateExpense(
+        businessId: String,
+        expense: Expense,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }

@@ -82,4 +82,34 @@ class ExpenseRepositoryImpl @Inject constructor(
         customerExpensesListener?.remove()
         customerExpensesListener = null
     }
+    override fun updateExpense(
+        businessId: String,
+        expense: Expense,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank() || expense.id.isBlank()) {
+            onFailure(Exception("Business or expense not selected"))
+            return
+        }
+        val expenseRef = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("expenses")
+            .document(expense.id)
+        expenseRef.set(expense)
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
