@@ -24,6 +24,9 @@ class ExpenseViewModel @Inject constructor(
         MutableStateFlow<UiState<List<ExpenseWithBalance>>>(UiState.Idle)
     val customerExpensesState: StateFlow<UiState<List<ExpenseWithBalance>>> =
         _customerExpensesState.asStateFlow()
+    private val _updateExpenseState =
+        MutableStateFlow<UiState<Expense>>(UiState.Idle)
+    val updateExpenseState = _updateExpenseState.asStateFlow()
     private val _sortOption =
         MutableStateFlow(ExpenseSortOption.DEFAULT)
     val sortOption: StateFlow<ExpenseSortOption> =
@@ -134,12 +137,46 @@ class ExpenseViewModel @Inject constructor(
         }
         _customerExpensesState.value = UiState.Success(sortedExpenses)
     }
+    fun updateExpense(
+        businessId: String,
+        expense: Expense
+    ) {
+        if (businessId.isBlank() || expense.id.isBlank()) {
+            _updateExpenseState.value =
+                UiState.Error("Business or expense not selected")
+            return
+        }
+
+        if (expense.amount <= 0) {
+            _updateExpenseState.value =
+                UiState.Error("Amount must be greater than zero")
+            return
+        }
+
+        _updateExpenseState.value = UiState.Loading
+
+        expenseRepository.updateExpense(
+            businessId = businessId,
+            expense = expense,
+            onSuccess = {
+                _updateExpenseState.value = UiState.Success(expense)
+            },
+            onFailure = { exception ->
+                _updateExpenseState.value = UiState.Error(
+                    exception.message ?: "Unable to update expense"
+                )
+            }
+        )
+    }
     fun setSortOption(option: ExpenseSortOption) {
         _sortOption.value = option
         applySorting()
     }
     fun resetAddExpenseState() {
         _addExpenseState.value = null
+    }
+    fun resetUpdateExpenseState() {
+        _updateExpenseState.value = UiState.Idle
     }
     override fun onCleared() {
         super.onCleared()
