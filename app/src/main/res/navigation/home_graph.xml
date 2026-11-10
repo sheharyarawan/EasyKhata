@@ -221,6 +221,9 @@
         <action
             android:id="@+id/action_customerDetailFragment_to_addExpenseFragment"
             app:destination="@id/addExpenseFragment" />
+        <action
+            android:id="@+id/action_customerDetailFragment_to_expenseDetailFragment"
+            app:destination="@id/expenseDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/editCustomerFragment"
@@ -236,4 +239,27 @@
         android:name="com.example.easykhata.ui.fragments.customers.UpdateFragment"
         android:label="fragment_update"
         tools:layout="@layout/fragment_update" />
+    <fragment
+        android:id="@+id/expenseDetailFragment"
+        android:name="com.example.easykhata.ui.fragments.expense.ExpenseDetailFragment"
+        android:label="fragment_expense_detail"
+        tools:layout="@layout/fragment_expense_detail">
+        <argument
+            android:name="expense"
+            app:argType="com.example.easykhata.data.models.expense.Expense" />
+        <action
+            android:id="@+id/action_expenseDetailFragment_to_editExpenseFragment"
+            app:destination="@id/editExpenseFragment"
+            app:popUpTo="@id/expenseDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editExpenseFragment"
+        android:name="com.example.easykhata.ui.fragments.expense.EditExpenseFragment"
+        android:label="fragment_edit_expense"
+        tools:layout="@layout/fragment_edit_expense">
+        <argument
+            android:name="expense"
+            app:argType="com.example.easykhata.data.models.expense.Expense" />
+    </fragment>
 </navigation>
