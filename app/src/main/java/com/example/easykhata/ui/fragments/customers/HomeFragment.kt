@@ -8,7 +8,6 @@ import com.example.easykhata.R
 import com.example.easykhata.databinding.FragmentHomeBinding
 import com.example.easykhata.ui.fragments.customers.bottomSheets.CustomerFilterBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
-
 @AndroidEntryPoint
 class HomeFragment : Fragment(R.layout.fragment_home) {
 lateinit var binding: FragmentHomeBinding
@@ -28,7 +27,8 @@ lateinit var binding: FragmentHomeBinding
                 findNavController().navigate(R.id.action_homeFragment_to_addCustomerFragment)
             }
             cardPdf.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_khataReportFragment)
+                val action= HomeFragmentDirections.actionHomeFragmentToCustomerDetailFragment("MEVGCItWG5OtrexIE6wH")
+                findNavController().navigate(action)
             }
             cardSort.setOnClickListener {
                 CustomerFilterBottomSheet().show(
