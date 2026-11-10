@@ -136,7 +136,12 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
         }
     }
     private fun setUpExpenseRecyclerView() {
-        expenseAdapter = ExpenseAdapter()
+        expenseAdapter = ExpenseAdapter{expense ->
+            val action= CustomerDetailFragmentDirections.actionCustomerDetailFragmentToExpenseDetailFragment(
+                expense
+            )
+            findNavController().navigate(action)
+        }
         binding.customerDetailRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = expenseAdapter
