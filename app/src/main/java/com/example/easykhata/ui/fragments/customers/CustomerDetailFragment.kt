@@ -10,6 +10,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.easykhata.R
+import com.example.easykhata.data.models.ExpenseDirection
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.databinding.FragmentCustomerDetailBinding
@@ -50,6 +51,18 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
                     }
                     else -> false
                 }
+            }
+            diyeButton.setOnClickListener {
+                val action= CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
+                    args.customerId, ExpenseDirection.DIYE.name
+                )
+                findNavController().navigate(action)
+            }
+            liyeButton.setOnClickListener {
+                val action= CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
+                    args.customerId, ExpenseDirection.LIYE.name
+                )
+                findNavController().navigate(action)
             }
         }
     }
