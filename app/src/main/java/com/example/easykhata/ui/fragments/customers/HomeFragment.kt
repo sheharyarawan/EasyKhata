@@ -39,9 +39,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             searchCardView.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_searchCustomerFragment)
             }
-            etSearchCustomerExpand.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_searchCustomerFragment)
-            }
             addCustomerButton.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_addCustomerFragment)
             }
