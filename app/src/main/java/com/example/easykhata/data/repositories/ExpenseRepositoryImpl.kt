@@ -9,6 +9,7 @@ class ExpenseRepositoryImpl @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore
 ) : ExpenseRepository {
     private var customerExpensesListener: ListenerRegistration? = null
+    private var businessExpensesListener: ListenerRegistration? = null
     override fun addExpense(
         businessId: String,
         expense: Expense,
@@ -141,5 +142,43 @@ class ExpenseRepositoryImpl @Inject constructor(
             .addOnFailureListener { exception ->
                 onFailure(exception)
             }
+    }
+    override fun observeBusinessExpenses(
+        businessId: String,
+        onSuccess: (List<Expense>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank()) {
+            onFailure(Exception("Business not selected"))
+            return
+        }
+        businessExpensesListener?.remove()
+        businessExpensesListener = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("expenses")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    onFailure(error)
+                    return@addSnapshotListener
+                }
+                val expenses = snapshot?.documents?.mapNotNull { document ->
+                    document.toObject(Expense::class.java)?.copy(
+                        id = document.id
+                    )
+                } ?: emptyList()
+                onSuccess(expenses)
+            }
+    }
+    override fun removeBusinessExpensesListener() {
+        businessExpensesListener?.remove()
+        businessExpensesListener = null
     }
 }
