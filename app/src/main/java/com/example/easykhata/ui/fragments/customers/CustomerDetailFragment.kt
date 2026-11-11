@@ -227,8 +227,9 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
                     tvAmount.setText(R.string.hisaab_zero)
                     tvHisaabStatus.setText(R.string.hisaab_clear_hai)
                     val gray = ContextCompat.getColor(requireContext(), R.color.lt_gray)
-                    tvAmount.setTextColor(gray)
-                    tvHisaabStatus.setTextColor(gray)
+                    val black= ContextCompat.getColor(requireContext(),R.color.black)
+                    tvAmount.setTextColor(black)
+                    tvHisaabStatus.setTextColor(black)
                     cardHisaabStatus.setCardBackgroundColor(gray)
                     ivDropdown.setBackgroundResource(R.drawable.circle_gray)
                 }
