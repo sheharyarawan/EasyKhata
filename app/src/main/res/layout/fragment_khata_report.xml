@@ -103,24 +103,22 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/naam_2"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textColor="@color/mid_gray"
+        android:textSize="16sp"
+
         app:layout_constraintEnd_toStartOf="@+id/textView15"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
         tools:ignore="TextContrastCheck,TextContrastCheck">
     </TextView>
-
     <TextView
         android:id="@+id/textView15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/maine_diye_3"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textColor="@color/mid_gray"
+        android:textSize="16sp"
         app:layout_constraintEnd_toStartOf="@+id/textView14"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
         tools:ignore="TextContrastCheck">
@@ -131,9 +129,8 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/maine_liye_3"
-        android:textColor="@color/gray"
-        android:textSize="18sp"
-        android:textStyle="bold"
+        android:textColor="@color/mid_gray"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView3"
         tools:ignore="TextContrastCheck">
@@ -142,30 +139,35 @@
         android:id="@+id/khataReportDiye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginEnd="8dp"
         android:layout_marginTop="6dp"
+        android:layout_marginEnd="16dp"
         android:textColor="@color/red"
         android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="@+id/textView15"
         app:layout_constraintEnd_toStartOf="@+id/khataReportLiye"
-        app:layout_constraintTop_toBottomOf="@+id/textView15">
+        app:layout_constraintStart_toStartOf="@+id/textView15"
+        app:layout_constraintTop_toBottomOf="@+id/textView15"
+        tools:ignore="TextContrastCheck"
+        tools:text="1000">
     </TextView>
     <TextView
         android:id="@+id/khataReportLiye"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="6dp"
         android:textColor="@color/green"
         android:textSize="18sp"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="6dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView14">
+        app:layout_constraintEnd_toEndOf="@+id/textView14"
+        app:layout_constraintTop_toBottomOf="@+id/textView14"
+        tools:ignore="TextContrastCheck"
+        tools:text="1000">
     </TextView>
     <View
         android:id="@+id/view8"
         android:layout_width="0dp"
         android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:background="#9D9D9D"
+        android:layout_marginTop="5dp"
+        android:background="#81ACACAC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/khataReportDiye">
@@ -221,4 +223,25 @@
         app:layout_constraintStart_toEndOf="@+id/downloadKhataButton"
         tools:ignore="VisualLintButtonSize">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="#FFFFFF" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
