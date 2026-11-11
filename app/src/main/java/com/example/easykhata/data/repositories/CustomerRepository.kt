@@ -25,4 +25,10 @@ interface CustomerRepository {
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun observeCustomers(
+        businessId: String,
+        onSuccess: (List<Customer>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeCustomersListener()
 }

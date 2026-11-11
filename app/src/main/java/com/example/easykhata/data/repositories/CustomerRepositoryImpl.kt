@@ -4,11 +4,13 @@ import com.example.easykhata.data.models.customers.Customer
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import javax.inject.Inject
 class CustomerRepositoryImpl @Inject constructor(
     private val firebaseFirestore: FirebaseFirestore,
     private val firebaseAuth: FirebaseAuth
 ) : CustomerRepository {
+    private var customersListener: ListenerRegistration? = null
     override fun addCustomer(
         businessId: String,
         customer: Customer,
@@ -149,5 +151,43 @@ class CustomerRepositoryImpl @Inject constructor(
             .addOnFailureListener { exception ->
                 onFailure(exception)
             }
+    }
+    override fun observeCustomers(
+        businessId: String,
+        onSuccess: (List<Customer>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank()) {
+            onFailure(Exception("Business not selected"))
+            return
+        }
+        customersListener?.remove()
+        customersListener = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("customers")
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    onFailure(error)
+                    return@addSnapshotListener
+                }
+                val customers = snapshot?.documents?.mapNotNull { document ->
+                    document.toObject(Customer::class.java)?.copy(
+                        id = document.id
+                    )
+                } ?: emptyList()
+                onSuccess(customers)
+            }
+    }
+    override fun removeCustomersListener() {
+        customersListener?.remove()
+        customersListener = null
     }
 }
