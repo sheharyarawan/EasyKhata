@@ -27,6 +27,9 @@ class ExpenseViewModel @Inject constructor(
     private val _updateExpenseState =
         MutableStateFlow<UiState<Expense>>(UiState.Idle)
     val updateExpenseState = _updateExpenseState.asStateFlow()
+    private val _deleteExpenseState =
+        MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val deleteExpenseState = _deleteExpenseState.asStateFlow()
     private val _sortOption =
         MutableStateFlow(ExpenseSortOption.DEFAULT)
     val sortOption: StateFlow<ExpenseSortOption> =
@@ -146,15 +149,12 @@ class ExpenseViewModel @Inject constructor(
                 UiState.Error("Business or expense not selected")
             return
         }
-
         if (expense.amount <= 0) {
             _updateExpenseState.value =
                 UiState.Error("Amount must be greater than zero")
             return
         }
-
         _updateExpenseState.value = UiState.Loading
-
         expenseRepository.updateExpense(
             businessId = businessId,
             expense = expense,
@@ -168,6 +168,23 @@ class ExpenseViewModel @Inject constructor(
             }
         )
     }
+    fun deleteExpense(
+        businessId: String,
+        expenseId: String
+    ) {
+        _deleteExpenseState.value = UiState.Loading
+        expenseRepository.deleteExpense(
+            businessId = businessId,
+            expenseId = expenseId,
+            onSuccess = {
+                _deleteExpenseState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _deleteExpenseState.value =
+                    UiState.Error(exception.message ?: "Failed to delete expense")
+            }
+        )
+    }
     fun setSortOption(option: ExpenseSortOption) {
         _sortOption.value = option
         applySorting()
@@ -177,6 +194,9 @@ class ExpenseViewModel @Inject constructor(
     }
     fun resetUpdateExpenseState() {
         _updateExpenseState.value = UiState.Idle
+    }
+    fun resetDeleteExpenseState() {
+        _deleteExpenseState.value = UiState.Idle
     }
     override fun onCleared() {
         super.onCleared()
