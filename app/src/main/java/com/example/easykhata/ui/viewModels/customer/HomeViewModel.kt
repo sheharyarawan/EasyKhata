@@ -4,7 +4,7 @@ import com.example.easykhata.data.models.ExpenseDirection
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.customers.Customer
 import com.example.easykhata.data.models.customers.CustomerWithBalance
-import com.example.easykhata.data.models.expense.CustomerBalanceFilter
+import com.example.easykhata.data.models.CustomerBalanceFilter
 import com.example.easykhata.data.models.expense.Expense
 import com.example.easykhata.data.repositories.CustomerRepository
 import com.example.easykhata.data.repositories.ExpenseRepository

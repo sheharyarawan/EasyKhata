@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.core.content.ContextCompat
 import com.example.easykhata.R
-import com.example.easykhata.data.models.expense.CustomerBalanceFilter
+import com.example.easykhata.data.models.CustomerBalanceFilter
 import com.example.easykhata.databinding.BottomSheetCustomerFilterBinding
 import com.example.easykhata.ui.viewModels.customer.HomeViewModel
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment

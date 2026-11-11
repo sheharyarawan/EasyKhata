@@ -1,4 +1,5 @@
-package com.example.easykhata.data.models.expense
+package com.example.easykhata.data.models
+
 enum class CustomerBalanceFilter {
     ALL,
     CLEAR,
