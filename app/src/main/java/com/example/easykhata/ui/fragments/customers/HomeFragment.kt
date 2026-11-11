@@ -43,8 +43,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 findNavController().navigate(R.id.action_homeFragment_to_addCustomerFragment)
             }
             cardPdf.setOnClickListener {
-                val action= HomeFragmentDirections.actionHomeFragmentToCustomerDetailFragment("MEVGCItWG5OtrexIE6wH")
-                findNavController().navigate(action)
+               findNavController().navigate(R.id.action_homeFragment_to_khataReportFragment)
             }
             cardSort.setOnClickListener {
                 CustomerFilterBottomSheet().show(
