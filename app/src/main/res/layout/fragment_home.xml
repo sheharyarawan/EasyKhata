@@ -270,19 +270,18 @@
                     app:layout_constraintTop_toBottomOf="@id/reminderCard"
                     app:strokeColor="@color/gray"
                     app:strokeWidth="0dp">
-
-                    <EditText
+                    <TextView
                         android:id="@+id/etSearchCustomerExpand"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@null"
-                        android:drawableStart="@drawable/ic_search"
                         android:drawablePadding="10dp"
                         android:hint="@string/search_customer_et"
-                        android:inputType="text"
+                        android:textColor="@color/mid_gray"
+                        android:gravity="center_vertical"
+                        android:text="@string/search_customer_4"
                         android:paddingHorizontal="12dp"
-                        android:singleLine="true"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_search"
                         tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.card.MaterialCardView>
 
