@@ -33,4 +33,10 @@ interface ExpenseRepository {
         onFailure: (Exception) -> Unit
     )
     fun removeBusinessExpensesListener()
+    fun observeReportExpenses(
+        businessId: String,
+        onSuccess: (List<Expense>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeReportExpensesListener()
 }
