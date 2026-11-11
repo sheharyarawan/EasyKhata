@@ -30,8 +30,10 @@ class CustomerAdapter(
             binding.tvCustomerName.text = customer.name
             binding.tvLastTransaction.text =
                 item.lastTransaction?.toDate()?.let {
-                    SimpleDateFormat("dd MMM yyyy", Locale.getDefault())
-                        .format(it)
+                    "last transacted on " + (
+                            item.lastTransaction.toDate().let {
+                                SimpleDateFormat("dd MMM", Locale.getDefault()).format(it)
+                            } ?: "No transactions yet")
                 } ?: "No transactions yet"
             binding.tvAmount.text = when {
                 item.balance > 0 -> String.format(
