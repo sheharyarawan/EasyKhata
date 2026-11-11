@@ -59,7 +59,11 @@
         android:id="@+id/searchCustomerFragment"
         android:name="com.example.easykhata.ui.fragments.customers.SearchCustomerFragment"
         android:label="fragment_search_customer"
-        tools:layout="@layout/fragment_search_customer" />
+        tools:layout="@layout/fragment_search_customer" >
+        <action
+            android:id="@+id/action_searchCustomerFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addCustomerFragment"
         android:name="com.example.easykhata.ui.fragments.customers.AddCustomerFragment"
