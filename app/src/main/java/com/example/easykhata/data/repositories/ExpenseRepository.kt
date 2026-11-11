@@ -21,4 +21,10 @@ interface ExpenseRepository {
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun deleteExpense(
+        businessId: String,
+        expenseId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }

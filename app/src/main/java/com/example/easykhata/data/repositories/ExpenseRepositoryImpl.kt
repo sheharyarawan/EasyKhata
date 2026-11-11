@@ -112,4 +112,34 @@ class ExpenseRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+    override fun deleteExpense(
+        businessId: String,
+        expenseId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not logged in"))
+            return
+        }
+        if (businessId.isBlank() || expenseId.isBlank()) {
+            onFailure(Exception("Business or expense not selected"))
+            return
+        }
+        firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("expenses")
+            .document(expenseId)
+            .delete()
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
