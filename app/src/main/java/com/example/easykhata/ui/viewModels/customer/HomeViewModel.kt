@@ -24,6 +24,9 @@ class HomeViewModel @Inject constructor(
         MutableStateFlow(CustomerBalanceFilter.ALL)
     val customerFilter = _customerFilter.asStateFlow()
     private var originalCustomers: List<CustomerWithBalance> = emptyList()
+    private val _allCustomersState =
+        MutableStateFlow<UiState<List<CustomerWithBalance>>>(UiState.Idle)
+    val allCustomersState = _allCustomersState.asStateFlow()
     private val _totalLene = MutableStateFlow(0.0)
     val totalLene = _totalLene.asStateFlow()
     private val _totalDene = MutableStateFlow(0.0)
@@ -77,6 +80,7 @@ class HomeViewModel @Inject constructor(
                 lastTransaction = lastTransaction
             )
         }
+        _allCustomersState.value = UiState.Success(originalCustomers)
         _totalLene.value = originalCustomers
             .filter { it.balance > 0 }
             .sumOf { it.balance }
