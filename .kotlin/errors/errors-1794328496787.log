@@ -1,0 +1,142 @@
+kotlin version: 2.2.20
+error message: java.lang.RuntimeException: Exception while generating code for:
+CONSTRUCTOR visibility:public returnType:com.example.easykhata.ui.fragments.customers.KhataReportFragment [primary]
+  BLOCK_BODY
+    DELEGATING_CONSTRUCTOR_CALL 'public constructor <init> (p0: kotlin.Int) declared in androidx.fragment.app.Fragment'
+      ARG p0: GET_FIELD 'FIELD IR_EXTERNAL_JAVA_DECLARATION_STUB name:fragment_khata_report type:kotlin.Int visibility:public [static] declared in com.example.easykhata.R.layout' type=kotlin.Int superQualifierSymbol=com.example.easykhata.R.layout origin=null
+    BLOCK type=kotlin.Unit origin=null
+      SET_FIELD 'FIELD PROPERTY_DELEGATE name:khataReportViewModel$delegate type:kotlin.Lazy<com.example.easykhata.ui.viewModels.expense.KhataReportViewModel> visibility:private [final] declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=kotlin.Unit origin=INITIALIZE_FIELD
+        receiver: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=null
+        value: TYPE_OP type=kotlin.Lazy<com.example.easykhata.ui.viewModels.expense.KhataReportViewModel> origin=IMPLICIT_CAST typeOperand=kotlin.Lazy<com.example.easykhata.ui.viewModels.expense.KhataReportViewModel>
+          CALL 'public final fun activityViewModels$default <VM> (<this>: androidx.fragment.app.Fragment, extrasProducer: kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>?, factoryProducer: kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>?, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> [inline] declared in androidx.fragment.app.FragmentViewModelLazyKt' type=kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> origin=DEFAULT_DISPATCH_CALL
+            TYPE_ARG VM: com.example.easykhata.ui.viewModels.expense.KhataReportViewModel
+            ARG <this>: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=IMPLICIT_ARGUMENT
+            ARG extrasProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? value=null
+            ARG factoryProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? value=null
+            ARG $mask0: CONST Int type=kotlin.Int value=3
+            ARG $handler: CONST Null type=kotlin.Any? value=null
+      SET_FIELD 'FIELD PROPERTY_DELEGATE name:homeViewModel$delegate type:kotlin.Lazy<com.example.easykhata.ui.viewModels.customer.HomeViewModel> visibility:private [final] declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=kotlin.Unit origin=INITIALIZE_FIELD
+        receiver: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=null
+        value: TYPE_OP type=kotlin.Lazy<com.example.easykhata.ui.viewModels.customer.HomeViewModel> origin=IMPLICIT_CAST typeOperand=kotlin.Lazy<com.example.easykhata.ui.viewModels.customer.HomeViewModel>
+          CALL 'public final fun activityViewModels$default <VM> (<this>: androidx.fragment.app.Fragment, extrasProducer: kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>?, factoryProducer: kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>?, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> [inline] declared in androidx.fragment.app.FragmentViewModelLazyKt' type=kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> origin=DEFAULT_DISPATCH_CALL
+            TYPE_ARG VM: com.example.easykhata.ui.viewModels.customer.HomeViewModel
+            ARG <this>: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=IMPLICIT_ARGUMENT
+            ARG extrasProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? value=null
+            ARG factoryProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? value=null
+            ARG $mask0: CONST Int type=kotlin.Int value=3
+            ARG $handler: CONST Null type=kotlin.Any? value=null
+      SET_FIELD 'FIELD PROPERTY_DELEGATE name:businessViewModel$delegate type:kotlin.Lazy<com.example.easykhata.ui.viewModels.auth.BusinessViewModel> visibility:private [final] declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=kotlin.Unit origin=INITIALIZE_FIELD
+        receiver: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=null
+        value: TYPE_OP type=kotlin.Lazy<com.example.easykhata.ui.viewModels.auth.BusinessViewModel> origin=IMPLICIT_CAST typeOperand=kotlin.Lazy<com.example.easykhata.ui.viewModels.auth.BusinessViewModel>
+          CALL 'public final fun activityViewModels$default <VM> (<this>: androidx.fragment.app.Fragment, extrasProducer: kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>?, factoryProducer: kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>?, $mask0: kotlin.Int, $handler: kotlin.Any?): kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> [inline] declared in androidx.fragment.app.FragmentViewModelLazyKt' type=kotlin.Lazy<VM of androidx.fragment.app.FragmentViewModelLazyKt.activityViewModels$default> origin=DEFAULT_DISPATCH_CALL
+            TYPE_ARG VM: com.example.easykhata.ui.viewModels.auth.BusinessViewModel
+            ARG <this>: GET_VAR '<this>: com.example.easykhata.ui.fragments.customers.KhataReportFragment declared in com.example.easykhata.ui.fragments.customers.KhataReportFragment' type=com.example.easykhata.ui.fragments.customers.KhataReportFragment origin=IMPLICIT_ARGUMENT
+            ARG extrasProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.viewmodel.CreationExtras>? value=null
+            ARG factoryProducer: COMPOSITE type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? origin=DEFAULT_VALUE
+              CONST Null type=kotlin.Function0<androidx.lifecycle.ViewModelProvider.Factory>? value=null
+            ARG $mask0: CONST Int type=kotlin.Int value=3
+            ARG $handler: CONST Null type=kotlin.Any? value=null
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:53)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate$default(FunctionCodegen.kt:46)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethodNode(ClassCodegen.kt:422)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generateMethod(ClassCodegen.kt:439)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ClassCodegen.generate(ClassCodegen.kt:164)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.generateFile(JvmIrCodegenFactory.kt:446)
+	at org.jetbrains.kotlin.backend.jvm.JvmIrCodegenFactory.invokeCodegen(JvmIrCodegenFactory.kt:413)
+	at org.jetbrains.kotlin.cli.jvm.compiler.KotlinToJVMBytecodeCompiler.runCodegen$cli(KotlinToJVMBytecodeCompiler.kt:425)
+	at org.jetbrains.kotlin.cli.pipeline.jvm.JvmBackendPipelinePhase.executePhase(JvmBackendPipelinePhase.kt:89)
+	at org.jetbrains.kotlin.cli.pipeline.jvm.JvmBackendPipelinePhase.executePhase(JvmBackendPipelinePhase.kt:27)
+	at org.jetbrains.kotlin.cli.pipeline.PipelinePhase.phaseBody(PipelinePhase.kt:68)
+	at org.jetbrains.kotlin.cli.pipeline.PipelinePhase.phaseBody(PipelinePhase.kt:58)
+	at org.jetbrains.kotlin.config.phaser.NamedCompilerPhase.invoke(CompilerPhase.kt:102)
+	at org.jetbrains.kotlin.backend.common.phaser.CompositePhase.invoke(PhaseBuilders.kt:22)
+	at org.jetbrains.kotlin.config.phaser.CompilerPhaseKt.invokeToplevel(CompilerPhase.kt:53)
+	at org.jetbrains.kotlin.cli.pipeline.AbstractCliPipeline.runPhasedPipeline(AbstractCliPipeline.kt:109)
+	at org.jetbrains.kotlin.cli.pipeline.AbstractCliPipeline.execute(AbstractCliPipeline.kt:68)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecutePhased(K2JVMCompiler.kt:79)
+	at org.jetbrains.kotlin.cli.jvm.K2JVMCompiler.doExecutePhased(K2JVMCompiler.kt:45)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.execImpl(CLICompiler.kt:90)
+	at org.jetbrains.kotlin.cli.common.CLICompiler.exec(CLICompiler.kt:352)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunnerBase.runCompiler(IncrementalJvmCompilerRunnerBase.kt:176)
+	at org.jetbrains.kotlin.incremental.IncrementalJvmCompilerRunnerBase.runCompiler(IncrementalJvmCompilerRunnerBase.kt:39)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.doCompile(IncrementalCompilerRunner.kt:499)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compileImpl(IncrementalCompilerRunner.kt:416)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally$lambda$0$compile(IncrementalCompilerRunner.kt:249)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.tryCompileIncrementally(IncrementalCompilerRunner.kt:267)
+	at org.jetbrains.kotlin.incremental.IncrementalCompilerRunner.compile(IncrementalCompilerRunner.kt:119)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.execIncrementalCompiler(CompileServiceImpl.kt:684)
+	at org.jetbrains.kotlin.daemon.CompileServiceImplBase.access$execIncrementalCompiler(CompileServiceImpl.kt:94)
+	at org.jetbrains.kotlin.daemon.CompileServiceImpl.compile(CompileServiceImpl.kt:1810)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(Unknown Source)
+	at java.base/java.lang.reflect.Method.invoke(Unknown Source)
+	at java.rmi/sun.rmi.server.UnicastServerRef.dispatch(Unknown Source)
+	at java.rmi/sun.rmi.transport.Transport.serviceCall(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport.handleMessages(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run0(Unknown Source)
+	at java.rmi/sun.rmi.transport.tcp.TCPTransport$ConnectionHandler.run(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(Unknown Source)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(Unknown Source)
+	at java.base/java.lang.Thread.run(Unknown Source)
+Caused by: java.lang.VerifyError: Bad local variable type
+Exception Details:
+  Location:
+    org/jetbrains/kotlin/codegen/inline/MethodInliner.<init>(Lorg/jetbrains/org/objectweb/asm/tree/MethodNode;Lorg/jetbrains/kotlin/codegen/inline/Parameters;Lorg/jetbrains/kotlin/codegen/inline/InliningContext;Lorg/jetbrains/kotlin/codegen/inline/FieldRemapper;ZLkotlin/jvm/functions/Function0;Lorg/jetbrains/kotlin/codegen/inline/SourceMapCopier;Lorg/jetbrains/kotlin/codegen/inline/InlineCallSiteInfo;ZZII)V @55: fload_2
+  Reason:
+    Type 'org/jetbrains/kotlin/codegen/inline/Parameters' (current frame, locals[2]) is not assignable to float
+  Current Frame:
+    bci: @55
+    flags: { }
+    locals: { 'org/jetbrains/kotlin/codegen/inline/MethodInliner', 'org/jetbrains/org/objectweb/asm/tree/MethodNode', 'org/jetbrains/kotlin/codegen/inline/Parameters', 'org/jetbrains/kotlin/codegen/inline/InliningContext', 'org/jetbrains/kotlin/codegen/inline/FieldRemapper', integer, 'kotlin/jvm/functions/Function0', 'org/jetbrains/kotlin/codegen/inline/SourceMapCopier', 'org/jetbrains/kotlin/codegen/inline/InlineCallSiteInfo', integer, integer, integer, integer }
+    stack: { }
+  Bytecode:
+    0000000: 2b12 adb8 00b3 2c12 b4b8 00b3 2d12 b5b8
+    0000010: 00b3 1904 12b6 b800 b319 0612 b7b8 00b3
+    0000020: 1907 12b8 b800 b319 0812 b9b8 00b3 2ab7
+    0000030: 00bc 2a2b b500 be24 2cb5 00c0 2a2d b500
+    0000040: c22a 1904 b500 c42a 1505 b500 c62a 1906
+    0000050: b500 c82a 1907 b500 ca2a 1908 b500 cc2a
+    0000060: 1509 b500 ce2a 150a b500 d02a 150b b500
+    0000070: d22a 150c b500 d42a 2ab4 00c2 b600 dab6
+    0000080: 00e0 b600 e6b5 00e8 2abb 00ea 59b7 00eb
+    0000090: b500 ed2a bb00 ea59 b700 ebb5 00ef 2abb
+    00000a0: 00f1 59b7 00f2 b500 f42a b200 f7b6 00fb
+    00000b0: b500 fdb1                              
+
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.inlineCall(IrInlineCodegen.kt:297)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCodegen.genInlineCall(IrInlineCodegen.kt:68)
+	at org.jetbrains.kotlin.backend.jvm.codegen.IrInlineCallGenerator.genCall(IrInlineCallGenerator.kt:36)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:589)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitCall(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.expressions.IrCall.accept(IrCall.kt:24)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitTypeOperator(ExpressionCodegen.kt:1080)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitTypeOperator(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.expressions.IrTypeOperatorCall.accept(IrTypeOperatorCall.kt:26)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:828)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitFieldAccess(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitor.visitSetField(IrVisitor.kt:215)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:862)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitSetField(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.expressions.IrSetField.accept(IrSetField.kt:21)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:530)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:544)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitContainerExpression(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.visitors.IrVisitor.visitBlock(IrVisitor.kt:122)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:416)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlock(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.expressions.IrBlock.accept(IrBlock.kt:18)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitStatementContainer(ExpressionCodegen.kt:530)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:535)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.visitBlockBody(ExpressionCodegen.kt:134)
+	at org.jetbrains.kotlin.ir.expressions.IrBlockBody.accept(IrBlockBody.kt:20)
+	at org.jetbrains.kotlin.backend.jvm.codegen.ExpressionCodegen.generate(ExpressionCodegen.kt:232)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.doGenerate(FunctionCodegen.kt:129)
+	at org.jetbrains.kotlin.backend.jvm.codegen.FunctionCodegen.generate(FunctionCodegen.kt:50)
+	... 40 more
+
+
