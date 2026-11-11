@@ -224,4 +224,5 @@
     <string name="date_unavailable">Date unavailable</string>
     <string name="login_code_validate_ho_raha_hai">Login code validate ho raha hai...</string>
     <string name="otp_valid_nai_hai_dubaara_koshish_karein">Otp valid nai hai, dubaara koshish karein</string>
+    <string name="search_customer_4">Search Customer</string>
 </resources>
