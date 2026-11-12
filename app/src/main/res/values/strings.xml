@@ -226,4 +226,5 @@
     <string name="otp_valid_nai_hai_dubaara_koshish_karein">Otp valid nai hai, dubaara koshish karein</string>
     <string name="search_customer_4">Search Customer</string>
     <string name="amount_rs">Rs %1$s</string>
+    <string name="ko_wasooli_ke_liye_automatic_sms_bheja_jaiga">%1$s ko wasooli ke liye automatic SMS bheja jaiga</string>
 </resources>
