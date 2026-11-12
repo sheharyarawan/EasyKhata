@@ -37,6 +37,7 @@ class ExpenseViewModel @Inject constructor(
     private val _runningBalance = MutableStateFlow(0.0)
     val runningBalance: StateFlow<Double> = _runningBalance.asStateFlow()
     private var originalExpenses: List<ExpenseWithBalance> = emptyList()
+    private val _searchQuery = MutableStateFlow("")
     fun addExpense(
         businessId: String,
         expense: Expense
@@ -110,11 +111,13 @@ class ExpenseViewModel @Inject constructor(
             }
         _runningBalance.value = originalExpenses.lastOrNull()?.runningBalance ?: 0.0
     }
-    private fun applySorting() {
+    private fun applySorting(
+        expenses: List<ExpenseWithBalance> = originalExpenses
+    ) {
         val sortedExpenses = when (_sortOption.value) {
             ExpenseSortOption.DEFAULT,
             ExpenseSortOption.NEWEST_FIRST -> {
-                originalExpenses.sortedWith(
+                expenses.sortedWith(
                     compareByDescending<ExpenseWithBalance> {
                         it.expense.date?.seconds ?: 0L
                     }.thenByDescending {
@@ -124,20 +127,16 @@ class ExpenseViewModel @Inject constructor(
                     }
                 )
             }
-            ExpenseSortOption.OLDEST_FIRST -> {
-                originalExpenses
-            }
-            ExpenseSortOption.AMOUNT_HIGH_TO_LOW -> {
-                originalExpenses.sortedByDescending {
-                    it.expense.amount
-                }
-            }
-            ExpenseSortOption.AMOUNT_LOW_TO_HIGH -> {
-                originalExpenses.sortedBy {
-                    it.expense.amount
-                }
-            }
+
+            ExpenseSortOption.OLDEST_FIRST -> expenses
+
+            ExpenseSortOption.AMOUNT_HIGH_TO_LOW ->
+                expenses.sortedByDescending { it.expense.amount }
+
+            ExpenseSortOption.AMOUNT_LOW_TO_HIGH ->
+                expenses.sortedBy { it.expense.amount }
         }
+
         _customerExpensesState.value = UiState.Success(sortedExpenses)
     }
     fun updateExpense(
@@ -187,7 +186,35 @@ class ExpenseViewModel @Inject constructor(
     }
     fun setSortOption(option: ExpenseSortOption) {
         _sortOption.value = option
-        applySorting()
+        applyFiltering()
+    }
+    fun setSearchQuery(query: String) {
+        _searchQuery.value = query
+        applyFiltering()
+    }
+    private fun applyFiltering() {
+        val query = _searchQuery.value.trim()
+
+        val filteredExpenses = originalExpenses.filter { item ->
+            val expense = item.expense
+
+            val amount = expense.amount.toString()
+            val description = expense.description
+
+            val date = expense.date?.toDate()?.let {
+                java.text.SimpleDateFormat(
+                    "dd MMM yyyy",
+                    java.util.Locale.getDefault()
+                ).format(it)
+            }.orEmpty()
+
+            query.isEmpty() ||
+                    amount.contains(query, ignoreCase = true) ||
+                    description.contains(query, ignoreCase = true) ||
+                    date.contains(query, ignoreCase = true)
+        }
+
+        applySorting(filteredExpenses)
     }
     fun resetAddExpenseState() {
         _addExpenseState.value = null
