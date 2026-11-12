@@ -41,7 +41,6 @@ class AnayWaleFragment : Fragment(R.layout.fragment_anay_wale) {
         setUpClicks()
         observeData()
         loadData()
-        loadBusinessId()
     }
     private fun setupRecyclerView() {
         wasooliAdapter = WasooliAdapter { item ->
@@ -146,11 +145,6 @@ class AnayWaleFragment : Fragment(R.layout.fragment_anay_wale) {
             wasooliViewModel.loadReminders(id)
         }
     }
-    private fun loadBusinessId(){
-        businessViewModel.loadActiveBusinessId {
-            businessId = businessViewModel.businessId.value.orEmpty()
-        }
-    }
     private fun showError(message: String) {
         Toast.makeText(
             requireContext(),
@@ -171,5 +165,4 @@ class AnayWaleFragment : Fragment(R.layout.fragment_anay_wale) {
     private fun hideProgress() {
         binding.customerProgressOverlay.visibility = View.GONE
     }
-
 }
