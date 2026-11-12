@@ -139,7 +139,11 @@
         android:id="@+id/wasooliFragment"
         android:name="com.example.easykhata.ui.fragments.account.WasooliFragment"
         android:label="fragment_wasooli"
-        tools:layout="@layout/fragment_wasooli" />
+        tools:layout="@layout/fragment_wasooli">
+        <action
+            android:id="@+id/action_wasooliFragment_to_wasooliCustomerFragment"
+            app:destination="@id/wasooliCustomerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cashbookFragment"
         android:name="com.example.easykhata.ui.fragments.account.CashbookFragment"
