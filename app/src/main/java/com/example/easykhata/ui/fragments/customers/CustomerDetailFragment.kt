@@ -26,6 +26,9 @@ import kotlinx.coroutines.launch
 import java.text.DecimalFormat
 import java.text.SimpleDateFormat
 import java.util.Locale
+import androidx.core.view.isVisible
+import androidx.core.widget.doAfterTextChanged
+
 @AndroidEntryPoint
 class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
     lateinit var binding: FragmentCustomerDetailBinding
@@ -58,23 +61,27 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
                         // Add or remove customer from favourites
                         true
                     }
+
                     R.id.editCustomerToolbar -> {
-                       findNavController().navigate(R.id.action_customerDetailFragment_to_editCustomerFragment)
+                        findNavController().navigate(R.id.action_customerDetailFragment_to_editCustomerFragment)
                         true
                     }
+
                     else -> false
                 }
             }
             diyeButton.setOnClickListener {
-                val action= CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
-                    args.customerId, ExpenseDirection.DIYE.name
-                )
+                val action =
+                    CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
+                        args.customerId, ExpenseDirection.DIYE.name
+                    )
                 findNavController().navigate(action)
             }
             liyeButton.setOnClickListener {
-                val action= CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
-                    args.customerId, ExpenseDirection.LIYE.name
-                )
+                val action =
+                    CustomerDetailFragmentDirections.actionCustomerDetailFragmentToAddExpenseFragment(
+                        args.customerId, ExpenseDirection.LIYE.name
+                    )
                 findNavController().navigate(action)
             }
             cardSort.setOnClickListener {
@@ -82,6 +89,17 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
                     childFragmentManager,
                     "ExpenseFilterBottomSheet"
                 )
+            }
+            cardSearch.setOnClickListener {
+                binding.searchCardView.visibility =
+                    if (searchCardView.isVisible) {
+                        View.GONE
+                    } else {
+                        View.VISIBLE
+                    }
+            }
+            etSearchCustomerExpand.doAfterTextChanged { editable ->
+                expenseViewModel.setSearchQuery(editable.toString())
             }
         }
     }
