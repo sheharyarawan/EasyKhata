@@ -14,6 +14,9 @@ class CustomerDetailViewModel @Inject constructor(
     private val _customerState =
         MutableStateFlow<UiState<Customer>>(UiState.Loading)
     val customerState = _customerState.asStateFlow()
+    private val _deleteCustomerState =
+        MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val deleteCustomerState = _deleteCustomerState.asStateFlow()
     fun loadCustomer(businessId: String, customerId: String) {
         _customerState.value = UiState.Loading
         customerRepository.getCustomerById(
@@ -53,5 +56,31 @@ class CustomerDetailViewModel @Inject constructor(
                 )
             }
         )
+    }
+    fun deleteCustomer(
+        businessId: String,
+        customerId: String
+    ) {
+        if (businessId.isBlank() || customerId.isBlank()) {
+            _deleteCustomerState.value =
+                UiState.Error("Business or customer not selected")
+            return
+        }
+        _deleteCustomerState.value = UiState.Loading
+        customerRepository.deleteCustomer(
+            businessId = businessId,
+            customerId = customerId,
+            onSuccess = {
+                _deleteCustomerState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _deleteCustomerState.value = UiState.Error(
+                    exception.message ?: "Unable to delete customer"
+                )
+            }
+        )
+    }
+    fun resetDeleteCustomerState() {
+        _deleteCustomerState.value = UiState.Idle
     }
 }
