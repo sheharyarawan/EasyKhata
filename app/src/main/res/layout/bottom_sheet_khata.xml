@@ -2,6 +2,7 @@
 <com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:contentPaddingTop="16dp"
@@ -36,14 +37,20 @@
         </TextView>
         <TextView
             android:id="@+id/khataReportAll"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="20dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/all"
             android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView9">
+            app:layout_constraintTop_toBottomOf="@+id/textView9"
+            tools:ignore="TouchTargetSizeCheck">
         </TextView>
         <View
             android:id="@+id/view"
@@ -51,7 +58,7 @@
             android:layout_height="1dp"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:background="#ADADAD"
+            android:background="#70ACACAC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -59,14 +66,20 @@
         </View>
         <TextView
             android:id="@+id/khataReportSingleDay"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
+            android:background="?attr/selectableItemBackground"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/single_day"
             android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view">
+            app:layout_constraintTop_toBottomOf="@+id/view"
+            tools:ignore="TouchTargetSizeCheck">
         </TextView>
         <View
             android:id="@+id/view2"
@@ -74,7 +87,7 @@
             android:layout_height="1dp"
             android:layout_margin="16dp"
             android:layout_marginHorizontal="16dp"
-            android:background="#ADADAD"
+            android:background="#70ACACAC"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -82,20 +95,26 @@
         </View>
         <TextView
             android:id="@+id/khataReportPichlaHafta"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/bg_ripple"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/pichla_hafta"
             android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2">
+            app:layout_constraintTop_toBottomOf="@+id/view2"
+            tools:ignore="TouchTargetSizeCheck">
         </TextView>
         <View
             android:id="@+id/view3"
             android:layout_width="0dp"
             android:layout_height="1dp"
             android:layout_marginHorizontal="16dp"
-            android:background="#ADADAD"
+            android:background="#70ACACAC"
             android:layout_margin="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
@@ -104,13 +123,19 @@
         </View>
         <TextView
             android:id="@+id/khataReportPichlaMahina"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:background="@drawable/bg_ripple"
+            android:clickable="true"
+            android:focusable="true"
             android:text="@string/pichla_mahina"
             android:textSize="22sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view3">
+            app:layout_constraintTop_toBottomOf="@+id/view3"
+            tools:ignore="TouchTargetSizeCheck">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

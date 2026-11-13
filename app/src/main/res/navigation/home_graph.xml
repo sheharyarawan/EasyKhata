@@ -21,6 +21,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addCustomerDetailFragment"
             app:destination="@id/addCustomerDetailFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/salesFragment"
@@ -56,7 +59,11 @@
         android:id="@+id/searchCustomerFragment"
         android:name="com.example.easykhata.ui.fragments.customers.SearchCustomerFragment"
         android:label="fragment_search_customer"
-        tools:layout="@layout/fragment_search_customer" />
+        tools:layout="@layout/fragment_search_customer" >
+        <action
+            android:id="@+id/action_searchCustomerFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/addCustomerFragment"
         android:name="com.example.easykhata.ui.fragments.customers.AddCustomerFragment"
@@ -65,6 +72,11 @@
         <action
             android:id="@+id/action_addCustomerFragment_to_addCustomerDetailFragment"
             app:destination="@id/addCustomerDetailFragment" />
+        <action
+            android:id="@+id/action_addCustomerFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="false" />
     </fragment>
     <fragment
         android:id="@+id/khataReportFragment"
@@ -75,7 +87,11 @@
         android:id="@+id/addCustomerDetailFragment"
         android:name="com.example.easykhata.ui.fragments.customers.AddCustomerDetailFragment"
         android:label="fragment_add_customer_detail"
-        tools:layout="@layout/fragment_add_customer_detail" />
+        tools:layout="@layout/fragment_add_customer_detail" >
+        <action
+            android:id="@+id/action_addCustomerDetailFragment_to_customerDetailFragment"
+            app:destination="@id/customerDetailFragment" />
+    </fragment>
     <fragment
         android:id="@+id/itemsManageFragment"
         android:name="com.example.easykhata.ui.fragments.sales.ItemsManageFragment"
@@ -123,7 +139,11 @@
         android:id="@+id/wasooliFragment"
         android:name="com.example.easykhata.ui.fragments.account.WasooliFragment"
         android:label="fragment_wasooli"
-        tools:layout="@layout/fragment_wasooli" />
+        tools:layout="@layout/fragment_wasooli">
+        <action
+            android:id="@+id/action_wasooliFragment_to_wasooliCustomerFragment"
+            app:destination="@id/wasooliCustomerFragment" />
+    </fragment>
     <fragment
         android:id="@+id/cashbookFragment"
         android:name="com.example.easykhata.ui.fragments.account.CashbookFragment"
@@ -186,5 +206,68 @@
         android:id="@+id/addExpenseFragment"
         android:name="com.example.easykhata.ui.fragments.expense.AddExpenseFragment"
         android:label="fragment_add_expense"
-        tools:layout="@layout/fragment_add_expense" />
+        tools:layout="@layout/fragment_add_expense">
+        <argument
+            android:name="customerId"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="direction"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/customerDetailFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.CustomerDetailFragment"
+        android:label="fragment_customer_detail"
+        tools:layout="@layout/fragment_customer_detail">
+        <argument
+            android:name="customerId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_customerDetailFragment_to_editCustomerFragment"
+            app:destination="@id/editCustomerFragment" />
+        <action
+            android:id="@+id/action_customerDetailFragment_to_addExpenseFragment"
+            app:destination="@id/addExpenseFragment" />
+        <action
+            android:id="@+id/action_customerDetailFragment_to_expenseDetailFragment"
+            app:destination="@id/expenseDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editCustomerFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.EditCustomerFragment"
+        android:label="fragment_edit_customer"
+        tools:layout="@layout/fragment_edit_customer" >
+        <action
+            android:id="@+id/action_editCustomerFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.example.easykhata.ui.fragments.customers.UpdateFragment"
+        android:label="fragment_update"
+        tools:layout="@layout/fragment_update" />
+    <fragment
+        android:id="@+id/expenseDetailFragment"
+        android:name="com.example.easykhata.ui.fragments.expense.ExpenseDetailFragment"
+        android:label="fragment_expense_detail"
+        tools:layout="@layout/fragment_expense_detail">
+        <argument
+            android:name="expense"
+            app:argType="com.example.easykhata.data.models.expense.Expense" />
+        <action
+            android:id="@+id/action_expenseDetailFragment_to_editExpenseFragment"
+            app:destination="@id/editExpenseFragment"
+            app:popUpTo="@id/expenseDetailFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editExpenseFragment"
+        android:name="com.example.easykhata.ui.fragments.expense.EditExpenseFragment"
+        android:label="fragment_edit_expense"
+        tools:layout="@layout/fragment_edit_expense">
+        <argument
+            android:name="expense"
+            app:argType="com.example.easykhata.data.models.expense.Expense" />
+    </fragment>
 </navigation>

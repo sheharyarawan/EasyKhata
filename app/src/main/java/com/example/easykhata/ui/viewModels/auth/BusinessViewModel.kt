@@ -1,5 +1,4 @@
-package com.example.easykhata.ui.viewModels
-
+package com.example.easykhata.ui.viewModels.auth
 import androidx.lifecycle.ViewModel
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.auth.Business
@@ -18,6 +17,8 @@ class BusinessViewModel @Inject constructor(
     val registrationState = _registrationState.asStateFlow()
     private val _selectedKarobarType = MutableStateFlow("")
     val selectedKarobarType = _selectedKarobarType.asStateFlow()
+    private val _businessId = MutableStateFlow<String?>(null)
+    val businessId = _businessId.asStateFlow()
     fun createUserWithBusiness(
         user: User,
         business: Business
@@ -27,6 +28,7 @@ class BusinessViewModel @Inject constructor(
             user = user,
             business = business,
             onSuccess = { businessId ->
+                setBusinessId(businessId)
                 _registrationState.value =
                     UiState.Success(businessId)
             },
@@ -37,10 +39,25 @@ class BusinessViewModel @Inject constructor(
             }
         )
     }
+    fun loadActiveBusinessId(onComplete: () -> Unit) {
+        businessRepository.getActiveBusinessId(
+            onSuccess = { id ->
+                setBusinessId(id)
+                onComplete()
+            },
+            onFailure = { exception ->
+                _businessId.value = null
+                onComplete()
+            }
+        )
+    }
     fun getKarobarTypes(): List<String> {
         return businessRepository.getKarobarTypes()
     }
     fun setSelectedKarobarType(type: String) {
         _selectedKarobarType.value = type
+    }
+    fun setBusinessId(id: String) {
+        _businessId.value = id
     }
 }

@@ -56,6 +56,7 @@
                         app:layout_constraintStart_toEndOf="@id/imageView"
                         app:layout_constraintTop_toTopOf="@id/imageView"
                         tools:ignore="HardcodedText,VisualLintSystemUi" />
+
                     <TextView
                         android:id="@+id/textView3"
                         android:layout_width="0dp"
@@ -63,11 +64,14 @@
                         android:layout_marginStart="10dp"
                         android:layout_marginEnd="16dp"
                         android:text="@string/tap_here_to_change_business"
+                        android:textColor="@color/mid_gray"
                         android:textSize="14sp"
-                        app:layout_constraintStart_toEndOf="@id/imageView"
+                        app:layout_constraintBottom_toBottomOf="@id/imageView"
                         app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/imageView"
                         app:layout_constraintTop_toBottomOf="@id/businessTv"
-                        app:layout_constraintBottom_toBottomOf="@id/imageView" />
+                        tools:ignore="TextContrastCheck" />
+
                     <TextView
                         android:id="@+id/textView4"
                         android:layout_width="wrap_content"
@@ -75,11 +79,12 @@
                         android:layout_marginStart="16dp"
                         android:layout_marginTop="24dp"
                         android:text="@string/total_balance"
-                        android:textColor="@color/gray"
+                        android:textColor="@color/mid_gray"
                         android:textSize="14sp"
                         android:textStyle="bold"
                         app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toBottomOf="@id/imageView" />
+                        app:layout_constraintTop_toBottomOf="@id/imageView"
+                        tools:ignore="TextContrastCheck" />
                     <com.google.android.material.card.MaterialCardView
                         android:id="@+id/materialCardView2"
                         android:layout_width="0dp"
@@ -134,7 +139,7 @@
                                     android:text="@string/maine_lene_hain"
                                     android:textColor="@color/red"
                                     android:textSize="14sp"
-                                    />
+                                    tools:ignore="TextContrastCheck" />
                             </LinearLayout>
                         </LinearLayout>
                     </com.google.android.material.card.MaterialCardView>
@@ -214,68 +219,72 @@
                 app:layout_constraintTop_toBottomOf="@+id/businessCard"
                 android:visibility="gone">
             </TextView>
+
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/show"
                 android:layout_width="0dp"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_height="wrap_content"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/businessCard">
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/reminderCard"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     app:cardCornerRadius="12dp"
-                    app:strokeWidth="0dp"
                     app:cardElevation="0dp"
-                    app:contentPaddingTop="14dp"
                     app:contentPaddingBottom="14dp"
                     app:contentPaddingLeft="12dp"
                     app:contentPaddingRight="12dp"
+                    app:contentPaddingTop="14dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:strokeWidth="0dp">
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="@string/reminders_0_overdue"
                         android:drawablePadding="6dp"
+                        android:text="@string/reminders_0_overdue"
                         android:textColor="@color/black"
                         android:textSize="17sp"
                         app:drawableStartCompat="@drawable/ic_reminder" />
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/searchCardView"
                     android:layout_width="0dp"
                     android:layout_height="50dp"
                     android:layout_marginStart="16dp"
-                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="14dp"
+                    android:layout_marginEnd="8dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeColor="@color/gray"
-                    app:strokeWidth="0dp"
-                    app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/cardSort"
-                    app:layout_constraintTop_toBottomOf="@id/reminderCard">
-                    <EditText
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/reminderCard"
+                    app:strokeColor="@color/gray"
+                    app:strokeWidth="0dp">
+                    <TextView
                         android:id="@+id/etSearchCustomerExpand"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:background="@null"
-                        android:drawableStart="@drawable/ic_search"
                         android:drawablePadding="10dp"
                         android:hint="@string/search_customer_et"
-                        android:inputType="text"
+                        android:textColor="@color/mid_gray"
+                        android:gravity="center_vertical"
+                        android:text="@string/search_customer_4"
                         android:paddingHorizontal="12dp"
-                        android:singleLine="true"
-                        android:textSize="17sp"
+                        android:textSize="18sp"
+                        app:drawableStartCompat="@drawable/ic_search"
                         tools:ignore="Autofill,TextContrastCheck,VisualLintTextFieldSize" />
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardSort"
                     android:layout_width="50dp"
@@ -283,11 +292,11 @@
                     android:layout_marginEnd="8dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp"
-                    app:layout_constraintStart_toEndOf="@id/searchCardView"
+                    app:layout_constraintBottom_toBottomOf="@id/searchCardView"
                     app:layout_constraintEnd_toStartOf="@id/cardPdf"
+                    app:layout_constraintStart_toEndOf="@id/searchCardView"
                     app:layout_constraintTop_toTopOf="@id/searchCardView"
-                    app:layout_constraintBottom_toBottomOf="@id/searchCardView">
+                    app:strokeWidth="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -297,6 +306,7 @@
                         android:src="@drawable/ic_sort"
                         tools:ignore="ImageContrastCheck" />
                 </com.google.android.material.card.MaterialCardView>
+
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/cardPdf"
                     android:layout_width="50dp"
@@ -304,11 +314,11 @@
                     android:layout_marginEnd="16dp"
                     app:cardCornerRadius="12dp"
                     app:cardElevation="0dp"
-                    app:strokeWidth="0dp"
-                    app:layout_constraintStart_toEndOf="@id/cardSort"
+                    app:layout_constraintBottom_toBottomOf="@id/searchCardView"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cardSort"
                     app:layout_constraintTop_toTopOf="@id/searchCardView"
-                    app:layout_constraintBottom_toBottomOf="@id/searchCardView">
+                    app:strokeWidth="0dp">
 
                     <ImageView
                         android:layout_width="wrap_content"
@@ -318,16 +328,17 @@
                         android:src="@drawable/ic_pdf"
                         tools:ignore="ImageContrastCheck" />
                 </com.google.android.material.card.MaterialCardView>
+
                 <LinearLayout
                     android:id="@+id/favLayout"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:orientation="vertical"
+                    android:visibility="gone"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/searchCardView"
-                    android:visibility="gone">
+                    app:layout_constraintTop_toBottomOf="@+id/searchCardView">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -348,7 +359,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
                     android:text="@string/customers"
-                    android:textColor="@color/gray"
+                    android:textColor="@color/mid_gray"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     app:layout_constraintStart_toStartOf="parent"
@@ -360,6 +371,8 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="16dp"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView2">
@@ -381,4 +394,25 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:ignore="VisualLintButtonSize" />
+    <FrameLayout
+        android:id="@+id/customerDetailProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

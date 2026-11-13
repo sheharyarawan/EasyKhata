@@ -50,7 +50,8 @@
             android:layout_marginTop="20dp"
             android:layout_marginStart="16dp"
             android:text="@string/agla_hafta"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/wasooliKisko">
         </TextView>
@@ -73,7 +74,8 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
             android:text="@string/agla_mahina"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view">
         </TextView>
@@ -95,7 +97,8 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/tareekh_darj_karein"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view2">
         </TextView>
@@ -117,9 +120,31 @@
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
             android:text="@string/koi_tareekh_nahi"
-            android:textSize="22sp"
+            android:textSize="18sp"
+            android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/view3">
         </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#15000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="#FFFFFF" />
+    </FrameLayout>
 </com.google.android.material.card.MaterialCardView>

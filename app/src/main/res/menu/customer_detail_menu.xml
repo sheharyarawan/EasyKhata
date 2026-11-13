@@ -10,7 +10,7 @@
     <item
         android:id="@+id/editCustomerToolbar"
         android:title=""
-        android:icon="@drawable/ic_edit"
+        android:icon="@drawable/ic_more"
         app:showAsAction="always">
     </item>
 </menu>

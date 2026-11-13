@@ -217,6 +217,15 @@
     <string name="easy">Easy</string>
     <string name="khata_2">Khata</string>
     <string name="sms_per_bhejain_2">SMS per bhejain</string>
+    <string name="amount_rupees">Rs. %1$s</string>
+    <string name="hisaab_lene_hain">Maine lene hain</string>
+    <string name="hisaab_dene_hain">Maine dene hain</string>
+    <string name="hisaab_zero">Rs. 0</string>
+    <string name="date_unavailable">Date unavailable</string>
     <string name="login_code_validate_ho_raha_hai">Login code validate ho raha hai...</string>
     <string name="otp_valid_nai_hai_dubaara_koshish_karein">Otp valid nai hai, dubaara koshish karein</string>
+    <string name="search_customer_4">Search Customer</string>
+    <string name="amount_rs">Rs %1$s</string>
+    <string name="ko_wasooli_ke_liye_automatic_sms_bheja_jaiga">%1$s ko wasooli ke liye automatic SMS bheja jaiga</string>
+    <string name="koi_tareekh_nahi_2">Koi tareekh nahi</string>
 </resources>

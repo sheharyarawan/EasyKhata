@@ -12,7 +12,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.databinding.FragmentSignUpBinding
-import com.example.easykhata.ui.viewModels.AuthViewModel
+import com.example.easykhata.ui.viewModels.auth.AuthViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 @AndroidEntryPoint

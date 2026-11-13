@@ -15,6 +15,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:navigationIcon="@drawable/ic_back"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge.Emphasized"
         app:title="Update karein">
     </com.google.android.material.appbar.MaterialToolbar>
     <TextView
@@ -23,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="16dp"
         android:text="@string/naam"
+        android:textColor="@color/mid_gray"
         android:textSize="17sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/updateToolbar">
@@ -46,6 +48,7 @@
         android:layout_margin="16dp"
         android:text="@string/phone_number"
         android:textSize="17sp"
+        android:textColor="@color/mid_gray"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/editTextNameUpdate">
     </TextView>
@@ -105,4 +108,25 @@
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="VisualLintButtonSize">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/updateProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

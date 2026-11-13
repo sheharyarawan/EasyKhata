@@ -18,5 +18,13 @@
         <item name="android:textColor">#111111</item>
         <item name="android:background">@drawable/otp_underline</item>
     </style>
+    <style name="ThemeOverlay.EasyKhata.DatePicker"
+        parent="ThemeOverlay.Material3.MaterialCalendar">
+        <item name="colorPrimary">#222222</item>
+        <item name="colorOnPrimary">#FFFFFF</item>
+        <item name="colorSurface">#FFFFFF</item>
+        <item name="colorOnSurface">#000000</item>
+        <item name="colorSecondary">#222222</item>
+    </style>
     <style name="Theme.EasyKhata" parent="Base.Theme.EasyKhata" />
 </resources>

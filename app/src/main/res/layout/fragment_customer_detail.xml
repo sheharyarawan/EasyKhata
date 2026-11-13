@@ -16,6 +16,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge.Emphasized"
+        app:subtitleTextColor="@color/mid_gray"
         app:menu="@menu/customer_detail_menu">
     </com.google.android.material.appbar.MaterialToolbar>
     <androidx.cardview.widget.CardView
@@ -74,8 +76,8 @@
     </androidx.cardview.widget.CardView>
     <ImageView
         android:id="@+id/reminderDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
         android:layout_marginTop="16dp"
         android:src="@drawable/ic_calendar"
         app:layout_constraintEnd_toEndOf="@+id/reminderTv"
@@ -105,18 +107,14 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/cardSort"
         app:strokeWidth="0dp">
-        <EditText
+        <ImageView
             android:id="@+id/etSearchCustomer"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@null"
-            android:drawableStart="@drawable/ic_search"
-            android:drawablePadding="8dp"
-            android:inputType="text"
+            android:src="@drawable/ic_search"
             android:paddingHorizontal="12dp"
-            android:singleLine="true"
-            android:textSize="16sp"
-            tools:ignore="Autofill,LabelFor,SpeakableTextPresentCheck" />
+            tools:ignore="Autofill,ContentDescription,LabelFor,SpeakableTextPresentCheck" />
     </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardSort"
@@ -135,25 +133,6 @@
             android:layout_gravity="center"
             android:contentDescription="@string/sort_customers"
             android:src="@drawable/ic_sort"
-            tools:ignore="ImageContrastCheck" />
-    </com.google.android.material.card.MaterialCardView>
-    <com.google.android.material.card.MaterialCardView
-        android:id="@+id/cardPdf"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        app:cardCornerRadius="12dp"
-        android:layout_marginStart="16dp"
-        app:cardElevation="0dp"
-        app:layout_constraintBottom_toBottomOf="@id/cardSort"
-        app:layout_constraintStart_toEndOf="@+id/cardSort"
-        app:layout_constraintTop_toTopOf="@id/cardSort"
-        app:strokeWidth="0dp">
-        <ImageView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:contentDescription="@string/export_pdf"
-            android:src="@drawable/ic_pdf"
             tools:ignore="ImageContrastCheck" />
     </com.google.android.material.card.MaterialCardView>
     <com.google.android.material.card.MaterialCardView
@@ -193,7 +172,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="30dp"
         android:text="TIME"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -205,9 +184,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="70dp"
+        android:layout_marginEnd="60dp"
         android:text="@string/diye"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toStartOf="@+id/liyeTv"
@@ -221,7 +200,7 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="70dp"
         android:text="@string/liye"
-        android:textColor="@color/gray"
+        android:textColor="@color/mid_gray"
         android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
@@ -276,4 +255,25 @@
         app:layout_constraintTop_toTopOf="@+id/liyeButton"
         tools:ignore="VisualLintButtonSize">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/customerDetailProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
