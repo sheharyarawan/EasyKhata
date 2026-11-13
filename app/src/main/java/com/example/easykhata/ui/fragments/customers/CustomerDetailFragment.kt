@@ -31,7 +31,6 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.easykhata.ui.fragments.customers.bottomSheets.WasooliBottomSheet
 import com.example.easykhata.ui.viewModels.account.WasooliViewModel
 import com.google.android.material.snackbar.Snackbar
-
 @AndroidEntryPoint
 class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
     lateinit var binding: FragmentCustomerDetailBinding
@@ -220,6 +219,7 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 expenseViewModel.runningBalance.collect { balance ->
                     updateHisaabStatus(balance)
+                    updateReminderDate()
                 }
             }
         }
@@ -283,13 +283,20 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
         }
     }
     private fun updateReminderDate() {
+        val balance = expenseViewModel.runningBalance.value
+        if (balance <= 0.0) {
+            binding.reminderTv.text = getString(R.string.koi_tareekh_nahi_2)
+            return
+        }
         val upcoming = wasooliViewModel.upcomingRemindersState.value
         val late = wasooliViewModel.lateRemindersState.value
         val reminders = when {
             upcoming is UiState.Success &&
                     late is UiState.Success -> upcoming.data + late.data
-
-            else -> return
+            else -> {
+                binding.reminderTv.text = getString(R.string.tareekh_rakhein)
+                return
+            }
         }
         val reminder = reminders.find {
             it.customerId == customerId

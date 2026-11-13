@@ -227,4 +227,5 @@
     <string name="search_customer_4">Search Customer</string>
     <string name="amount_rs">Rs %1$s</string>
     <string name="ko_wasooli_ke_liye_automatic_sms_bheja_jaiga">%1$s ko wasooli ke liye automatic SMS bheja jaiga</string>
+    <string name="koi_tareekh_nahi_2">Koi tareekh nahi</string>
 </resources>
