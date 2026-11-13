@@ -125,7 +125,7 @@ class KhataReportFragment : Fragment(R.layout.fragment_khata_report) {
                 }
                 launch {
                     khataReportViewModel.totalLiye.collect { total ->
-                        binding.khataReportDiye.text = getString(
+                        binding.khataReportLiye.text = getString(
                             R.string.amount_rs,
                             "%,.0f".format(total)
                         )
