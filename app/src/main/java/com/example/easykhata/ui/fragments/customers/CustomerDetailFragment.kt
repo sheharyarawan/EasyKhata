@@ -28,6 +28,9 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 import androidx.core.view.isVisible
 import androidx.core.widget.doAfterTextChanged
+import com.example.easykhata.ui.fragments.customers.bottomSheets.WasooliBottomSheet
+import com.example.easykhata.ui.viewModels.account.WasooliViewModel
+import com.google.android.material.snackbar.Snackbar
 
 @AndroidEntryPoint
 class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
@@ -35,6 +38,7 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
     private val viewModel: CustomerDetailViewModel by activityViewModels()
     private val businessViewModel: BusinessViewModel by activityViewModels()
     private val expenseViewModel: ExpenseViewModel by activityViewModels()
+    private val wasooliViewModel: WasooliViewModel by activityViewModels()
     private lateinit var expenseAdapter: ExpenseAdapter
     private val args: CustomerDetailFragmentArgs by navArgs()
     private lateinit var customerId: String
@@ -49,6 +53,7 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
         observeRunningBalance()
         loadCustomer()
         loadCustomerExpenses()
+        observeReminderDate()
     }
     private fun setUpClicks() {
         binding.apply {
@@ -101,6 +106,9 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
             etSearchCustomerExpand.doAfterTextChanged { editable ->
                 expenseViewModel.setSearchQuery(editable.toString())
             }
+            reminderDate.setOnClickListener {
+              openWasooliBottomSheet()
+            }
         }
     }
     private fun loadCustomer() {
@@ -114,6 +122,7 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
             return
         }
         viewModel.loadCustomer(businessId, customerId)
+        wasooliViewModel.loadReminders(businessId)
     }
     private fun observeCustomer() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -253,6 +262,75 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
                 }
             }
         }
+    }
+    private fun observeReminderDate() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                launch {
+                    wasooliViewModel.upcomingRemindersState.collect {
+                        updateReminderDate()
+                    }
+                }
+                launch {
+                    wasooliViewModel.lateRemindersState.collect {
+                        updateReminderDate()
+                    }
+                }
+            }
+        }
+    }
+    private fun updateReminderDate() {
+        val upcoming = wasooliViewModel.upcomingRemindersState.value
+        val late = wasooliViewModel.lateRemindersState.value
+        val reminders = when {
+            upcoming is UiState.Success &&
+                    late is UiState.Success -> upcoming.data + late.data
+
+            else -> return
+        }
+        val reminder = reminders.find {
+            it.customerId == customerId
+        }
+        binding.reminderTv.text = reminder?.reminderDate?.toDate()?.let {
+            SimpleDateFormat("dd MMM yyyy", Locale.getDefault()).format(it)
+        } ?: getString(R.string.tareekh_rakhein)
+    }
+    private fun openWasooliBottomSheet() {
+        val customerState = viewModel.customerState.value
+        val businessId = businessViewModel.businessId.value
+        val balance = expenseViewModel.runningBalance.value
+        if (customerState !is UiState.Success || businessId.isNullOrBlank()) {
+            Toast.makeText(
+                requireContext(),
+                "Customer or business information unavailable",
+                Toast.LENGTH_SHORT
+            ).show()
+            return
+        }
+        when {
+            balance == 0.0 -> {
+                Snackbar.make(
+                    binding.root,
+                    "Hisaab clear hai",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return
+            }
+            balance < 0 -> {
+                Snackbar.make(
+                    binding.root,
+                    "Wasooli sirf payment wasool karne ke liye add ki ja sakti hai",
+                    Snackbar.LENGTH_SHORT
+                ).show()
+                return
+            }
+        }
+        val customer = customerState.data
+        WasooliBottomSheet.newInstance(
+            customerId = customerId,
+            customerName = customer.name,
+            businessId = businessId
+        ).show(parentFragmentManager, "WasooliBottomSheet")
     }
     private fun showProgress() {
         binding.customerDetailProgressOverlay.visibility = View.VISIBLE
