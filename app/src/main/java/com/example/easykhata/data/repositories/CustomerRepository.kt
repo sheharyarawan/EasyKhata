@@ -1,5 +1,4 @@
 package com.example.easykhata.data.repositories
-
 import com.example.easykhata.data.models.customers.Customer
 interface CustomerRepository {
     fun addCustomer(
@@ -31,4 +30,10 @@ interface CustomerRepository {
         onFailure: (Exception) -> Unit
     )
     fun removeCustomersListener()
+    fun deleteCustomer(
+        businessId: String,
+        customerId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }

@@ -190,4 +190,65 @@ class CustomerRepositoryImpl @Inject constructor(
         customersListener?.remove()
         customersListener = null
     }
+    override fun deleteCustomer(
+        businessId: String,
+        customerId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank() || customerId.isBlank()) {
+            onFailure(Exception("Business or customer not selected"))
+            return
+        }
+        val businessRef = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+        val expensesRef = businessRef.collection("expenses")
+        expensesRef
+            .whereEqualTo("customerId", customerId)
+            .get()
+            .addOnSuccessListener { expensesSnapshot ->
+                val deleteTasks = expensesSnapshot.documents
+                    .chunked(500)
+                    .map { documents ->
+                        val batch = firebaseFirestore.batch()
+                        documents.forEach { document ->
+                            batch.delete(document.reference)
+                        }
+                        batch.commit()
+                    }
+                com.google.android.gms.tasks.Tasks.whenAll(deleteTasks)
+                    .addOnSuccessListener {
+                        val finalBatch = firebaseFirestore.batch()
+                        val reminderRef = businessRef
+                            .collection("wasooliReminders")
+                            .document(customerId)
+                        val customerRef = businessRef
+                            .collection("customers")
+                            .document(customerId)
+                        finalBatch.delete(reminderRef)
+                        finalBatch.delete(customerRef)
+                        finalBatch.commit()
+                            .addOnSuccessListener {
+                                onSuccess()
+                            }
+                            .addOnFailureListener { exception ->
+                                onFailure(exception)
+                            }
+                    }
+                    .addOnFailureListener { exception ->
+                        onFailure(exception)
+                    }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
