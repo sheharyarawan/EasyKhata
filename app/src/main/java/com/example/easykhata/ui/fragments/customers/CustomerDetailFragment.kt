@@ -58,7 +58,10 @@ class CustomerDetailFragment : Fragment(R.layout.fragment_customer_detail) {
     private fun setUpClicks() {
         binding.apply {
             customerDetailToolbar.setNavigationOnClickListener {
-                findNavController().navigateUp()
+                findNavController().popBackStack(
+                    R.id.homeFragment,
+                    false
+                )
             }
             customerDetailToolbar.setOnMenuItemClickListener { menuItem ->
                 when (menuItem.itemId) {
