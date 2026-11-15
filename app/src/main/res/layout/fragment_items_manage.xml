@@ -14,7 +14,6 @@
         app:titleTextAppearance="@style/TextAppearance.Material3.TitleLarge.Emphasized"
         app:navigationIcon="@drawable/ic_back"
         app:menu="@menu/mere_items_menu"
-        app:subtitle="Catalog mein 0"
         app:subtitleTextColor="#ACACAC"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -46,13 +45,11 @@
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="#B7C9C7C7"
-        android:layout_marginTop="12dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/materialCardView13">
     </View>
-
     <LinearLayout
         android:id="@+id/emptyItemsLayout"
         android:layout_width="0dp"
@@ -89,7 +86,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginHorizontal="16dp"
-
+        tools:itemCount="2"
         tools:listitem="@layout/item_mere_items"
         app:layout_constraintBottom_toTopOf="@+id/nayaItemAddButton"
         app:layout_constraintEnd_toEndOf="parent"
@@ -102,11 +99,31 @@
         android:layout_height="wrap_content"
         android:text="@string/naya_item"
         android:layout_margin="16dp"
-        android:visibility="gone"
         android:backgroundTint="@color/black"
         android:textSize="20sp"
         android:paddingVertical="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
     </com.google.android.material.button.MaterialButton>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
