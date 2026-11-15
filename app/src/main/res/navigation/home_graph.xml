@@ -117,7 +117,12 @@
         android:id="@+id/itemEditKareinFragment"
         android:name="com.example.easykhata.ui.fragments.sales.ItemEditKareinFragment"
         android:label="fragment_item_edit_karein"
-        tools:layout="@layout/fragment_item_edit_karein" />
+        tools:layout="@layout/fragment_item_edit_karein" >
+        <argument
+            android:name="source"
+            app:argType="string"/>
+    </fragment>
+
     <fragment
         android:id="@+id/saleConfirmKareinFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SaleConfirmKareinFragment"
