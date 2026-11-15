@@ -18,11 +18,18 @@ import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
 import com.example.easykhata.ui.viewModels.sales.ItemsViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import android.text.Editable
+import android.text.TextWatcher
+import android.view.inputmethod.InputMethodManager
+import android.content.Context
+import com.example.easykhata.data.models.sales.SaleItem
+import androidx.core.view.isVisible
 @AndroidEntryPoint
 class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
     private lateinit var binding: FragmentItemsManageBinding
     private val viewModel: ItemsViewModel by activityViewModels()
     private val businessViewModel: BusinessViewModel by activityViewModels()
+    private var allItems = emptyList<SaleItem>()
     private lateinit var itemsAdapter: ItemsAdapter
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +38,7 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
         setUpRecyclerView()
         observeItems()
         load()
+        setUpSearch()
     }
     private fun setUpClicks() {
         binding.apply {
@@ -81,7 +89,8 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
                         is UiState.Success -> {
                             hideLoading()
                             val items = state.data
-                            itemsAdapter.submitList(items)
+                            allItems = items
+                            filterItems(binding.itemSearchEt.text.toString())
                             updateItemsVisibility(items.isEmpty())
                             binding.mereItemsToolbar.subtitle =
                                 "Catalog mein ${items.size}"
@@ -102,13 +111,65 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
             }
         }
     }
-
     private fun load() {
         val businessId = businessViewModel.businessId.value
         if (businessId.isNullOrBlank()) {
             return
         }
         viewModel.observeItems(businessId)
+    }
+    private fun setUpSearch() {
+        binding.mereItemsToolbar.setOnMenuItemClickListener { menuItem ->
+            if (menuItem.itemId == R.id.search) {
+                val isVisible =
+                    binding.itemSearchEt.isVisible
+                if (isVisible) {
+                    binding.apply {
+                        itemSearchEt.text.clear()
+                        itemSearchEt.visibility = View.GONE
+                        materialCardView13.visibility = View.GONE
+                    }
+                    itemsAdapter.submitList(allItems)
+
+                } else {
+                    binding.apply {
+                        materialCardView13.visibility = View.VISIBLE
+                        itemSearchEt.visibility = View.VISIBLE
+                        itemSearchEt.requestFocus()
+                    }
+                }
+                true
+            } else {
+                false
+            }
+        }
+        binding.itemSearchEt.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(
+                s: CharSequence?,
+                start: Int,
+                count: Int,
+                after: Int
+            ) = Unit
+            override fun onTextChanged(
+                s: CharSequence?,
+                start: Int,
+                before: Int,
+                count: Int
+            ) {
+                filterItems(s.toString())
+            }
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
+    }
+    private fun filterItems(query: String) {
+        val filteredItems = if (query.isBlank()) {
+            allItems
+        } else {
+            allItems.filter { item ->
+                item.name.contains(query.trim(), ignoreCase = true)
+            }
+        }
+        itemsAdapter.submitList(filteredItems)
     }
     private fun showLoading() {
         binding.customerProgressOverlay.visibility = View.VISIBLE
