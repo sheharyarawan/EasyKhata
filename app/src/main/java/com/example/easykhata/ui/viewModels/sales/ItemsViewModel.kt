@@ -27,6 +27,15 @@ class ItemsViewModel @Inject constructor(
     private val _addItemState =
         MutableStateFlow<UiState<String>>(UiState.Idle)
     val addItemState = _addItemState.asStateFlow()
+    private val _getItemState =
+        MutableStateFlow<UiState<SaleItem>>(UiState.Idle)
+    val getItemState = _getItemState.asStateFlow()
+    private val _updateItemState =
+        MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val updateItemState = _updateItemState.asStateFlow()
+    private val _itemsState =
+        MutableStateFlow<UiState<List<SaleItem>>>(UiState.Loading)
+    val itemsState = _itemsState.asStateFlow()
     fun addItem(
         businessId: String,
         item: SaleItem
@@ -57,7 +66,98 @@ class ItemsViewModel @Inject constructor(
             }
         )
     }
+    fun getItemById(
+        businessId: String,
+        itemId: String
+    ) {
+        if (businessId.isBlank()) {
+            _getItemState.value = UiState.Error("Business not found")
+            return
+        }
+        if (itemId.isBlank()) {
+            _getItemState.value = UiState.Error("Invalid item")
+            return
+        }
+        _getItemState.value = UiState.Loading
+        itemsRepository.getItemById(
+            businessId = businessId,
+            itemId = itemId,
+            onSuccess = { item ->
+                _getItemState.value = UiState.Success(item)
+            },
+            onFailure = { exception ->
+                _getItemState.value = UiState.Error(
+                    exception.message ?: "Unable to load item"
+                )
+            }
+        )
+    }
+    fun updateItem(
+        businessId: String,
+        item: SaleItem
+    ) {
+        if (businessId.isBlank()) {
+            _updateItemState.value = UiState.Error("Business not found")
+            return
+        }
+        if (item.id.isBlank()) {
+            _updateItemState.value = UiState.Error("Invalid item")
+            return
+        }
+        if (item.name.isBlank()) {
+            _updateItemState.value = UiState.Error("Enter item name")
+            return
+        }
+        if (item.price <= 0.0) {
+            _updateItemState.value = UiState.Error("Enter a valid price")
+            return
+        }
+        _updateItemState.value = UiState.Loading
+        itemsRepository.updateItem(
+            businessId = businessId,
+            item = item,
+            onSuccess = {
+                _updateItemState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _updateItemState.value = UiState.Error(
+                    exception.message ?: "Unable to update item"
+                )
+            }
+        )
+    }
+    fun observeItems(businessId: String) {
+        if (businessId.isBlank()) {
+            _itemsState.value = UiState.Error("Business not found")
+            return
+        }
+        _itemsState.value = UiState.Loading
+        itemsRepository.observeItems(
+            businessId = businessId,
+            onSuccess = { items ->
+                _itemsState.value = UiState.Success(items)
+            },
+            onFailure = { exception ->
+                _itemsState.value = UiState.Error(
+                    exception.message ?: "Unable to load items"
+                )
+            }
+        )
+    }
+    fun removeItemsListener() {
+        itemsRepository.removeItemsListener()
+    }
     fun resetAddItemState() {
         _addItemState.value = UiState.Idle
+    }
+    fun resetGetItemState() {
+        _getItemState.value = UiState.Idle
+    }
+    fun resetUpdateItemState() {
+        _updateItemState.value = UiState.Idle
+    }
+    override fun onCleared() {
+        removeItemsListener()
+        super.onCleared()
     }
 }
