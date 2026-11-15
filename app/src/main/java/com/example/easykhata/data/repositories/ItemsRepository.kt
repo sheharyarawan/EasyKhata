@@ -10,4 +10,23 @@ interface ItemsRepository {
         onFailure: (Exception) -> Unit
     )
     fun getUnits(): List<UnitItem>
+    fun observeItems(
+        businessId: String,
+        onSuccess: (List<SaleItem>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeItemsListener()
+    fun getItemById(
+        businessId: String,
+        itemId: String,
+        onSuccess: (SaleItem) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+
+    fun updateItem(
+        businessId: String,
+        item: SaleItem,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
