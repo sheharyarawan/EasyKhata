@@ -231,4 +231,9 @@
     <string name="item_save_karein">Item save karein</string>
     <string name="tabdeeliyan_save_karein">Tabdeeliyan save karein</string>
     <string name="symbol">%1$s (%2$s)</string>
+    <string name="rs_6">Rs %1$s</string>
+    <string name="items">%1$d items</string>
+    <string name="items_2">ITEMS %1$d</string>
+    <string name="rs_7">Rs %1$s</string>
+    <string name="rs_9">Rs %1$s</string>
 </resources>

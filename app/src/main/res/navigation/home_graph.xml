@@ -36,6 +36,9 @@
         <action
             android:id="@+id/action_salesFragment_to_saleDarjkareinFragment"
             app:destination="@id/saleDarjkareinFragment" />
+        <action
+            android:id="@+id/action_salesFragment_to_reciptFragment"
+            app:destination="@id/reciptFragment" />
     </fragment>
     <fragment
         android:id="@+id/accountFragment"
@@ -132,7 +135,11 @@
         android:id="@+id/saleConfirmKareinFragment"
         android:name="com.example.easykhata.ui.fragments.sales.SaleConfirmKareinFragment"
         android:label="fragment_sale_confirm_karein"
-        tools:layout="@layout/fragment_sale_confirm_karein" />
+        tools:layout="@layout/fragment_sale_confirm_karein" >
+        <action
+            android:id="@+id/action_saleConfirmKareinFragment_to_reciptFragment"
+            app:destination="@id/reciptFragment" />
+    </fragment>
     <fragment
         android:id="@+id/visitingCardFragment"
         android:name="com.example.easykhata.ui.fragments.account.VisitingCardFragment"
@@ -279,5 +286,14 @@
         <argument
             android:name="expense"
             app:argType="com.example.easykhata.data.models.expense.Expense" />
+    </fragment>
+    <fragment
+        android:id="@+id/reciptFragment"
+        android:name="com.example.easykhata.ui.fragments.sales.ReciptFragment"
+        android:label="fragment_recipt"
+        tools:layout="@layout/fragment_recipt">
+        <argument
+            android:name="saleId"
+            app:argType="string" />
     </fragment>
 </navigation>
