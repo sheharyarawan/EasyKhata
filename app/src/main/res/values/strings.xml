@@ -236,4 +236,7 @@
     <string name="items_2">ITEMS %1$d</string>
     <string name="rs_7">Rs %1$s</string>
     <string name="rs_9">Rs %1$s</string>
+    <string name="rs_10">Rs %1$s</string>
+    <string name="inv">INV-%1$s</string>
+    <string name="rs_10">Rs %1$.2f</string>
 </resources>
