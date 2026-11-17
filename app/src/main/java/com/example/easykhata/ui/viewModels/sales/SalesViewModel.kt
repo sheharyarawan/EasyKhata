@@ -20,6 +20,8 @@ class SalesViewModel @Inject constructor(
     private val _saleDetailsState =
         MutableStateFlow<UiState<Sale>>(UiState.Idle)
     val saleDetailsState = _saleDetailsState.asStateFlow()
+    private val _salesState = MutableStateFlow<UiState<List<Sale>>>(UiState.Idle)
+    val salesState = _salesState.asStateFlow()
     private val _selectedSaleItems =
         MutableStateFlow<List<SelectedSaleItem>>(emptyList())
     val selectedSaleItems = _selectedSaleItems.asStateFlow()
@@ -124,6 +126,23 @@ class SalesViewModel @Inject constructor(
         }
         _selectedSaleItems.value = currentItems
     }
+    fun observeSales(businessId: String) {
+        _salesState.value = UiState.Loading
+        salesRepository.observeSales(
+            businessId = businessId,
+            onSuccess = { sales ->
+                _salesState.value = UiState.Success(sales)
+            },
+            onFailure = { exception ->
+                _salesState.value = UiState.Error(
+                    exception.message ?: "Failed to fetch sales"
+                )
+            }
+        )
+    }
+    fun removeSalesListener() {
+        salesRepository.removeSalesListener()
+    }
     fun getSelectedQuantity(itemId: String): Int {
         return _selectedSaleItems.value
             .find { it.item.id == itemId }
@@ -137,5 +156,9 @@ class SalesViewModel @Inject constructor(
     }
     fun resetSaleDetailsState() {
         _saleDetailsState.value = UiState.Idle
+    }
+    override fun onCleared() {
+        super.onCleared()
+        removeSalesListener()
     }
 }
