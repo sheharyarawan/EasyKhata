@@ -17,6 +17,9 @@ class SalesViewModel @Inject constructor(
     private val _addSaleState =
         MutableStateFlow<UiState<String>>(UiState.Idle)
     val addSaleState = _addSaleState.asStateFlow()
+    private val _saleDetailsState =
+        MutableStateFlow<UiState<Sale>>(UiState.Idle)
+    val saleDetailsState = _saleDetailsState.asStateFlow()
     private val _selectedSaleItems =
         MutableStateFlow<List<SelectedSaleItem>>(emptyList())
     val selectedSaleItems = _selectedSaleItems.asStateFlow()
@@ -34,7 +37,8 @@ class SalesViewModel @Inject constructor(
                 UiState.Error("Please add at least one item")
             return
         }
-        if (sale.paymentMethod == PaymentMethod.UDHAAR &&
+        if (
+            sale.paymentMethod == PaymentMethod.UDHAAR &&
             (sale.customerId.isBlank() || sale.customerName.isBlank())
         ) {
             _addSaleState.value =
@@ -49,10 +53,37 @@ class SalesViewModel @Inject constructor(
                 _addSaleState.value = UiState.Success(saleId)
             },
             onFailure = { exception ->
-                _addSaleState.value =
-                    UiState.Error(
-                        exception.message ?: "Failed to add sale"
-                    )
+                _addSaleState.value = UiState.Error(
+                    exception.message ?: "Failed to add sale"
+                )
+            }
+        )
+    }
+    fun getSale(
+        businessId: String,
+        saleId: String
+    ) {
+        if (businessId.isBlank()) {
+            _saleDetailsState.value =
+                UiState.Error("Business not selected")
+            return
+        }
+        if (saleId.isBlank()) {
+            _saleDetailsState.value =
+                UiState.Error("Invalid sale ID")
+            return
+        }
+        _saleDetailsState.value = UiState.Loading
+        salesRepository.getSale(
+            businessId = businessId,
+            saleId = saleId,
+            onSuccess = { sale ->
+                _saleDetailsState.value = UiState.Success(sale)
+            },
+            onFailure = { exception ->
+                _saleDetailsState.value = UiState.Error(
+                    exception.message ?: "Failed to load sale"
+                )
             }
         )
     }
@@ -63,6 +94,7 @@ class SalesViewModel @Inject constructor(
         }
         if (existingIndex != -1) {
             val existingItem = currentItems[existingIndex]
+
             currentItems[existingIndex] = existingItem.copy(
                 quantity = existingItem.quantity + 1
             )
@@ -102,5 +134,8 @@ class SalesViewModel @Inject constructor(
     }
     fun resetAddSaleState() {
         _addSaleState.value = UiState.Idle
+    }
+    fun resetSaleDetailsState() {
+        _saleDetailsState.value = UiState.Idle
     }
 }
