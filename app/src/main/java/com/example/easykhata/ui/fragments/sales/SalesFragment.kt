@@ -1,6 +1,7 @@
 package com.example.easykhata.ui.fragments.sales
 import android.os.Bundle
 import android.view.View
+import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
@@ -19,6 +20,7 @@ import com.example.easykhata.databinding.FragmentSalesBinding
 import com.example.easykhata.ui.adapters.SalesAdapter
 import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
 import com.example.easykhata.ui.viewModels.sales.SalesViewModel
+import com.example.easykhata.utils.showConfirmationDialog
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import java.math.BigDecimal
@@ -40,6 +42,7 @@ class SalesFragment : Fragment(R.layout.fragment_sales) {
         setUpClicks()
         setUpSearch()
         observeSales()
+        observeDeleteSale()
         loadSales()
     }
     private fun setupUi() {
@@ -88,16 +91,87 @@ class SalesFragment : Fragment(R.layout.fragment_sales) {
     private fun setUpAdapter() {
         salesAdapter = SalesAdapter(
             onSaleClick = { sale ->
-                val action =
-                    SalesFragmentDirections.actionSalesFragmentToReciptFragment(
-                        sale.id
-                    )
-                findNavController().navigate(action)
+                openReceipt(sale)
             },
+
             onSaleMenuClick = { sale, anchor ->
-                // Sale menu actions will be implemented later.
+                showSaleMenu(sale, anchor)
             }
         )
+    }
+    private fun showSaleMenu(sale: Sale, anchor: View) {
+        val popupMenu = PopupMenu(requireContext(), anchor)
+        popupMenu.menuInflater.inflate(
+            R.menu.menu_sale_options,
+            popupMenu.menu
+        )
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_view_receipt -> {
+                    openReceipt(sale)
+                    true
+                }
+                R.id.action_delete_sale -> {
+                    showDeleteConfirmation(sale)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+    private fun openReceipt(sale: Sale) {
+        val action =
+            SalesFragmentDirections.actionSalesFragmentToReciptFragment(sale.id)
+        findNavController().navigate(action)
+    }
+    private fun showDeleteConfirmation(sale: Sale) {
+        showConfirmationDialog(
+            title = "Sale delete karein?",
+            message = "Kya aap sale delete karna chahte hein?",
+            positiveButtonText = "DELETE",
+            negativeButtonText = "CANCEL"
+        ) {
+            val businessId = businessViewModel.businessId.value.orEmpty()
+            salesViewModel.deleteSale(
+                businessId = businessId,
+                sale = sale
+            )
+        }
+    }
+    private fun observeDeleteSale() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                salesViewModel.deleteSaleState.collect { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            showLoading()
+                        }
+                        is UiState.Success -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                "Sale deleted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            salesViewModel.resetDeleteSaleState()
+                        }
+                        is UiState.Error -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            salesViewModel.resetDeleteSaleState()
+                        }
+                        is UiState.Idle -> {
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
     }
     private fun observeSales() {
         viewLifecycleOwner.lifecycleScope.launch {
