@@ -6,11 +6,14 @@ import com.example.easykhata.data.models.expense.Expense
 import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
+import com.google.firebase.firestore.Query
 import javax.inject.Inject
 class SalesRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firebaseFirestore: FirebaseFirestore
 ) : SalesRepository {
+    private var salesListener: ListenerRegistration? = null
     override fun addSale(
         businessId: String,
         sale: Sale,
@@ -124,5 +127,44 @@ class SalesRepositoryImpl @Inject constructor(
             .addOnFailureListener { exception ->
                 onFailure(exception)
             }
+    }
+    override fun observeSales(
+        businessId: String,
+        onSuccess: (List<Sale>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank()) {
+            onFailure(Exception("Business not selected"))
+            return
+        }
+        salesListener?.remove()
+        salesListener = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("sales")
+            .orderBy("date", Query.Direction.DESCENDING)
+            .addSnapshotListener { snapshot, error ->
+                if (error != null) {
+                    onFailure(error)
+                    return@addSnapshotListener
+                }
+                val sales = snapshot?.documents?.mapNotNull { document ->
+                    document.toObject(Sale::class.java)?.copy(
+                        id = document.id
+                    )
+                } ?: emptyList()
+                onSuccess(sales)
+            }
+    }
+    override fun removeSalesListener() {
+        salesListener?.remove()
+        salesListener = null
     }
 }

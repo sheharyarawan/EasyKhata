@@ -13,4 +13,10 @@ interface SalesRepository {
         onSuccess: (Sale) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun observeSales(
+        businessId: String,
+        onSuccess: (List<Sale>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeSalesListener()
 }
