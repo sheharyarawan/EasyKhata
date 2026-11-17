@@ -22,6 +22,10 @@ class SalesViewModel @Inject constructor(
     val saleDetailsState = _saleDetailsState.asStateFlow()
     private val _salesState = MutableStateFlow<UiState<List<Sale>>>(UiState.Idle)
     val salesState = _salesState.asStateFlow()
+    private val _deleteSaleState =
+        MutableStateFlow<UiState<String>>(UiState.Idle)
+
+    val deleteSaleState = _deleteSaleState.asStateFlow()
     private val _selectedSaleItems =
         MutableStateFlow<List<SelectedSaleItem>>(emptyList())
     val selectedSaleItems = _selectedSaleItems.asStateFlow()
@@ -139,6 +143,39 @@ class SalesViewModel @Inject constructor(
                 )
             }
         )
+    }
+    fun deleteSale(
+        businessId: String,
+        sale: Sale
+    ) {
+        if (businessId.isBlank()) {
+            _deleteSaleState.value =
+                UiState.Error("Business not selected")
+            return
+        }
+        if (sale.id.isBlank()) {
+            _deleteSaleState.value =
+                UiState.Error("Invalid sale ID")
+            return
+        }
+        _deleteSaleState.value = UiState.Loading
+        salesRepository.deleteSale(
+            businessId = businessId,
+            sale = sale,
+            onSuccess = {
+                _deleteSaleState.value =
+                    UiState.Success(sale.id)
+            },
+            onFailure = { exception ->
+                _deleteSaleState.value =
+                    UiState.Error(
+                        exception.message ?: "Failed to delete sale"
+                    )
+            }
+        )
+    }
+    fun resetDeleteSaleState() {
+        _deleteSaleState.value = UiState.Idle
     }
     fun removeSalesListener() {
         salesRepository.removeSalesListener()
