@@ -19,4 +19,10 @@ interface SalesRepository {
         onFailure: (Exception) -> Unit
     )
     fun removeSalesListener()
+    fun deleteSale(
+        businessId: String,
+        sale: Sale,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }

@@ -85,6 +85,7 @@ class SalesRepositoryImpl @Inject constructor(
             onFailure(exception)
         }
     }
+
     override fun getSale(
         businessId: String,
         saleId: String,
@@ -128,6 +129,7 @@ class SalesRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+
     override fun observeSales(
         businessId: String,
         onSuccess: (List<Sale>) -> Unit,
@@ -166,5 +168,76 @@ class SalesRepositoryImpl @Inject constructor(
     override fun removeSalesListener() {
         salesListener?.remove()
         salesListener = null
+    }
+    override fun deleteSale(
+        businessId: String,
+        sale: Sale,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank()) {
+            onFailure(Exception("Business not selected"))
+            return
+        }
+        if (sale.id.isBlank()) {
+            onFailure(Exception("Invalid sale ID"))
+            return
+        }
+        val businessRef = firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+        val saleRef = businessRef
+            .collection("sales")
+            .document(sale.id)
+        val expenseQuery = businessRef
+            .collection("expenses")
+            .whereEqualTo(
+                "description",
+                "Sale #${sale.invoiceNumber}"
+            )
+        if (sale.paymentMethod == PaymentMethod.UDHAAR) {
+            expenseQuery.get()
+                .addOnSuccessListener { expenseSnapshot ->
+                    firebaseFirestore.runTransaction { transaction ->
+                        val saleSnapshot = transaction.get(saleRef)
+                        if (!saleSnapshot.exists()) {
+                            throw IllegalStateException("Sale not found")
+                        }
+                        expenseSnapshot.documents.forEach { document ->
+                            transaction.delete(document.reference)
+                        }
+                        transaction.delete(saleRef)
+                        true
+                    }.addOnSuccessListener {
+                        onSuccess()
+                    }.addOnFailureListener { exception ->
+                        onFailure(exception)
+                    }
+                }
+                .addOnFailureListener { exception ->
+                    onFailure(exception)
+                }
+
+        } else {
+            firebaseFirestore.runTransaction { transaction ->
+                val saleSnapshot = transaction.get(saleRef)
+                if (!saleSnapshot.exists()) {
+                    throw IllegalStateException("Sale not found")
+                }
+                transaction.delete(saleRef)
+                true
+            }.addOnSuccessListener {
+                onSuccess()
+            }.addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+        }
     }
 }
