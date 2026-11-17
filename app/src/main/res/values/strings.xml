@@ -239,4 +239,5 @@
     <string name="rs_10">Rs %1$s</string>
     <string name="inv">INV-%1$s</string>
     <string name="rs_11">Rs %1$.2f</string>
+    <string name="nataij">%1$d nataij</string>
 </resources>

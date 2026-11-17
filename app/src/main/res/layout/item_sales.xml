@@ -60,7 +60,7 @@
             android:layout_height="wrap_content"
             android:ellipsize="end"
             android:maxLines="1"
-            android:textColor="#4D4D4D"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:text="@string/walk_in_customer"
             android:textStyle="normal"
