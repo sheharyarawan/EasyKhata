@@ -82,4 +82,47 @@ class SalesRepositoryImpl @Inject constructor(
             onFailure(exception)
         }
     }
+    override fun getSale(
+        businessId: String,
+        saleId: String,
+        onSuccess: (Sale) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank()) {
+            onFailure(Exception("Business not selected"))
+            return
+        }
+        if (saleId.isBlank()) {
+            onFailure(Exception("Invalid sale ID"))
+            return
+        }
+        firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("sales")
+            .document(saleId)
+            .get()
+            .addOnSuccessListener { document ->
+                if (!document.exists()) {
+                    onFailure(Exception("Sale not found"))
+                    return@addOnSuccessListener
+                }
+                val sale = document.toObject(Sale::class.java)
+                if (sale == null) {
+                    onFailure(Exception("Failed to read sale details"))
+                    return@addOnSuccessListener
+                }
+                onSuccess(sale.copy(id = document.id))
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }

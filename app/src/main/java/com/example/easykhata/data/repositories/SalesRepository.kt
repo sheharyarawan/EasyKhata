@@ -7,4 +7,10 @@ interface SalesRepository {
         onSuccess: (String) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun getSale(
+        businessId: String,
+        saleId: String,
+        onSuccess: (Sale) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
