@@ -45,6 +45,7 @@ class SaleDarjkareinFragment :
     private fun setUpClicks() {
         binding.apply {
             saleDarjKareinToolbar.setNavigationOnClickListener {
+                salesViewModel.clearSelectedSaleItems()
                 findNavController().navigateUp()
             }
             nayaItemAddButtonSale.setOnClickListener {
