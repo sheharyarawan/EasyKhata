@@ -1,29 +1,308 @@
 package com.example.easykhata.ui.fragments.sales
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
+import android.widget.PopupMenu
+import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.easykhata.R
+import com.example.easykhata.data.models.PaymentMethod
+import com.example.easykhata.data.models.UiState
+import com.example.easykhata.data.models.sales.Sale
 import com.example.easykhata.databinding.FragmentSalesBinding
+import com.example.easykhata.ui.adapters.SalesAdapter
+import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
+import com.example.easykhata.ui.viewModels.sales.SalesViewModel
+import com.example.easykhata.utils.showConfirmationDialog
 import dagger.hilt.android.AndroidEntryPoint
-
+import kotlinx.coroutines.launch
+import java.math.BigDecimal
+import java.text.DecimalFormat
+import java.util.Calendar
+import java.util.Locale
 @AndroidEntryPoint
 class SalesFragment : Fragment(R.layout.fragment_sales) {
-    lateinit var binding: FragmentSalesBinding
+    private lateinit var binding: FragmentSalesBinding
+    private val salesViewModel: SalesViewModel by viewModels()
+    private val businessViewModel: BusinessViewModel by activityViewModels()
+    private lateinit var salesAdapter: SalesAdapter
+    private var allSales = emptyList<Sale>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding= FragmentSalesBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentSalesBinding.bind(view)
+        setUpAdapter()
+        setupUi()
         setUpClicks()
+        setUpSearch()
+        observeSales()
+        observeDeleteSale()
+        loadSales()
     }
-    private fun setUpClicks(){
+    private fun setupUi() {
         binding.apply {
-            itemsManageCard.setOnClickListener {
-                findNavController().navigate(R.id.action_salesFragment_to_itemsManageFragment)
+            salesRv.apply {
+                layoutManager = LinearLayoutManager(requireContext())
+                adapter = salesAdapter
             }
-            saleDarjKareinButton.setOnClickListener {
-                findNavController().navigate(R.id.action_salesFragment_to_saleDarjkareinFragment)
+            periodRadioGroup.check(R.id.haftaOption)
+            updatePeriodLabels()
+            updateSummary()
+            periodRadioGroup.setOnCheckedChangeListener { _, checkedId ->
+                haftaOption.setBackgroundResource(
+                    if (checkedId == R.id.haftaOption) {
+                        R.drawable.bg_period_selected
+                    } else {
+                        R.drawable.bg_period_unselected
+                    }
+                )
+                maheenaOption.setBackgroundResource(
+                    if (checkedId == R.id.maheenaOption) {
+                        R.drawable.bg_period_selected
+                    } else {
+                        R.drawable.bg_period_unselected
+                    }
+                )
+                updatePeriodLabels()
+                updateSummary()
             }
         }
+    }
+    private fun updatePeriodLabels() {
+        val selectedPeriod = binding.periodRadioGroup.checkedRadioButtonId
+        val periodText = if (selectedPeriod == R.id.maheenaOption) {
+            "Is mahine"
+        } else {
+            "Is hafte"
+        }
+        binding.apply {
+            salesDate.text = periodText
+            ordersDate.text = periodText
+            naqadDate.text = periodText
+            udhaarDate.text = periodText
+        }
+    }
+    private fun setUpAdapter() {
+        salesAdapter = SalesAdapter(
+            onSaleClick = { sale ->
+                openReceipt(sale)
+            },
+
+            onSaleMenuClick = { sale, anchor ->
+                showSaleMenu(sale, anchor)
+            }
+        )
+    }
+    private fun showSaleMenu(sale: Sale, anchor: View) {
+        val popupMenu = PopupMenu(requireContext(), anchor)
+        popupMenu.menuInflater.inflate(
+            R.menu.menu_sale_options,
+            popupMenu.menu
+        )
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.action_view_receipt -> {
+                    openReceipt(sale)
+                    true
+                }
+                R.id.action_delete_sale -> {
+                    showDeleteConfirmation(sale)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
+    }
+    private fun openReceipt(sale: Sale) {
+        val action =
+            SalesFragmentDirections.actionSalesFragmentToReciptFragment(sale.id)
+        findNavController().navigate(action)
+    }
+    private fun showDeleteConfirmation(sale: Sale) {
+        showConfirmationDialog(
+            title = "Sale delete karein?",
+            message = "Kya aap sale delete karna chahte hein?",
+            positiveButtonText = "DELETE",
+            negativeButtonText = "CANCEL"
+        ) {
+            val businessId = businessViewModel.businessId.value.orEmpty()
+            salesViewModel.deleteSale(
+                businessId = businessId,
+                sale = sale
+            )
+        }
+    }
+    private fun observeDeleteSale() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                salesViewModel.deleteSaleState.collect { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            showLoading()
+                        }
+                        is UiState.Success -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                "Sale deleted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            salesViewModel.resetDeleteSaleState()
+                        }
+                        is UiState.Error -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            salesViewModel.resetDeleteSaleState()
+                        }
+                        is UiState.Idle -> {
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private fun observeSales() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                salesViewModel.salesState.collect { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            showLoading()
+                        }
+                        is UiState.Success -> {
+                            hideLoading()
+                            allSales = state.data
+                            filterSales(binding.searchEt.text.toString())
+                            updateSummary()
+                        }
+                        is UiState.Error -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        }
+                        is UiState.Idle -> {
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private fun setUpSearch() {
+        binding.searchEt.doAfterTextChanged { editable ->
+            filterSales(editable?.toString().orEmpty())
+        }
+    }
+    private fun filterSales(query: String) {
+        val searchQuery = query.trim().lowercase(Locale.ROOT)
+        val filteredSales = allSales.filter { sale ->
+            val customerName = sale.customerName
+                .trim()
+                .lowercase(Locale.ROOT)
+            val displayName = customerName.ifBlank {
+                "walk-in customer"
+            }
+            val invoiceNumber = sale.invoiceNumber
+                .trim()
+                .lowercase(Locale.ROOT)
+            val normalizedQuery = searchQuery.replace(",", "")
+            val amount = BigDecimal.valueOf(sale.totalPrice)
+                .stripTrailingZeros()
+                .toPlainString()
+            val originalAmount = sale.totalPrice.toString()
+            searchQuery.isBlank() ||
+                    displayName.contains(searchQuery) ||
+                    invoiceNumber.contains(searchQuery) ||
+                    amount.contains(normalizedQuery) ||
+                    originalAmount.contains(normalizedQuery)
+        }
+        salesAdapter.submitList(filteredSales)
+        binding.nataijCount.text = getString(R.string.nataij, filteredSales.size)
+    }
+    private fun updateSummary() {
+        val periodSales = getSalesForSelectedPeriod()
+        val totalSales = periodSales.sumOf { it.totalPrice }
+        val naqadSales = periodSales
+            .filter { it.paymentMethod == PaymentMethod.NAQAD }
+            .sumOf { it.totalPrice }
+        val udhaarSales = periodSales
+            .filter { it.paymentMethod == PaymentMethod.UDHAAR }
+            .sumOf { it.totalPrice }
+        binding.apply {
+            kullSalesTv.text = formatAmount(totalSales)
+            ordersTv.text = periodSales.size.toString()
+            naqadTv.text = formatAmount(naqadSales)
+            udhaarTv.text = formatAmount(udhaarSales)
+        }
+    }
+    private fun getSalesForSelectedPeriod(): List<Sale> {
+        val calendar = Calendar.getInstance()
+        calendar.set(Calendar.HOUR_OF_DAY, 0)
+        calendar.set(Calendar.MINUTE, 0)
+        calendar.set(Calendar.SECOND, 0)
+        calendar.set(Calendar.MILLISECOND, 0)
+        val now = System.currentTimeMillis()
+        if (binding.periodRadioGroup.checkedRadioButtonId == R.id.maheenaOption) {
+            calendar.set(Calendar.DAY_OF_MONTH, 1)
+        } else {
+            val dayOfWeek = calendar.get(Calendar.DAY_OF_WEEK)
+            val daysSinceMonday = (dayOfWeek + 5) % 7
+            calendar.add(Calendar.DAY_OF_MONTH, -daysSinceMonday)
+        }
+        val startDate = calendar.timeInMillis
+        return allSales.filter { sale ->
+            sale.date in startDate..now
+        }
+    }
+    private fun formatAmount(amount: Double): String {
+        val formatter = DecimalFormat("#,##0.##")
+        return "Rs. ${formatter.format(amount)}"
+    }
+    private fun setUpClicks() {
+        binding.apply {
+            itemsManageCard.setOnClickListener {
+                findNavController().navigate(
+                    R.id.action_salesFragment_to_itemsManageFragment
+                )
+            }
+            saleDarjKareinButton.setOnClickListener {
+                findNavController().navigate(
+                    R.id.action_salesFragment_to_saleDarjkareinFragment
+                )
+            }
+        }
+    }
+    private fun loadSales() {
+        val businessId = businessViewModel.businessId.value.orEmpty()
+        if (businessId.isNotBlank()) {
+            salesViewModel.observeSales(businessId)
+        } else {
+            Toast.makeText(
+                requireContext(),
+                "Please select a business first",
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+    private fun showLoading() {
+        binding.customerProgressOverlay.visibility = View.VISIBLE
+    }
+    private fun hideLoading() {
+        binding.customerProgressOverlay.visibility = View.GONE
     }
 }

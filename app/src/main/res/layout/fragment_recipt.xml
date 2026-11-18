@@ -163,11 +163,12 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
                 android:text="@string/item"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView35">
+                app:layout_constraintTop_toBottomOf="@+id/textView35"
+                tools:ignore="TextContrastCheck">
             </TextView>
             <TextView
                 android:layout_width="wrap_content"
@@ -175,20 +176,22 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
                 android:text="@string/raqam"
-                android:textColor="@color/gray"
+                android:textColor="@color/mid_gray"
                 android:textSize="12sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView35">
+                app:layout_constraintTop_toBottomOf="@+id/textView35"
+                tools:ignore="TextContrastCheck">
             </TextView>
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/invoiceRv"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                app:layout_constraintBottom_toTopOf="@id/textView37"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView36">
+                app:layout_constraintTop_toBottomOf="@id/textView36">
             </androidx.recyclerview.widget.RecyclerView>
             <TextView
                 android:id="@+id/textView37"
@@ -244,7 +247,7 @@
                 android:textColor="@color/gray"
                 android:textSize="17sp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/totalAmount"
+                app:layout_constraintTop_toBottomOf="@id/jamaRaqam"
                 tools:text="Rs 20">
             </TextView>
             <TextView
@@ -268,7 +271,7 @@
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/saleDiscount"
+                app:layout_constraintTop_toBottomOf="@id/saleDiscount"
                 tools:text="Rs 649">
             </TextView>
             <TextView
@@ -308,6 +311,7 @@
                 tools:text="Guss">
             </TextView>
             <TextView
+                android:id="@+id/noteLine"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -399,4 +403,25 @@
             </com.google.android.material.button.MaterialButton>
         </androidx.constraintlayout.widget.ConstraintLayout>
     </com.google.android.material.card.MaterialCardView>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

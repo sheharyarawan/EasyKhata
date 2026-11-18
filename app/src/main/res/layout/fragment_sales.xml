@@ -48,7 +48,7 @@
                     android:gravity="center"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:paddingHorizontal="10dp"
+                    android:paddingHorizontal="14dp"
                     android:text="@string/hafta"
                     android:textColor="@color/gray"
                     android:textSize="12sp"
@@ -62,22 +62,8 @@
                     android:gravity="center"
                     android:minWidth="0dp"
                     android:minHeight="0dp"
-                    android:paddingHorizontal="10dp"
+                    android:paddingHorizontal="14dp"
                     android:text="@string/maheena"
-                    android:textColor="@color/gray"
-                    android:textSize="12sp"
-                    tools:ignore="TouchTargetSizeCheck,VisualLintSystemUi" />
-                <RadioButton
-                    android:id="@+id/apniMarziOption"
-                    android:layout_width="wrap_content"
-                    android:layout_height="48dp"
-                    android:background="@drawable/bg_period_unselected"
-                    android:button="@null"
-                    android:gravity="center"
-                    android:minWidth="0dp"
-                    android:minHeight="0dp"
-                    android:paddingHorizontal="10dp"
-                    android:text="@string/apni_marzi"
                     android:textColor="@color/gray"
                     android:textSize="12sp"
                     tools:ignore="TouchTargetSizeCheck,VisualLintSystemUi" />
@@ -287,7 +273,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_margin="16dp"
-                app:contentPadding="10dp"
+                app:contentPaddingLeft="10dp"
+                app:contentPaddingRight="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/itemsManageCard">
@@ -323,7 +310,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="10dp"
                 android:text="@string/haali_sales"
                 android:textColor="#9C9C9C"
                 android:textSize="13sp"
@@ -337,6 +324,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:textSize="14sp"
+                android:textColor="@color/mid_gray"
+                tools:text="14 nataij"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="@id/textView26" />
             <com.google.android.material.card.MaterialCardView
@@ -379,4 +368,25 @@
             app:cornerRadius="10dp"
             tools:ignore="VisualLintButtonSize" />
     </com.google.android.material.card.MaterialCardView>
+    <FrameLayout
+        android:id="@+id/customerProgressOverlay"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="#66000000"
+        android:clickable="true"
+        android:focusable="true"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+        <com.google.android.material.progressindicator.CircularProgressIndicator
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:indeterminate="true"
+            app:indicatorSize="48dp"
+            app:trackThickness="5dp"
+            app:indicatorColor="@android:color/white" />
+    </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
