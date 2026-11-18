@@ -2,6 +2,7 @@ package com.example.easykhata.ui.fragments.sales
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.widget.doAfterTextChanged
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -12,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.easykhata.R
 import com.example.easykhata.data.models.Source
 import com.example.easykhata.data.models.UiState
+import com.example.easykhata.data.models.sales.SaleItem
 import com.example.easykhata.data.models.sales.SelectedSaleItem
 import com.example.easykhata.databinding.FragmentSaleDarjkareinBinding
 import com.example.easykhata.ui.adapters.SaleCatalogAdapter
@@ -29,11 +31,13 @@ class SaleDarjkareinFragment :
     private val businessViewModel: BusinessViewModel by activityViewModels()
     private val salesViewModel: SalesViewModel by activityViewModels()
     private lateinit var saleCatalogAdapter: SaleCatalogAdapter
+    private var allItems = emptyList<SaleItem>()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding = FragmentSaleDarjkareinBinding.bind(view)
         setUpRecyclerView()
         setUpClicks()
+        setUpSearch()
         observeItems()
         loadItems()
         observeSelectedSaleItems()
@@ -81,24 +85,10 @@ class SaleDarjkareinFragment :
                             binding.catalogRv.visibility = View.GONE
                         }
                         is UiState.Success -> {
-                            val items = state.data
-                            val selectedItems =
-                                salesViewModel.selectedSaleItems.value
-                            val catalogItems = items.map { item ->
-                                SelectedSaleItem(
-                                    item = item,
-                                    quantity = selectedItems
-                                        .find { it.item.id == item.id }
-                                        ?.quantity ?: 0
-                                )
-                            }
-                            saleCatalogAdapter.submitList(catalogItems)
-                            binding.catalogRv.visibility =
-                                if (items.isEmpty()) View.GONE
-                                else View.VISIBLE
-                            binding.catalogItemCount.text =
-                                getString(R.string.items, items.size)
-                            binding.catalogCount.text = items.size.toString()
+                            allItems = state.data
+                            filterItems(
+                                binding.searchItemEt.text.toString()
+                            )
                         }
                         is UiState.Error -> {
                             Toast.makeText(
@@ -117,9 +107,15 @@ class SaleDarjkareinFragment :
         viewLifecycleOwner.lifecycleScope.launch {
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 salesViewModel.selectedSaleItems.collect { selectedItems ->
-                    val items = (itemsViewModel.itemsState.value
-                            as? UiState.Success)?.data.orEmpty()
-                    val catalogItems = items.map { item ->
+                    val searchQuery =
+                        binding.searchItemEt.text.toString().trim()
+                    val filteredItems = allItems.filter { item ->
+                        item.name.contains(
+                            searchQuery,
+                            ignoreCase = true
+                        )
+                    }
+                    val catalogItems = filteredItems.map { item ->
                         SelectedSaleItem(
                             item = item,
                             quantity = selectedItems
@@ -135,15 +131,44 @@ class SaleDarjkareinFragment :
                         it.item.price * it.quantity
                     }
                     binding.itemCount.text = totalQuantity.toString()
-                    binding.totalSaleAmount.text =
-                        getString(
-                            R.string.rs_6,
-                            DecimalFormat("#,##0.##").format(totalAmount)
-                        )
-                    val hasSelectedItems = selectedItems.isNotEmpty()
-                    updateNextButton(hasSelectedItems)
+                    binding.totalSaleAmount.text = getString(
+                        R.string.rs_6,
+                        DecimalFormat("#,##0.##").format(totalAmount)
+                    )
+                    updateNextButton(selectedItems.isNotEmpty())
                 }
             }
+        }
+    }
+    private fun setUpSearch() {
+        binding.searchItemEt.doAfterTextChanged { editable ->
+            filterItems(editable?.toString().orEmpty())
+        }
+    }
+    private fun filterItems(query: String) {
+        val searchQuery = query.trim()
+        val filteredItems = allItems.filter { item ->
+            item.name.contains(searchQuery, ignoreCase = true)
+        }
+        updateCatalog(filteredItems)
+    }
+    private fun updateCatalog(items: List<SaleItem>) {
+        val selectedItems = salesViewModel.selectedSaleItems.value
+        val catalogItems = items.map { item ->
+            SelectedSaleItem(
+                item = item,
+                quantity = selectedItems
+                    .find { it.item.id == item.id }
+                    ?.quantity ?: 0
+            )
+        }
+        saleCatalogAdapter.submitList(catalogItems)
+        binding.apply {
+            catalogRv.visibility =
+                if (items.isEmpty()) View.GONE else View.VISIBLE
+            catalogItemCount.text =
+                getString(R.string.items, items.size)
+            catalogCount.text = items.size.toString()
         }
     }
     private fun updateNextButton(hasSelectedItems: Boolean) {
