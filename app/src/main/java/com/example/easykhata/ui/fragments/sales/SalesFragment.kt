@@ -214,10 +214,8 @@ class SalesFragment : Fragment(R.layout.fragment_sales) {
             val customerName = sale.customerName
                 .trim()
                 .lowercase(Locale.ROOT)
-            val displayName = if (customerName.isBlank()) {
+            val displayName = customerName.ifBlank {
                 "walk-in customer"
-            } else {
-                customerName
             }
             val invoiceNumber = sale.invoiceNumber
                 .trim()

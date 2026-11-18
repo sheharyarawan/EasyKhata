@@ -20,10 +20,10 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import android.text.Editable
 import android.text.TextWatcher
-import android.view.inputmethod.InputMethodManager
-import android.content.Context
+import android.widget.PopupMenu
 import com.example.easykhata.data.models.sales.SaleItem
 import androidx.core.view.isVisible
+import com.example.easykhata.utils.showConfirmationDialog
 @AndroidEntryPoint
 class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
     private lateinit var binding: FragmentItemsManageBinding
@@ -37,6 +37,7 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
         setUpClicks()
         setUpRecyclerView()
         observeItems()
+        observeDeleteItem()
         load()
         setUpSearch()
     }
@@ -64,19 +65,49 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
     private fun setUpRecyclerView() {
         itemsAdapter = ItemsAdapter(
             onItemClick = { item ->
-                val action = ItemsManageFragmentDirections.actionItemsManageFragmentToItemEditKareinFragment(
-                    Source.EDIT.name,item.id
-                )
+                val action =
+                    ItemsManageFragmentDirections
+                        .actionItemsManageFragmentToItemEditKareinFragment(
+                            Source.EDIT.name,
+                            item.id
+                        )
                 findNavController().navigate(action)
             },
             onMenuClick = { item, anchor ->
-                // Show popup card
+                showItemMenu(item, anchor)
             }
         )
         binding.mereItemsRv.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = itemsAdapter
         }
+    }
+    private fun showItemMenu(item: SaleItem, anchor: View) {
+        val popupMenu = PopupMenu(requireContext(), anchor)
+        popupMenu.menuInflater.inflate(
+            R.menu.menu_item_options,
+            popupMenu.menu
+        )
+        popupMenu.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.action_edit_item -> {
+                    val action =
+                        ItemsManageFragmentDirections
+                            .actionItemsManageFragmentToItemEditKareinFragment(
+                                Source.EDIT.name,
+                                item.id
+                            )
+                    findNavController().navigate(action)
+                    true
+                }
+                R.id.action_delete_item -> {
+                    showDeleteItemConfirmation(item)
+                    true
+                }
+                else -> false
+            }
+        }
+        popupMenu.show()
     }
     private fun observeItems() {
         viewLifecycleOwner.lifecycleScope.launch {
@@ -102,6 +133,54 @@ class ItemsManageFragment : Fragment(R.layout.fragment_items_manage) {
                                 state.message,
                                 Toast.LENGTH_SHORT
                             ).show()
+                        }
+                        is UiState.Idle -> {
+                            hideLoading()
+                        }
+                    }
+                }
+            }
+        }
+    }
+    private fun showDeleteItemConfirmation(item: SaleItem) {
+        showConfirmationDialog(
+            title = "Yeh item mitaein?",
+            message = "Kya aap yeh item mitana chahte hain?",
+            positiveButtonText = "DELETE",
+            negativeButtonText = "CANCEL"
+        ) {
+            val businessId = businessViewModel.businessId.value.orEmpty()
+            viewModel.deleteItem(
+                businessId = businessId,
+                itemId = item.id
+            )
+        }
+    }
+    private fun observeDeleteItem() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                viewModel.deleteItemState.collect { state ->
+                    when (state) {
+                        is UiState.Loading -> {
+                            showLoading()
+                        }
+                        is UiState.Success -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                "Item deleted successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            viewModel.resetDeleteItemState()
+                        }
+                        is UiState.Error -> {
+                            hideLoading()
+                            Toast.makeText(
+                                requireContext(),
+                                state.message,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                            viewModel.resetDeleteItemState()
                         }
                         is UiState.Idle -> {
                             hideLoading()
