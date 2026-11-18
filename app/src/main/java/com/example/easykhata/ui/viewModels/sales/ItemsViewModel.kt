@@ -36,6 +36,9 @@ class ItemsViewModel @Inject constructor(
     private val _itemsState =
         MutableStateFlow<UiState<List<SaleItem>>>(UiState.Loading)
     val itemsState = _itemsState.asStateFlow()
+    private val _deleteItemState =
+        MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val deleteItemState = _deleteItemState.asStateFlow()
     fun addItem(
         businessId: String,
         item: SaleItem
@@ -144,6 +147,32 @@ class ItemsViewModel @Inject constructor(
             }
         )
     }
+    fun deleteItem(
+        businessId: String,
+        itemId: String
+    ) {
+        if (businessId.isBlank()) {
+            _deleteItemState.value = UiState.Error("Business not found")
+            return
+        }
+        if (itemId.isBlank()) {
+            _deleteItemState.value = UiState.Error("Invalid item")
+            return
+        }
+        _deleteItemState.value = UiState.Loading
+        itemsRepository.deleteItem(
+            businessId = businessId,
+            itemId = itemId,
+            onSuccess = {
+                _deleteItemState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _deleteItemState.value = UiState.Error(
+                    exception.message ?: "Unable to delete item"
+                )
+            }
+        )
+    }
     fun removeItemsListener() {
         itemsRepository.removeItemsListener()
     }
@@ -155,6 +184,9 @@ class ItemsViewModel @Inject constructor(
     }
     fun resetUpdateItemState() {
         _updateItemState.value = UiState.Idle
+    }
+    fun resetDeleteItemState() {
+        _deleteItemState.value = UiState.Idle
     }
     override fun onCleared() {
         removeItemsListener()
