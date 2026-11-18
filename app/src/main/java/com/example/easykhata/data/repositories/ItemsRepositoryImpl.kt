@@ -168,4 +168,34 @@ class ItemsRepositoryImpl @Inject constructor(
         itemsListener?.remove()
         itemsListener = null
     }
+    override fun deleteItem(
+        businessId: String,
+        itemId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val userId = firebaseAuth.currentUser?.uid
+        if (userId.isNullOrBlank()) {
+            onFailure(Exception("User not authenticated"))
+            return
+        }
+        if (businessId.isBlank() || itemId.isBlank()) {
+            onFailure(Exception("Invalid item details"))
+            return
+        }
+        firebaseFirestore
+            .collection("users")
+            .document(userId)
+            .collection("business")
+            .document(businessId)
+            .collection("items")
+            .document(itemId)
+            .delete()
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
