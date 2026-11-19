@@ -13,6 +13,7 @@ import com.example.easykhata.R
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.databinding.FragmentHomeBinding
 import com.example.easykhata.ui.adapters.CustomerAdapter
+import com.example.easykhata.ui.fragments.account.bottomSheets.KarobarBadleinBottomSheet
 import com.example.easykhata.ui.fragments.customers.bottomSheets.CustomerFilterBottomSheet
 import com.example.easykhata.ui.viewModels.auth.BusinessViewModel
 import com.example.easykhata.ui.viewModels.customer.HomeViewModel
@@ -27,12 +28,15 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by activityViewModels()
     private val businessViewModel: BusinessViewModel by activityViewModels()
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        binding= FragmentHomeBinding.bind(view)
+        super.onViewCreated(view, savedInstanceState)
+        binding = FragmentHomeBinding.bind(view)
         setUpClicks()
         setUpRecyclerView()
         observeHomeState()
         setUpUi()
-        loadHomeData()
+        observeActiveBusiness()
+        observeBusinessName()
+        loadBusinesses()
     }
     private fun setUpClicks(){
         binding.apply {
@@ -49,6 +53,12 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 CustomerFilterBottomSheet().show(
                     parentFragmentManager,
                     "CustomerFilterBottomSheet"
+                )
+            }
+            businessTv.setOnClickListener {
+                KarobarBadleinBottomSheet().show(
+                    parentFragmentManager,
+                    "KarobarBadleinBottomSheet"
                 )
             }
         }
@@ -105,6 +115,41 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             }
         }
     }
+    private fun observeActiveBusiness() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                businessViewModel.businessId.collect { businessId ->
+                    if (!businessId.isNullOrBlank()) {
+                        homeViewModel.observeHomeData(businessId)
+                        updateBusinessName()
+                    }
+                }
+            }
+        }
+    }
+    private fun observeBusinessName() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+                businessViewModel.businessesState.collect { state ->
+                    if (state is UiState.Success) {
+                        updateBusinessName()
+                    }
+                }
+            }
+        }
+    }
+    private fun updateBusinessName() {
+        val activeBusinessId = businessViewModel.businessId.value
+            ?: return
+        val state = businessViewModel.businessesState.value
+        if (state is UiState.Success) {
+            val activeBusiness = state.data.find {
+                it.businessId == activeBusinessId
+            }
+            binding.businessTv.text =
+                activeBusiness?.businessName ?: "Select Business"
+        }
+    }
     private fun setUpRecyclerView() {
         customerAdapter = CustomerAdapter { customerId ->
             val action =
@@ -117,17 +162,10 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             adapter = customerAdapter
         }
     }
-    private fun loadHomeData() {
-        val businessId = businessViewModel.businessId.value
-        if (!businessId.isNullOrBlank()) {
-            homeViewModel.observeHomeData(businessId)
-        } else {
-            businessViewModel.loadActiveBusinessId {
-                val id = businessViewModel.businessId.value
-                if (!id.isNullOrBlank()) {
-                    homeViewModel.observeHomeData(id)
-                }
-            }
+    private fun loadBusinesses(){
+        businessViewModel.loadUserBusinesses()
+        if (businessViewModel.businessId.value.isNullOrBlank()) {
+            businessViewModel.loadActiveBusinessId {}
         }
     }
     private fun formatAmount(amount: Double): String {
