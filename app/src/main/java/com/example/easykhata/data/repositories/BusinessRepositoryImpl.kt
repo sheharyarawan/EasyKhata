@@ -1,5 +1,4 @@
 package com.example.easykhata.data.repositories
-
 import com.example.easykhata.data.models.auth.Business
 import com.example.easykhata.data.models.auth.User
 import com.google.firebase.auth.FirebaseAuth
@@ -87,6 +86,39 @@ class BusinessRepositoryImpl @Inject constructor(
                 } else {
                     onSuccess(businessId)
                 }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
+    override fun createBusiness(
+        businessName: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        val userRef = firestore.collection("users")
+            .document(currentUser.uid)
+        val businessRef = userRef.collection("business")
+            .document()
+        val business = Business(
+            businessId = businessRef.id,
+            businessName = businessName.trim()
+        )
+        val batch = firestore.batch()
+        batch.set(businessRef, business)
+        batch.update(
+            userRef,
+            "activeBusinessId",
+            businessRef.id
+        )
+        batch.commit()
+            .addOnSuccessListener {
+                onSuccess(businessRef.id)
             }
             .addOnFailureListener { exception ->
                 onFailure(exception)

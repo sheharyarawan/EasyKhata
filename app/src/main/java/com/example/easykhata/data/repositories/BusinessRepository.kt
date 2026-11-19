@@ -14,4 +14,9 @@ interface BusinessRepository {
         onSuccess: (String) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun createBusiness(
+        businessName: String,
+        onSuccess: (String) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
