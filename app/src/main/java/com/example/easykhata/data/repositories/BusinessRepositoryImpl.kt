@@ -149,4 +149,24 @@ class BusinessRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+    override fun switchBusiness(
+        businessId: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        firestore.collection("users")
+            .document(currentUser.uid)
+            .update("activeBusinessId", businessId)
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }
