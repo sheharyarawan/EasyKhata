@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_marginTop="12dp">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
     <View
         android:id="@+id/view25"
         android:layout_width="0dp"
         android:layout_height="1dp"
         android:background="@color/mid_gray"
+        android:paddingBottom="6dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
-    </View>
+        app:layout_constraintTop_toTopOf="parent" />
     <TextView
         android:id="@+id/businessName"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         android:gravity="center_vertical"
-        android:textSize="20sp"
-        android:layout_marginTop="12dp"
-        app:layout_constraintBottom_toBottomOf="@+id/businessDelete"
-        app:layout_constraintEnd_toStartOf="@+id/businessDelete"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/businessDelete"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/view25"
-        tools:text="dukaan"
-        tools:ignore="VisualLintSystemUi">
-    </TextView>
+        app:layout_constraintTop_toBottomOf="@id/view25"
+        tools:text="My Hardware Store" />
     <ImageView
         android:id="@+id/businessDelete"
-        android:layout_width="22dp"
-        android:layout_height="22dp"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="6dp"
         android:src="@drawable/ic_delete"
-        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/businessName"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="ContentDescription">
-    </ImageView>
+        app:layout_constraintTop_toTopOf="@id/businessName"
+        tools:ignore="ContentDescription" />
 </androidx.constraintlayout.widget.ConstraintLayout>
