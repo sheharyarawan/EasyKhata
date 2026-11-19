@@ -19,6 +19,10 @@ class BusinessViewModel @Inject constructor(
     val selectedKarobarType = _selectedKarobarType.asStateFlow()
     private val _businessId = MutableStateFlow<String?>(null)
     val businessId = _businessId.asStateFlow()
+    private val _newBusinessState =
+        MutableStateFlow<UiState<String>>(UiState.Idle)
+
+    val newBusinessState = _newBusinessState.asStateFlow()
     fun createUserWithBusiness(
         user: User,
         business: Business
@@ -50,6 +54,32 @@ class BusinessViewModel @Inject constructor(
                 onComplete()
             }
         )
+    }
+    fun createNewBusiness(businessName: String) {
+        if (businessName.isBlank()) {
+            _newBusinessState.value =
+                UiState.Error("Please enter karobar name")
+            return
+        }
+        _newBusinessState.value = UiState.Loading
+        businessRepository.createBusiness(
+            businessName = businessName.trim(),
+            onSuccess = { id ->
+                setBusinessId(id)
+
+                _newBusinessState.value =
+                    UiState.Success(id)
+            },
+            onFailure = { exception ->
+                _newBusinessState.value =
+                    UiState.Error(
+                        exception.message ?: "Unable to create business"
+                    )
+            }
+        )
+    }
+    fun resetNewBusinessState() {
+        _newBusinessState.value = UiState.Idle
     }
     fun getKarobarTypes(): List<String> {
         return businessRepository.getKarobarTypes()
