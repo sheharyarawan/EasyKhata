@@ -23,6 +23,10 @@ class BusinessViewModel @Inject constructor(
         MutableStateFlow<UiState<String>>(UiState.Idle)
 
     val newBusinessState = _newBusinessState.asStateFlow()
+    private val _businessesState =
+        MutableStateFlow<UiState<List<Business>>>(UiState.Idle)
+
+    val businessesState = _businessesState.asStateFlow()
     fun createUserWithBusiness(
         user: User,
         business: Business
@@ -78,6 +82,21 @@ class BusinessViewModel @Inject constructor(
             }
         )
     }
+    fun loadUserBusinesses() {
+        _businessesState.value = UiState.Loading
+        businessRepository.getUserBusinesses(
+            onSuccess = { businesses ->
+                _businessesState.value =
+                    UiState.Success(businesses)
+            },
+            onFailure = { exception ->
+                _businessesState.value =
+                    UiState.Error(
+                        exception.message ?: "Unable to load businesses"
+                    )
+            }
+        )
+    }
     fun resetNewBusinessState() {
         _newBusinessState.value = UiState.Idle
     }
@@ -89,5 +108,8 @@ class BusinessViewModel @Inject constructor(
     }
     fun setBusinessId(id: String) {
         _businessId.value = id
+    }
+    fun resetBusinessesState() {
+        _businessesState.value = UiState.Idle
     }
 }
