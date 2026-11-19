@@ -180,7 +180,13 @@
         android:id="@+id/myDetailsFragment"
         android:name="com.example.easykhata.ui.fragments.account.MyDetailsFragment"
         android:label="fragment_my_details"
-        tools:layout="@layout/fragment_my_details" />
+        tools:layout="@layout/fragment_my_details" >
+        <argument
+            android:name="user"
+            app:argType="com.example.easykhata.data.models.auth.User">
+        </argument>
+    </fragment>
+
     <fragment
         android:id="@+id/karobarAddressFragment"
         android:name="com.example.easykhata.ui.fragments.account.KarobarAddressFragment"
