@@ -9,7 +9,7 @@
         android:id="@+id/feedbackCard"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:contentPadding="16dp"
+
         app:cardCornerRadius="16dp"
         app:cardElevation="4dp"
         app:cardBackgroundColor="@color/white"
@@ -24,6 +24,7 @@
                 android:id="@+id/cardTopView"
                 android:layout_width="50dp"
                 android:layout_height="4dp"
+                android:layout_marginTop="16dp"
                 android:background="@color/black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -34,8 +35,8 @@
                 android:layout_height="wrap_content"
                 android:text="@string/karobar_badlein"
                 android:textSize="24sp"
+                android:layout_margin="16dp"
                 android:textStyle="bold"
-                android:layout_marginTop="16dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/cardTopView"
                 tools:ignore="VisualLintSystemUi">
@@ -47,6 +48,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 tools:itemCount="5"
+                android:layout_marginTop="16dp"
                 tools:listitem="@layout/item_karobar_badlein"
                 app:layout_constraintTop_toBottomOf="@+id/textView21">
             </androidx.recyclerview.widget.RecyclerView>
@@ -58,6 +60,7 @@
                 android:textSize="18sp"
                 android:textColor="@color/white"
                 android:layout_marginTop="16dp"
+                android:layout_marginHorizontal="16dp"
                 android:backgroundTint="@color/black"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
