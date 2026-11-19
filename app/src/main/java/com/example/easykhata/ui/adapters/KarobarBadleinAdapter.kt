@@ -23,7 +23,7 @@ class KarobarBadleinAdapter(
             binding.root.setBackgroundColor(
                 ContextCompat.getColor(
                     binding.root.context,
-                    if (item.isActive) R.color.mid_gray
+                    if (item.isActive) R.color.ltt_gray
                     else android.R.color.transparent
                 )
             )
