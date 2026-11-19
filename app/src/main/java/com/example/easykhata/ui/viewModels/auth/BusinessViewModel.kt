@@ -27,6 +27,10 @@ class BusinessViewModel @Inject constructor(
         MutableStateFlow<UiState<List<Business>>>(UiState.Idle)
 
     val businessesState = _businessesState.asStateFlow()
+    private val _switchBusinessState =
+        MutableStateFlow<UiState<String>>(UiState.Idle)
+
+    val switchBusinessState = _switchBusinessState.asStateFlow()
     fun createUserWithBusiness(
         user: User,
         business: Business
@@ -70,7 +74,7 @@ class BusinessViewModel @Inject constructor(
             businessName = businessName.trim(),
             onSuccess = { id ->
                 setBusinessId(id)
-
+                loadUserBusinesses()
                 _newBusinessState.value =
                     UiState.Success(id)
             },
@@ -97,6 +101,28 @@ class BusinessViewModel @Inject constructor(
             }
         )
     }
+    fun switchBusiness(businessId: String) {
+        if (businessId.isBlank()) {
+            _switchBusinessState.value =
+                UiState.Error("Invalid business")
+            return
+        }
+        _switchBusinessState.value = UiState.Loading
+        businessRepository.switchBusiness(
+            businessId = businessId,
+            onSuccess = {
+                setBusinessId(businessId)
+                _switchBusinessState.value =
+                    UiState.Success(businessId)
+            },
+            onFailure = { exception ->
+                _switchBusinessState.value =
+                    UiState.Error(
+                        exception.message ?: "Unable to switch business"
+                    )
+            }
+        )
+    }
     fun resetNewBusinessState() {
         _newBusinessState.value = UiState.Idle
     }
@@ -111,5 +137,8 @@ class BusinessViewModel @Inject constructor(
     }
     fun resetBusinessesState() {
         _businessesState.value = UiState.Idle
+    }
+    fun resetSwitchBusinessState() {
+        _switchBusinessState.value = UiState.Idle
     }
 }
