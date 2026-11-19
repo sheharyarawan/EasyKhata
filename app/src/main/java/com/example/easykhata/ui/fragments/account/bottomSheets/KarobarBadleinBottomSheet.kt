@@ -34,17 +34,19 @@ class KarobarBadleinBottomSheet : BottomSheetDialogFragment() {
     }
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        businessViewModel.resetSwitchBusinessState()
         setupRecyclerView()
         setupClicks()
         observeBusinesses()
-        businessViewModel.loadActiveBusinessId {
-            businessViewModel.loadUserBusinesses()
-        }
     }
     private fun setupRecyclerView() {
         businessAdapter = KarobarBadleinAdapter(
             onBusinessClick = { businessUi ->
-                // Business switching will be implemented next.
+                if (!businessUi.isActive) {
+                    businessViewModel.switchBusiness(
+                        businessUi.business.businessId
+                    )
+                }
             },
             onDeleteClick = { businessUi ->
                 // Business deletion will be implemented later.
@@ -69,12 +71,10 @@ class KarobarBadleinBottomSheet : BottomSheetDialogFragment() {
                             is UiState.Loading -> {
                                 showProgress()
                             }
-
                             is UiState.Success -> {
                                 hideProgress()
                                 updateBusinessList()
                             }
-
                             is UiState.Error -> {
                                 hideProgress()
                                 Toast.makeText(
@@ -83,9 +83,32 @@ class KarobarBadleinBottomSheet : BottomSheetDialogFragment() {
                                     Toast.LENGTH_SHORT
                                 ).show()
                             }
-
                             is UiState.Idle -> {
                                 hideProgress()
+                            }
+                        }
+                    }
+                }
+                launch {
+                    businessViewModel.switchBusinessState.collect { state ->
+                        when (state) {
+                            is UiState.Idle -> {
+                                hideProgress()
+                            }
+                            is UiState.Loading -> {
+                                showProgress()
+                            }
+                            is UiState.Success -> {
+                                hideProgress()
+                                dismiss()
+                            }
+                            is UiState.Error -> {
+                                hideProgress()
+                                Toast.makeText(
+                                    requireContext(),
+                                    state.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
                             }
                         }
                     }

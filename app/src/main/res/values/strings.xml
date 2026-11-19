@@ -240,4 +240,6 @@
     <string name="inv">INV-%1$s</string>
     <string name="rs_11">Rs %1$.2f</string>
     <string name="nataij">%1$d nataij</string>
+    <string name="karobar_badlein">Karobar badlein</string>
+    <string name="naya_karobar_darj_karein">NAYA KAROBAR DARJ KAREIN</string>
 </resources>
