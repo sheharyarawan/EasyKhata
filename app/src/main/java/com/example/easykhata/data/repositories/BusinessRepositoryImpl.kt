@@ -124,4 +124,29 @@ class BusinessRepositoryImpl @Inject constructor(
                 onFailure(exception)
             }
     }
+    override fun getUserBusinesses(
+        onSuccess: (List<Business>) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        firestore.collection("users")
+            .document(currentUser.uid)
+            .collection("business")
+            .get()
+            .addOnSuccessListener { snapshot ->
+                val businesses = snapshot.documents.mapNotNull { document ->
+                    document.toObject(Business::class.java)?.copy(
+                        businessId = document.id
+                    )
+                }
+                onSuccess(businesses)
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
 }

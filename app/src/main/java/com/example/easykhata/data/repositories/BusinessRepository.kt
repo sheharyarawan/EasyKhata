@@ -19,4 +19,8 @@ interface BusinessRepository {
         onSuccess: (String) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun getUserBusinesses(
+        onSuccess: (List<Business>) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
 }
