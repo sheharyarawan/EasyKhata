@@ -1,7 +1,7 @@
 package com.example.easykhata.data.repositories
 import android.app.Activity
+import com.example.easykhata.data.models.auth.User
 import com.google.firebase.auth.PhoneAuthCredential
-
 interface AuthRepository {
     fun sendOtp(
         phoneNumber: String,
@@ -19,4 +19,9 @@ interface AuthRepository {
     )
     suspend fun hasBusiness(uid: String): Boolean
     fun getCurrentUserUid(): String?
+    fun getUserInfo(
+        onSuccess: (User) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeUserInfoListener()
 }
