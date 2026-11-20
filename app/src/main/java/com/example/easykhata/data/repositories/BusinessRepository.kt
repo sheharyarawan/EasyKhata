@@ -27,4 +27,9 @@ interface BusinessRepository {
         onSuccess: () -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun getActiveBusinessInfo(
+        onSuccess: (Business) -> Unit,
+        onFailure: (Exception) -> Unit
+    )
+    fun removeActiveBusinessInfoListener()
 }

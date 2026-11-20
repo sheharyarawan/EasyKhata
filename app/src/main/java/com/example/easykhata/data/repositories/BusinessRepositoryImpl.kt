@@ -3,11 +3,15 @@ import com.example.easykhata.data.models.auth.Business
 import com.example.easykhata.data.models.auth.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.ListenerRegistration
 import javax.inject.Inject
 class BusinessRepositoryImpl @Inject constructor(
     private val firebaseAuth: FirebaseAuth,
     private val firestore: FirebaseFirestore
 ) : BusinessRepository {
+    private var activeBusinessUserListener: ListenerRegistration? = null
+    private var activeBusinessListener: ListenerRegistration? = null
+    private var currentActiveBusinessId: String? = null
     override fun createUserWithBusiness(
         user: User,
         business: Business,
@@ -168,5 +172,72 @@ class BusinessRepositoryImpl @Inject constructor(
             .addOnFailureListener { exception ->
                 onFailure(exception)
             }
+    }
+    override fun getActiveBusinessInfo(
+        onSuccess: (Business) -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        removeActiveBusinessInfoListener()
+        val userRef = firestore.collection("users")
+            .document(currentUser.uid)
+        activeBusinessUserListener = userRef.addSnapshotListener { userDocument, error ->
+            if (error != null) {
+                onFailure(error)
+                return@addSnapshotListener
+            }
+            if (userDocument == null || !userDocument.exists()) {
+                onFailure(Exception("User information not found"))
+                return@addSnapshotListener
+            }
+            val activeBusinessId = userDocument.getString("activeBusinessId")
+            if (activeBusinessId.isNullOrBlank()) {
+                activeBusinessListener?.remove()
+                activeBusinessListener = null
+                currentActiveBusinessId = null
+                onFailure(Exception("No active business found"))
+                return@addSnapshotListener
+            }
+            if (currentActiveBusinessId == activeBusinessId) {
+                return@addSnapshotListener
+            }
+            activeBusinessListener?.remove()
+            activeBusinessListener = null
+            currentActiveBusinessId = activeBusinessId
+            activeBusinessListener = userRef
+                .collection("business")
+                .document(activeBusinessId)
+                .addSnapshotListener { businessDocument, businessError ->
+                    if (businessError != null) {
+                        onFailure(businessError)
+                        return@addSnapshotListener
+                    }
+                    if (businessDocument == null || !businessDocument.exists()) {
+                        onFailure(Exception("Active business information not found"))
+                        return@addSnapshotListener
+                    }
+                    val business = businessDocument.toObject(Business::class.java)
+                    if (business != null) {
+                        onSuccess(
+                            business.copy(
+                                businessId = businessDocument.id
+                            )
+                        )
+                    } else {
+                        onFailure(Exception("Failed to retrieve business information"))
+                    }
+                }
+        }
+    }
+    override fun removeActiveBusinessInfoListener() {
+        activeBusinessUserListener?.remove()
+        activeBusinessUserListener = null
+        activeBusinessListener?.remove()
+        activeBusinessListener = null
+        currentActiveBusinessId = null
     }
 }
