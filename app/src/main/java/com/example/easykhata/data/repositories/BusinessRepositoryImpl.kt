@@ -233,6 +233,52 @@ class BusinessRepositoryImpl @Inject constructor(
                 }
         }
     }
+    override fun updateActiveBusinessInfo(
+        businessName: String,
+        businessType: String,
+        businessAddress: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        val userRef = firestore.collection("users")
+            .document(currentUser.uid)
+        userRef.get()
+            .addOnSuccessListener { userDocument ->
+                if (!userDocument.exists()) {
+                    onFailure(Exception("User information not found"))
+                    return@addOnSuccessListener
+                }
+                val activeBusinessId =
+                    userDocument.getString("activeBusinessId")
+                if (activeBusinessId.isNullOrBlank()) {
+                    onFailure(Exception("No active business found"))
+                    return@addOnSuccessListener
+                }
+                userRef.collection("business")
+                    .document(activeBusinessId)
+                    .update(
+                        mapOf(
+                            "businessName" to businessName.trim(),
+                            "businessType" to businessType.trim(),
+                            "businessAddress" to businessAddress.trim()
+                        )
+                    )
+                    .addOnSuccessListener {
+                        onSuccess()
+                    }
+                    .addOnFailureListener { exception ->
+                        onFailure(exception)
+                    }
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
     override fun removeActiveBusinessInfoListener() {
         activeBusinessUserListener?.remove()
         activeBusinessUserListener = null

@@ -31,5 +31,12 @@ interface BusinessRepository {
         onSuccess: (Business) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun updateActiveBusinessInfo(
+        businessName: String,
+        businessType: String,
+        businessAddress: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
     fun removeActiveBusinessInfoListener()
 }
