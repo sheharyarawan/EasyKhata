@@ -22,6 +22,9 @@ class ProfileViewModel @Inject constructor(
     private val _businessInfoState =
         MutableStateFlow<UiState<Business>>(UiState.Idle)
     val businessInfoState = _businessInfoState.asStateFlow()
+    private val _updateBusinessInfoState =
+        MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val updateBusinessInfoState = _updateBusinessInfoState.asStateFlow()
     fun loadUserInfo() {
         _userState.value = UiState.Loading
         authRepository.getUserInfo(
@@ -66,11 +69,34 @@ class ProfileViewModel @Inject constructor(
             }
         )
     }
+    fun updateActiveBusinessInfo(
+        businessName: String,
+        businessType: String,
+        businessAddress: String
+    ) {
+        _updateBusinessInfoState.value = UiState.Loading
+        businessRepository.updateActiveBusinessInfo(
+            businessName = businessName.trim(),
+            businessType = businessType.trim(),
+            businessAddress = businessAddress.trim(),
+            onSuccess = {
+                _updateBusinessInfoState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _updateBusinessInfoState.value = UiState.Error(
+                    exception.message ?: "Failed to update business information"
+                )
+            }
+        )
+    }
     fun resetUpdateNameState() {
         _updateNameState.value = UiState.Idle
     }
     fun resetUserState() {
         _userState.value = UiState.Idle
+    }
+    fun resetUpdateBusinessInfoState() {
+        _updateBusinessInfoState.value = UiState.Idle
     }
     override fun onCleared() {
         super.onCleared()
