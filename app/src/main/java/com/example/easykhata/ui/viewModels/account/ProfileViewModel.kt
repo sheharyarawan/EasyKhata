@@ -1,21 +1,27 @@
 package com.example.easykhata.ui.viewModels.account
 import androidx.lifecycle.ViewModel
 import com.example.easykhata.data.models.UiState
+import com.example.easykhata.data.models.auth.Business
 import com.example.easykhata.data.models.auth.User
 import com.example.easykhata.data.repositories.AuthRepository
+import com.example.easykhata.data.repositories.BusinessRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import javax.inject.Inject
 @HiltViewModel
 class ProfileViewModel @Inject constructor(
-    private val authRepository: AuthRepository
+    private val authRepository: AuthRepository,
+    private val businessRepository: BusinessRepository
 ) : ViewModel() {
     private val _userState =
         MutableStateFlow<UiState<User>>(UiState.Idle)
     val userState = _userState.asStateFlow()
     private val _updateNameState = MutableStateFlow<UiState<Unit>>(UiState.Idle)
     val updateNameState = _updateNameState.asStateFlow()
+    private val _businessInfoState =
+        MutableStateFlow<UiState<Business>>(UiState.Idle)
+    val businessInfoState = _businessInfoState.asStateFlow()
     fun loadUserInfo() {
         _userState.value = UiState.Loading
         authRepository.getUserInfo(
@@ -29,14 +35,25 @@ class ProfileViewModel @Inject constructor(
             }
         )
     }
+    fun loadActiveBusinessInfo() {
+        _businessInfoState.value = UiState.Loading
+        businessRepository.getActiveBusinessInfo(
+            onSuccess = { business ->
+                _businessInfoState.value = UiState.Success(business)
+            },
+            onFailure = { exception ->
+                _businessInfoState.value = UiState.Error(
+                    exception.message ?: "Unable to load business information"
+                )
+            }
+        )
+    }
     fun updateUserName(name: String) {
         if (name.isBlank()) {
             _updateNameState.value = UiState.Error("Name cannot be empty")
             return
         }
-
         _updateNameState.value = UiState.Loading
-
         authRepository.updateUserName(
             name = name.trim(),
             onSuccess = {
@@ -58,5 +75,6 @@ class ProfileViewModel @Inject constructor(
     override fun onCleared() {
         super.onCleared()
         authRepository.removeUserInfoListener()
+        businessRepository.removeActiveBusinessInfoListener()
     }
 }
