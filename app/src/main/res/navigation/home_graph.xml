@@ -57,6 +57,9 @@
         <action
             android:id="@+id/action_accountFragment_to_myDetailsFragment"
             app:destination="@id/myDetailsFragment" />
+        <action
+            android:id="@+id/action_accountFragment_to_karobarTypeFragment"
+            app:destination="@id/karobarTypeFragment" />
     </fragment>
     <fragment
         android:id="@+id/searchCustomerFragment"
@@ -186,7 +189,6 @@
             app:argType="com.example.easykhata.data.models.auth.User">
         </argument>
     </fragment>
-
     <fragment
         android:id="@+id/karobarAddressFragment"
         android:name="com.example.easykhata.ui.fragments.account.KarobarAddressFragment"
@@ -196,7 +198,12 @@
         android:id="@+id/karobarTypeFragment"
         android:name="com.example.easykhata.ui.fragments.account.bottomSheets.KarobarTypeFragment"
         android:label="fragment_karobar_type"
-        tools:layout="@layout/fragment_karobar_type" />
+        tools:layout="@layout/fragment_karobar_type">
+        <argument
+            android:name="source"
+            app:argType="com.example.easykhata.data.models.Source">
+        </argument>
+    </fragment>
     <fragment
         android:id="@+id/anayWaleFragment"
         android:name="com.example.easykhata.ui.fragments.account.AnayWaleFragment"
