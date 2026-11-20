@@ -9,9 +9,11 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.navigation.fragment.findNavController
 import com.example.easykhata.R
+import com.example.easykhata.data.models.Source
 import com.example.easykhata.data.models.UiState
 import com.example.easykhata.data.models.auth.User
 import com.example.easykhata.databinding.FragmentAccountBinding
+import com.example.easykhata.ui.fragments.account.bottomSheets.KarobarNaamBottomSheet
 import com.example.easykhata.ui.viewModels.account.ProfileViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -135,6 +137,18 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                     View.GONE
                 }
             }
+            karobarName.setOnClickListener {
+                KarobarNaamBottomSheet().apply {
+                    arguments = Bundle().apply {
+                        putSerializable("source", Source.EDIT)
+                        putString("businessName", karobarName.text.toString())
+                    }
+                }.show(parentFragmentManager, "KarobarNaamBottomSheet")
+            }
+            karobarType.setOnClickListener {
+
+            }
+
         }
     }
     private fun loadActiveBusinessInfo() {
