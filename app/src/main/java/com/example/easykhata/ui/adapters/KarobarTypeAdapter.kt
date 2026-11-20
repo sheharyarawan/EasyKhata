@@ -1,15 +1,15 @@
 package com.example.easykhata.ui.adapters
-
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.easykhata.data.models.account.KarobarType
 import com.example.easykhata.databinding.ItemKarobarTypeBinding
+import kotlin.collections.map
 class KarobarTypeAdapter :
-    ListAdapter<String, KarobarTypeAdapter.KarobarTypeViewHolder>(DiffCallback()) {
-    private var selectedType: String? = null
+    ListAdapter<KarobarType, KarobarTypeAdapter.KarobarTypeViewHolder>(DiffCallback()) {
     class KarobarTypeViewHolder(
         val binding: ItemKarobarTypeBinding
     ) : RecyclerView.ViewHolder(binding.root)
@@ -30,34 +30,37 @@ class KarobarTypeAdapter :
     ) {
         val type = getItem(position)
         holder.binding.apply {
-            karobarName.text = type
+            karobarName.text = type.name
             icCheckKarobarType.visibility =
-                if (selectedType == type) View.VISIBLE else View.GONE
+                if (type.isSelected) View.VISIBLE else View.GONE
             root.setOnClickListener {
-                val previousType = selectedType
-                selectedType = type
-                val previousPosition = currentList.indexOf(previousType)
-                val newPosition = currentList.indexOf(type)
-                if (previousPosition != -1) {
-                    notifyItemChanged(previousPosition)
+                val updatedList = currentList.map {
+                    it.copy(isSelected = it.name == type.name)
                 }
-                if (newPosition != -1 && newPosition != previousPosition) {
-                    notifyItemChanged(newPosition)
-                }
+                submitList(updatedList)
             }
         }
     }
-    fun getSelectedType(): String? = selectedType
-    class DiffCallback : DiffUtil.ItemCallback<String>() {
+    fun getSelectedType(): String? {
+        return currentList.find { it.isSelected }?.name
+    }
+    fun setSelectedType(type: String?) {
+        submitList(
+            currentList.map {
+                it.copy(isSelected = it.name == type)
+            }
+        )
+    }
+    class DiffCallback : DiffUtil.ItemCallback<KarobarType>() {
         override fun areItemsTheSame(
-            oldItem: String,
-            newItem: String
+            oldItem: KarobarType,
+            newItem: KarobarType
         ): Boolean {
-            return oldItem == newItem
+            return oldItem.name == newItem.name
         }
         override fun areContentsTheSame(
-            oldItem: String,
-            newItem: String
+            oldItem: KarobarType,
+            newItem: KarobarType
         ): Boolean {
             return oldItem == newItem
         }
