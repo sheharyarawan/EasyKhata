@@ -146,7 +146,10 @@ class AccountFragment : Fragment(R.layout.fragment_account) {
                 }.show(parentFragmentManager, "KarobarNaamBottomSheet")
             }
             karobarType.setOnClickListener {
-
+                val action = AccountFragmentDirections.actionAccountFragmentToKarobarTypeFragment(
+                    Source.EDIT
+                )
+                findNavController().navigate(action)
             }
 
         }
