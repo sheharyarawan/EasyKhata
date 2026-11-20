@@ -23,5 +23,10 @@ interface AuthRepository {
         onSuccess: (User) -> Unit,
         onFailure: (Exception) -> Unit
     )
+    fun updateUserName(
+        name: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    )
     fun removeUserInfoListener()
 }

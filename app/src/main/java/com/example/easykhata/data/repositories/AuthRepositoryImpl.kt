@@ -114,6 +114,26 @@ class AuthRepositoryImpl @Inject constructor(
                 }
             }
     }
+    override fun updateUserName(
+        name: String,
+        onSuccess: () -> Unit,
+        onFailure: (Exception) -> Unit
+    ) {
+        val currentUser = firebaseAuth.currentUser
+        if (currentUser == null) {
+            onFailure(Exception("User is not authenticated"))
+            return
+        }
+        firestore.collection("users")
+            .document(currentUser.uid)
+            .update("name", name)
+            .addOnSuccessListener {
+                onSuccess()
+            }
+            .addOnFailureListener { exception ->
+                onFailure(exception)
+            }
+    }
     override fun removeUserInfoListener() {
         userInfoListener?.remove()
         userInfoListener = null
