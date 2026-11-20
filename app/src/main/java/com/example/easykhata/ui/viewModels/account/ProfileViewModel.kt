@@ -14,6 +14,8 @@ class ProfileViewModel @Inject constructor(
     private val _userState =
         MutableStateFlow<UiState<User>>(UiState.Idle)
     val userState = _userState.asStateFlow()
+    private val _updateNameState = MutableStateFlow<UiState<Unit>>(UiState.Idle)
+    val updateNameState = _updateNameState.asStateFlow()
     fun loadUserInfo() {
         _userState.value = UiState.Loading
         authRepository.getUserInfo(
@@ -26,6 +28,29 @@ class ProfileViewModel @Inject constructor(
                 )
             }
         )
+    }
+    fun updateUserName(name: String) {
+        if (name.isBlank()) {
+            _updateNameState.value = UiState.Error("Name cannot be empty")
+            return
+        }
+
+        _updateNameState.value = UiState.Loading
+
+        authRepository.updateUserName(
+            name = name.trim(),
+            onSuccess = {
+                _updateNameState.value = UiState.Success(Unit)
+            },
+            onFailure = { exception ->
+                _updateNameState.value = UiState.Error(
+                    exception.message ?: "Failed to update name"
+                )
+            }
+        )
+    }
+    fun resetUpdateNameState() {
+        _updateNameState.value = UiState.Idle
     }
     fun resetUserState() {
         _userState.value = UiState.Idle
