@@ -11,5 +11,9 @@
     <color name="ltt_gray">#4EACACAC</color>
     <color name="green">#06AA0F</color>
     <color name="lt_green">#81C8E9CA</color>
+    <color name="navy_blue">#0B1630</color>
+    <color name="forest_green">#14532D</color>
+    <color name="maroon">#701C36</color>
+    <color name="deep_purple">#45246B</color>
 
 </resources>
