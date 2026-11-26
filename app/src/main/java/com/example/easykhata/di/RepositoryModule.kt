@@ -9,6 +9,8 @@ import com.example.easykhata.data.repositories.ExpenseRepository
 import com.example.easykhata.data.repositories.ExpenseRepositoryImpl
 import com.example.easykhata.data.repositories.ItemsRepository
 import com.example.easykhata.data.repositories.ItemsRepositoryImpl
+import com.example.easykhata.data.repositories.LocationRepository
+import com.example.easykhata.data.repositories.LocationRepositoryImpl
 import com.example.easykhata.data.repositories.PhoneContactsRepository
 import com.example.easykhata.data.repositories.PhoneContactsRepositoryImpl
 import com.example.easykhata.data.repositories.SalesRepository
@@ -63,4 +65,9 @@ abstract class RepositoryModule {
     abstract fun bindSalesRepository(
         salesRepositoryImpl: SalesRepositoryImpl
     ): SalesRepository
+    @Binds
+    @Singleton
+    abstract fun bindLocationRepository(
+        locationRepositoryImpl: LocationRepositoryImpl
+    ): LocationRepository
 }
