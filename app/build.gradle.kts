@@ -134,4 +134,6 @@ dependencies {
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    implementation("org.maplibre.gl:android-sdk:13.7.1")
+    implementation("com.google.android.gms:play-services-location:21.3.0")
 }
